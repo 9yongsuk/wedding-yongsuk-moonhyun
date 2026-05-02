@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>구용석 ♥ 전문현 결혼합니다</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="구용석 ♥ 전문현 결혼합니다">
+<meta property="og:description" content="2026년 6월 13일, 저희 결혼식에 초대합니다.">
+<meta property="og:image" content="https://images.pexels.com/videos/4148225/pexels-photo-4148225.jpeg?auto=compress&cs=tinysrgb&w=1200">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="구용석 ♥ 전문현 결혼합니다">
+<meta name="twitter:description" content="2026년 6월 13일, 저희 결혼식에 초대합니다.">
+<meta name="twitter:image" content="https://images.pexels.com/videos/4148225/pexels-photo-4148225.jpeg?auto=compress&cs=tinysrgb&w=1200">
+<meta name="theme-color" content="#1a1816">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Bebas+Neue&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --bg: #1a1816;
+  --bg-soft: #232120;
+  --bg-card: #2a2725;
+  --bg-deep: #0d0c0b;
+  --ink: #f5efe4;
+  --ink-soft: #a89f91;
+  --ink-mute: #6b6359;
+  --accent: #d4b896;
+  --accent-light: #e8d5b5;
+  --line: #3a3633;
+  --rose: #c8a888;
+}
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--ink);
+  font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+.wrap {
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(0,0,0,0.6);
+}
+
+/* ============= LOADING ============= */
+.loading {
+  position: fixed; inset: 0;
+  background: var(--bg-deep);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s, visibility 0.8s;
+}
+.loading.hide { opacity: 0; visibility: hidden; }
+
+.slate {
+  width: 240px; height: 160px;
+  background: var(--ink);
+  position: relative;
+  display: flex; flex-direction: column;
+  border: 3px solid var(--bg-deep);
+}
+.slate-stripes {
+  height: 30px;
+  background: repeating-linear-gradient(-65deg,
+    var(--bg-deep) 0px, var(--bg-deep) 18px,
+    var(--ink) 18px, var(--ink) 36px);
+  animation: stripeOpen 1.2s ease-out;
+  transform-origin: bottom;
+}
+@keyframes stripeOpen {
+  0% { transform: rotate(-25deg); }
+  60% { transform: rotate(0deg); }
+  75% { transform: rotate(-8deg); }
+  100% { transform: rotate(0deg); }
+}
+.slate-body {
+  flex: 1;
+  background: var(--bg-deep);
+  padding: 14px;
+  color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+}
+.slate-row {
+  display: flex; justify-content: space-between;
+  border-bottom: 1px solid var(--ink-mute);
+  padding-bottom: 4px;
+}
+.slate-title {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  padding: 8px 0;
+}
+.loading-text {
+  margin-top: 30px;
+  font-family: 'Italiana', serif;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--ink-soft);
+  animation: blink 1s infinite;
+}
+@keyframes blink { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+
+/* ============= COVER ============= */
+.cover {
+  height: 100vh;
+  min-height: 720px;
+  position: relative;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 60px 40px;
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.cover-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: grayscale(100%) brightness(0.55) contrast(1.15);
+  opacity: 0.7;
+}
+
+.cover-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: 
+    radial-gradient(ellipse at center, rgba(13,12,11,0.4) 0%, rgba(13,12,11,0.85) 100%),
+    linear-gradient(180deg, rgba(13,12,11,0.4) 0%, rgba(13,12,11,0.2) 50%, rgba(13,12,11,0.85) 100%);
+}
+
+.cover-vignette {
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 150px 50px rgba(0,0,0,0.9);
+}
+
+.cover-grain {
+  position: absolute; inset: 0; z-index: 3;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: grain 0.4s steps(3) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-2%, 1%); }
+  66% { transform: translate(2%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+.cover-scanlines {
+  position: absolute; inset: 0; z-index: 3;
+  background: repeating-linear-gradient(0deg,
+    transparent 0px, transparent 2px,
+    rgba(0,0,0,0.08) 3px, transparent 4px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.cover-frame {
+  position: absolute;
+  top: 30px; left: 30px; right: 30px; bottom: 30px;
+  border: 1px solid rgba(212, 184, 150, 0.3);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.film-strip-left, .film-strip-right {
+  position: absolute;
+  top: 0;
+  width: 30px; height: 100%;
+  background: var(--bg-deep);
+  z-index: 5;
+  display: flex; flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.film-strip-left { left: 0; }
+.film-strip-right { right: 0; }
+.film-strip-left .perfs, .film-strip-right .perfs {
+  display: flex; flex-direction: column;
+  gap: 12px;
+  animation: scrollFilm 4s linear infinite;
+}
+.film-strip-left .perf, .film-strip-right .perf {
+  width: 14px; height: 18px;
+  background: var(--bg);
+  border-radius: 3px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+@keyframes scrollFilm {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-30px); }
+}
+
+.cover-inner {
+  position: relative;
+  z-index: 6;
+  text-align: center;
+  display: flex; flex-direction: column;
+  align-items: center;
+}
+
+.cover-mark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--accent);
+  margin-bottom: 14px;
+  padding: 4px 14px;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  animation: fadeUp 1s 0.3s forwards;
+  background: rgba(13, 12, 11, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.cover-title {
+  font-family: 'Italiana', serif;
+  font-size: 12px;
+  letter-spacing: 8px;
+  color: var(--ink);
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.cover-flower {
+  width: 80px; height: 80px;
+  margin-bottom: 35px;
+  opacity: 0;
+  animation: fadeUp 1s 0.7s forwards;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+.cover-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  color: var(--ink);
+  opacity: 0;
+  animation: fadeUp 1s 0.9s forwards;
+  text-shadow: 0 4px 16px rgba(0,0,0,0.9);
+}
+
+.cover-names .amp {
+  display: block;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--accent);
+  margin: 8px 0;
+}
+
+.cover-kor {
+  margin-top: 30px;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--ink-soft);
+  opacity: 0;
+  animation: fadeUp 1s 1.1s forwards;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(15px); }
+}
+
+.cover-date {
+  position: absolute;
+  bottom: 95px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 6px;
+  color: var(--accent);
+  text-align: center;
+  z-index: 6;
+  opacity: 0;
+  animation: fadeUp 1s 1.3s forwards;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.cover-date strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: 8px;
+  letter-spacing: 4px;
+  color: var(--ink);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 45px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-family: 'Italiana', serif;
+  z-index: 6;
+  opacity: 0;
+  animation: fadeUp 1s 1.5s forwards, bounce 2s 2.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.rec-indicator {
+  position: absolute;
+  top: 50px; left: 50px;
+  z-index: 6;
+  display: flex; align-items: center;
+  gap: 6px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--ink);
+  opacity: 0.7;
+}
+.rec-dot {
+  width: 8px; height: 8px;
+  background: #c44;
+  border-radius: 50%;
+  animation: recBlink 1.5s infinite;
+}
+@keyframes recBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.timecode {
+  position: absolute;
+  top: 50px; right: 50px;
+  z-index: 6;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  opacity: 0.7;
+}
+
+/* ============= FILM DIVIDER ============= */
+.film-divider {
+  background: var(--bg-deep);
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.film-divider .perforations {
+  display: flex;
+  gap: 12px;
+  padding: 0 12px;
+  animation: scrollHoriz 8s linear infinite;
+  white-space: nowrap;
+}
+.film-divider .perf {
+  width: 18px; height: 24px;
+  background: var(--bg);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+@keyframes scrollHoriz {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-30px); }
+}
+
+/* ============= SECTION ============= */
+.section {
+  padding: 80px 35px;
+  text-align: center;
+  position: relative;
+  background: var(--bg);
+}
+
+.section-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: inline-block;
+  padding: 3px 12px;
+  border: 1px solid var(--accent);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin: 18px 0 50px;
+  color: var(--ink);
+}
+
+.divider {
+  width: 1px;
+  height: 50px;
+  background: var(--line);
+  margin: 0 auto 30px;
+}
+
+/* ============= INVITATION (with cinematic videos) ============= */
+.invitation {
+  padding: 100px 0 80px;
+  background: var(--bg);
+}
+
+.invitation-inner {
+  padding: 0 40px;
+  text-align: center;
+}
+
+.invitation-text {
+  font-size: 16px;
+  line-height: 2.2;
+  color: var(--ink-soft);
+  margin-bottom: 30px;
+}
+
+.invitation-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin: 30px 0;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 20px 0;
+}
+.invitation-quote::before, .invitation-quote::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+.invitation-quote::before { top: 0; }
+.invitation-quote::after { bottom: 0; }
+.invitation-quote .source {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--ink-mute);
+  margin-top: 8px;
+  font-style: normal;
+}
+
+/* Cinematic video card */
+.cinema-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  margin: 50px 0;
+  overflow: hidden;
+  background: var(--bg-deep);
+}
+
+.cinema-scene video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.6) contrast(1.2);
+  opacity: 0.85;
+  transition: opacity 0.6s, filter 0.6s;
+}
+
+.cinema-scene.visible video {
+  opacity: 0.85;
+}
+
+/* Letterbox (영화관 화면 비율 효과) */
+.cinema-scene::before,
+.cinema-scene::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 25px;
+  background: var(--bg-deep);
+  z-index: 2;
+}
+.cinema-scene::before { top: 0; }
+.cinema-scene::after { bottom: 0; }
+
+/* Vignette */
+.cinema-scene .scene-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 0 80px 20px rgba(0,0,0,0.7);
+}
+
+/* Grain */
+.cinema-scene .scene-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: grain 0.4s steps(3) infinite;
+}
+
+/* Scene info overlay */
+.scene-info {
+  position: absolute;
+  bottom: 35px;
+  left: 25px;
+  z-index: 5;
+  text-align: left;
+  color: var(--ink);
+}
+
+.scene-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.scene-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+  line-height: 1.3;
+}
+
+.scene-meta {
+  position: absolute;
+  top: 35px;
+  right: 25px;
+  z-index: 5;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  opacity: 0.7;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  text-align: right;
+}
+
+/* Subtitle below video (영화 자막 스타일) */
+.scene-subtitle {
+  text-align: center;
+  margin-top: 16px;
+  padding: 0 20px;
+  font-family: 'Gowun Batang', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.scene-subtitle .subtitle-mark {
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin: 0 8px;
+}
+
+/* ============= CAST ============= */
+.cast { background: var(--bg-soft); }
+
+.cast-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 30px 25px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cast-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.cast-card .role-tag {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 3px 10px;
+  margin-bottom: 14px;
+}
+
+.cast-card .name-eng {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+.cast-card .name-kor {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 5px;
+  margin-bottom: 12px;
+}
+
+.cast-card .relation {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 1px;
+}
+
+.parents-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.parent-item {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.parent-role {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.parent-name-eng {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.parent-name-kor {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 2px;
+}
+
+/* ============= TICKET ============= */
+.ticket-section {
+  background: var(--bg-deep);
+  padding: 80px 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-bg-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.3'/></svg>");
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.ticket-wrap {
+  perspective: 1000px;
+  margin: 0 auto;
+  max-width: 340px;
+}
+
+.ticket {
+  background: linear-gradient(135deg, #d4b896 0%, #e8d5b5 100%);
+  color: var(--bg);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.ticket.flipped { transform: rotateY(180deg); }
+.ticket-face, .ticket-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.ticket-back {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bg-card);
+  color: var(--ink);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px dashed var(--accent);
+}
+
+.ticket::before, .ticket::after {
+  content: '';
+  position: absolute;
+  width: 24px; height: 24px;
+  background: var(--bg-deep);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.ticket::before { left: -12px; }
+.ticket::after { right: -12px; }
+
+.ticket-face {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  min-height: 200px;
+}
+
+.ticket-main {
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(26, 24, 22, 0.7);
+  border-bottom: 1px dashed rgba(26, 24, 22, 0.3);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.ticket-movie-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.ticket-subtitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(26, 24, 22, 0.7);
+  margin-bottom: 16px;
+}
+
+.ticket-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.ticket-info-item .label {
+  letter-spacing: 1.5px;
+  color: rgba(26, 24, 22, 0.6);
+  margin-bottom: 2px;
+  font-size: 9px;
+}
+
+.ticket-info-item .value {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.ticket-stub {
+  width: 80px;
+  background: rgba(26, 24, 22, 0.1);
+  border-left: 2px dashed rgba(26, 24, 22, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 8px;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.ticket-stub .stub-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(26, 24, 22, 0.6);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.ticket-stub .stub-num {
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.ticket-stub .stub-bar {
+  width: 100%;
+  height: 30px;
+  background: repeating-linear-gradient(90deg,
+    var(--bg) 0, var(--bg) 2px,
+    transparent 2px, transparent 5px);
+}
+
+.ticket-back-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  line-height: 1.8;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.ticket-back-name {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 18px;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+
+.ticket-hint {
+  text-align: center;
+  margin-top: 20px;
+  font-family: 'Italiana', serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--ink-soft);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============= CALENDAR ============= */
+.calendar-wrap {
+  background: var(--bg-card);
+  padding: 50px 25px;
+  border: 1px solid var(--line);
+  margin: 30px 0;
+  position: relative;
+}
+
+.calendar-month {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  margin-bottom: 25px;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+
+table.cal { width: 100%; border-collapse: collapse; }
+
+table.cal th {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+  padding: 8px 0;
+}
+
+table.cal td {
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+table.cal td.sun { color: var(--rose); }
+
+table.cal td.wedding-day {
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+  font-weight: 700;
+  position: relative;
+  animation: pulseDay 2s infinite;
+}
+
+@keyframes pulseDay {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 184, 150, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(212, 184, 150, 0); }
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.cd-item {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 12px 4px;
+}
+
+.cd-item .num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.cd-item .label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--ink-mute);
+  margin-top: 2px;
+}
+
+.time-info {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid var(--line);
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 2px;
+}
+
+.time-info .day {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.time-info .time {
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+/* ============= GALLERY ============= */
+.gallery { background: var(--bg); }
+
+.film-reel {
+  background: var(--bg-deep);
+  padding: 12px 0;
+  margin: 30px -35px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.film-reel::before, .film-reel::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 12px;
+  background-image: linear-gradient(90deg,
+    var(--bg) 0, var(--bg) 8px,
+    transparent 8px, transparent 20px);
+  background-size: 20px 12px;
+}
+.film-reel::before { top: 0; }
+.film-reel::after { bottom: 0; }
+
+.film-reel-track {
+  display: flex;
+  gap: 8px;
+  padding: 0 8px;
+  animation: reelScroll 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes reelScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.film-frame {
+  width: 110px; height: 75px;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-soft));
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Italiana', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--ink-mute);
+  flex-shrink: 0;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Italiana', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--ink-mute);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+  border: 1px solid var(--line);
+}
+
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-soft));
+}
+
+.gallery-item span {
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-item:active { transform: scale(0.97); }
+.gallery-item.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* ============= LOCATION ============= */
+.location { background: var(--bg-soft); }
+
+.location-name {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+.location-hall {
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.location-addr {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 30px;
+}
+
+.map-placeholder {
+  height: 200px;
+  background: linear-gradient(135deg, #2a2725, #1f1c1a);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 184, 150, 0.04) 10px, rgba(212, 184, 150, 0.04) 20px),
+    repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
+}
+
+.map-pin {
+  font-size: 30px;
+  color: var(--accent);
+  z-index: 1;
+  animation: pinDrop 2s ease-out infinite;
+}
+
+@keyframes pinDrop {
+  0%, 60%, 100% { transform: translateY(0); }
+  20% { transform: translateY(-15px); }
+  40% { transform: translateY(0); }
+}
+
+.map-placeholder small {
+  z-index: 1;
+  margin-top: 8px;
+  font-family: 'Italiana', serif;
+  letter-spacing: 3px;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.transport-item {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+  text-align: left;
+}
+
+.transport-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.transport-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+}
+
+/* ============= ACCOUNT ============= */
+.account-tabs {
+  display: flex;
+  margin-bottom: 30px;
+  border: 1px solid var(--line);
+}
+
+.account-tab {
+  flex: 1;
+  padding: 14px;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  background: var(--bg-card);
+  color: var(--ink-soft);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.account-tab.active { background: var(--accent); color: var(--bg); }
+
+.account-list { display: none; }
+.account-list.active { display: block; animation: fadeIn 0.4s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.account-card {
+  border: 1px solid var(--line);
+  padding: 18px 20px;
+  margin-bottom: 10px;
+  text-align: left;
+  background: var(--bg-card);
+}
+
+.account-role {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.account-name {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.account-bank {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-btn:active { background: var(--accent); color: var(--bg); }
+
+/* ============= GUESTBOOK ============= */
+.guestbook { background: var(--bg-soft); }
+
+.guestbook-list { text-align: left; margin-bottom: 25px; }
+
+.guestbook-item {
+  background: var(--bg-card);
+  padding: 18px 20px;
+  margin-bottom: 10px;
+  border-left: 2px solid var(--accent);
+}
+
+.guestbook-msg {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.guestbook-meta {
+  font-size: 11px;
+  color: var(--ink-mute);
+  display: flex;
+  justify-content: space-between;
+}
+
+.write-btn {
+  padding: 12px 30px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  cursor: pointer;
+}
+
+.write-btn:active { background: var(--accent); color: var(--bg); }
+
+/* ============= SHARE & FOOTER ============= */
+.share { background: var(--bg); padding: 80px 35px 40px; }
+
+.share-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.share-btn {
+  flex: 1;
+  padding: 14px 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.share-btn:active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.footer {
+  text-align: center;
+  padding: 50px 30px;
+  background: var(--bg-deep);
+  border-top: 1px solid var(--line);
+}
+
+.footer-mark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  padding: 4px 14px;
+  border: 1px solid var(--accent);
+  display: inline-block;
+}
+
+.footer-thanks {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: 2px;
+  margin-top: 16px;
+}
+
+.footer-credit {
+  margin-top: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--ink-mute);
+}
+
+.video-credit {
+  margin-top: 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--ink-mute);
+  opacity: 0.6;
+  line-height: 1.6;
+}
+.video-credit a { color: var(--ink-mute); text-decoration: none; }
+
+/* ============= MODAL & TOAST ============= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+.modal.active { display: flex; }
+
+.modal-content {
+  background: var(--bg-card);
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  border: 1px solid var(--line);
+  animation: modalIn 0.3s;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px; right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.modal-input, .modal-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.modal-textarea { min-height: 100px; resize: vertical; }
+
+.modal-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--bg);
+  padding: 12px 24px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  font-weight: 500;
+}
+.toast.show { opacity: 1; }
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 250;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.active { display: flex; }
+.lightbox-content {
+  max-width: 90%;
+  max-height: 80%;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  padding: 40px;
+  font-family: 'Italiana', serif;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--ink-soft);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 1s, transform 1s;
+}
+.slide-left.visible { opacity: 1; transform: translateX(0); }
+
+.slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 1s, transform 1s;
+}
+.slide-right.visible { opacity: 1; transform: translateX(0); }
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading" id="loading">
+  <div class="slate">
+    <div class="slate-stripes"></div>
+    <div class="slate-body">
+      <div class="slate-row"><span>SCENE</span><span>TAKE</span></div>
+      <div class="slate-title">YS × MH</div>
+      <div class="slate-row"><span>2026.06.13</span><span>ROLL 1</span></div>
+    </div>
+  </div>
+  <div class="loading-text">NOW SHOWING</div>
+</div>
+
+<div class="wrap">
+
+  <!-- COVER -->
+  <section class="cover">
+    <video class="cover-video" autoplay muted loop playsinline preload="metadata"
+           poster="https://images.pexels.com/videos/4148225/pexels-photo-4148225.jpeg?auto=compress&cs=tinysrgb&w=800">
+      <source src="https://videos.pexels.com/video-files/4148225/4148225-hd_1920_1080_24fps.mp4" type="video/mp4">
+    </video>
+    <div class="cover-overlay"></div>
+    <div class="cover-vignette"></div>
+    <div class="cover-grain"></div>
+    <div class="cover-scanlines"></div>
+    <div class="cover-frame"></div>
+
+    <div class="rec-indicator"><span class="rec-dot"></span><span>REC</span></div>
+    <div class="timecode" id="timecode">00:00:13:06</div>
+
+    <div class="film-strip-left"><div class="perfs" id="stripL"></div></div>
+    <div class="film-strip-right"><div class="perfs" id="stripR"></div></div>
+
+    <div class="cover-inner">
+      <div class="cover-mark">NOW SHOWING</div>
+      <div class="cover-title">A LOVE STORY</div>
+      <svg class="cover-flower" viewBox="0 0 100 100" fill="none">
+        <g stroke="#d4b896" stroke-width="0.8" fill="none">
+          <circle cx="50" cy="50" r="3" fill="#e8d5b5"/>
+          <ellipse cx="50" cy="30" rx="6" ry="14" fill="#d4b896" opacity="0.5"/>
+          <ellipse cx="50" cy="70" rx="6" ry="14" fill="#d4b896" opacity="0.5"/>
+          <ellipse cx="30" cy="50" rx="14" ry="6" fill="#d4b896" opacity="0.5"/>
+          <ellipse cx="70" cy="50" rx="14" ry="6" fill="#d4b896" opacity="0.5"/>
+          <ellipse cx="35" cy="35" rx="5" ry="11" transform="rotate(-45 35 35)" fill="#c8a888" opacity="0.45"/>
+          <ellipse cx="65" cy="35" rx="5" ry="11" transform="rotate(45 65 35)" fill="#c8a888" opacity="0.45"/>
+          <ellipse cx="35" cy="65" rx="5" ry="11" transform="rotate(45 35 65)" fill="#c8a888" opacity="0.45"/>
+          <ellipse cx="65" cy="65" rx="5" ry="11" transform="rotate(-45 65 65)" fill="#c8a888" opacity="0.45"/>
+        </g>
+      </svg>
+      <div class="cover-names">Yongseok<span class="amp">&</span>Munhyun</div>
+      <div class="cover-kor">구용석 · 전문현</div>
+    </div>
+
+    <div class="cover-date">
+      WE INVITE YOU
+      <strong>2026 . 06 . 13 . SAT</strong>
+    </div>
+    <div class="scroll-hint">SCROLL ↓</div>
+  </section>
+
+  <!-- ============= INVITATION (with cinematic videos) ============= -->
+  <section class="invitation">
+    <div class="invitation-inner">
+      <div class="section-label">INVITATION</div>
+      <h2 class="section-title">초대합니다</h2>
+      <div class="divider"></div>
+      <p class="invitation-text">
+        서로가 마주보며 다져온 사랑을<br>
+        이제 함께 한 곳을 바라보며<br>
+        걸어갈 수 있는 큰 사랑으로<br>
+        키우고자 합니다.
+      </p>
+    </div>
+
+    <!-- SCENE 01 — 노을/일몰 커플 실루엣 -->
+    <div class="cinema-scene reveal">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="https://images.pexels.com/videos/5667123/pexels-photo-5667123.jpeg?auto=compress&cs=tinysrgb&w=800">
+        <source src="https://videos.pexels.com/video-files/5667123/5667123-hd_1080_1920_25fps.mp4" type="video/mp4">
+      </video>
+      <div class="scene-vignette"></div>
+      <div class="scene-grain"></div>
+      <div class="scene-meta">
+        SCENE 01<br>
+        SUNSET / EXT.
+      </div>
+      <div class="scene-info">
+        <div class="scene-num">— ACT I —</div>
+        <div class="scene-caption">"At the end of the day,<br>we found each other."</div>
+      </div>
+    </div>
+    <div class="scene-subtitle">
+      <span class="subtitle-mark"></span>
+      어느 노을, 우리는 마주 섰습니다
+      <span class="subtitle-mark"></span>
+    </div>
+
+    <div class="invitation-inner" style="padding-top: 40px;">
+      <p class="invitation-text">
+        매일이 영화 같지는 않아도<br>
+        하루하루가 우리에게는 한 컷,<br>
+        그 모든 순간이 모여 한 편의 이야기가 되었습니다.
+      </p>
+    </div>
+
+    <!-- SCENE 02 — 바닷가/해변 산책 -->
+    <div class="cinema-scene reveal">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="https://images.pexels.com/videos/9112862/pexels-photo-9112862.jpeg?auto=compress&cs=tinysrgb&w=800">
+        <source src="https://videos.pexels.com/video-files/9112862/9112862-hd_1080_1920_30fps.mp4" type="video/mp4">
+      </video>
+      <div class="scene-vignette"></div>
+      <div class="scene-grain"></div>
+      <div class="scene-meta">
+        SCENE 02<br>
+        BEACH / EXT.
+      </div>
+      <div class="scene-info">
+        <div class="scene-num">— ACT II —</div>
+        <div class="scene-caption">"Walking together,<br>one step at a time."</div>
+      </div>
+    </div>
+    <div class="scene-subtitle">
+      <span class="subtitle-mark"></span>
+      파도 소리를 따라 함께 걸었습니다
+      <span class="subtitle-mark"></span>
+    </div>
+
+    <div class="invitation-inner" style="padding-top: 40px;">
+      <div class="invitation-quote">
+        "인생은 모두가 함께하는 여행이다.<br>
+        매일매일 사는 동안 우리가 할 수 있는 건<br>
+        최선을 다해 이 멋진 여행을 만끽하는 것이다."
+        <span class="source">— 영화 〈ABOUT TIME〉 중 —</span>
+      </div>
+    </div>
+
+    <!-- SCENE 03 — 비 내리는 창가 -->
+    <div class="cinema-scene reveal">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="https://images.pexels.com/videos/3214448/free-video-3214448.jpg?auto=compress&cs=tinysrgb&w=800">
+        <source src="https://videos.pexels.com/video-files/3214448/3214448-hd_1920_1080_25fps.mp4" type="video/mp4">
+      </video>
+      <div class="scene-vignette"></div>
+      <div class="scene-grain"></div>
+      <div class="scene-meta">
+        SCENE 03<br>
+        RAIN / INT.
+      </div>
+      <div class="scene-info">
+        <div class="scene-num">— ACT III —</div>
+        <div class="scene-caption">"Some days quiet,<br>some days loud — always together."</div>
+      </div>
+    </div>
+    <div class="scene-subtitle">
+      <span class="subtitle-mark"></span>
+      비 오는 날에도, 햇살 좋은 날에도
+      <span class="subtitle-mark"></span>
+    </div>
+
+    <div class="invitation-inner" style="padding-top: 40px;">
+      <p class="invitation-text">
+        평범한 날들이 모여 특별한 사랑이 되었습니다.
+      </p>
+    </div>
+
+    <!-- SCENE 04 — 도시 야경 + 손잡기 -->
+    <div class="cinema-scene reveal">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="https://images.pexels.com/videos/2611250/free-video-2611250.jpg?auto=compress&cs=tinysrgb&w=800">
+        <source src="https://videos.pexels.com/video-files/2611250/2611250-hd_1920_1080_30fps.mp4" type="video/mp4">
+      </video>
+      <div class="scene-vignette"></div>
+      <div class="scene-grain"></div>
+      <div class="scene-meta">
+        SCENE 04<br>
+        CITY / NIGHT
+      </div>
+      <div class="scene-info">
+        <div class="scene-num">— ACT IV —</div>
+        <div class="scene-caption">"Among a million lights,<br>only one stays."</div>
+      </div>
+    </div>
+    <div class="scene-subtitle">
+      <span class="subtitle-mark"></span>
+      불빛 가득한 밤, 서로의 손을 놓지 않았습니다
+      <span class="subtitle-mark"></span>
+    </div>
+
+    <div class="invitation-inner" style="padding-top: 40px;">
+      <p class="invitation-text">
+        새로운 여행의 출발선에 서있는<br>
+        저희를 축복해 주시면 감사하겠습니다.
+      </p>
+    </div>
+
+    <!-- SCENE 05 — 들판/꽃밭 데이트 -->
+    <div class="cinema-scene reveal">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&w=800">
+        <source src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4" type="video/mp4">
+      </video>
+      <div class="scene-vignette"></div>
+      <div class="scene-grain"></div>
+      <div class="scene-meta">
+        SCENE 05<br>
+        FIELD / EXT.
+      </div>
+      <div class="scene-info">
+        <div class="scene-num">— FINALE —</div>
+        <div class="scene-caption">"And so, our story begins."</div>
+      </div>
+    </div>
+    <div class="scene-subtitle">
+      <span class="subtitle-mark"></span>
+      그리고 이제, 우리의 이야기를 시작합니다
+      <span class="subtitle-mark"></span>
+    </div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv1"></div></div>
+
+  <!-- CAST -->
+  <section class="cast section">
+    <div class="section-label">CAST</div>
+    <h2 class="section-title">우리의 시작</h2>
+    <div class="divider"></div>
+
+    <div class="cast-card slide-left">
+      <div class="role-tag">THE GROOM</div>
+      <div class="name-eng">KIM YONGSEOK</div>
+      <div class="name-kor">구 용 석</div>
+      <div class="relation">[신랑 아버지] · [신랑 어머니]의 [장남/차남/아들]</div>
+    </div>
+
+    <div class="cast-card slide-right">
+      <div class="role-tag">THE BRIDE</div>
+      <div class="name-eng">LEE MUNHYUN</div>
+      <div class="name-kor">전 문 현</div>
+      <div class="relation">[신부 아버지] · [신부 어머니]의 [장녀/차녀/딸]</div>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <div class="section-label" style="font-size: 11px;">SUPPORTING CAST</div>
+    </div>
+
+    <div class="parents-grid reveal">
+      <div class="parent-item">
+        <div class="parent-role">GROOM'S FATHER</div>
+        <div class="parent-name-eng">[Father]</div>
+        <div class="parent-name-kor">김 재 현</div>
+      </div>
+      <div class="parent-item">
+        <div class="parent-role">GROOM'S MOTHER</div>
+        <div class="parent-name-eng">[Mother]</div>
+        <div class="parent-name-kor">박 미 영</div>
+      </div>
+      <div class="parent-item">
+        <div class="parent-role">BRIDE'S FATHER</div>
+        <div class="parent-name-eng">[Father]</div>
+        <div class="parent-name-kor">이 성 훈</div>
+      </div>
+      <div class="parent-item">
+        <div class="parent-role">BRIDE'S MOTHER</div>
+        <div class="parent-name-eng">[Mother]</div>
+        <div class="parent-name-kor">최 은 경</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv2"></div></div>
+
+  <!-- TICKET -->
+  <section class="ticket-section">
+    <div class="ticket-bg-grain"></div>
+    <div style="text-align: center; margin-bottom: 30px; position: relative; z-index: 1;">
+      <div class="section-label">ADMIT ONE</div>
+      <h2 class="section-title" style="margin: 18px 0 0;">Wedding Ticket</h2>
+    </div>
+
+    <div class="ticket-wrap">
+      <div class="ticket" id="ticket" onclick="flipTicket()">
+        <div class="ticket-face">
+          <div class="ticket-main">
+            <div class="ticket-header">
+              <span>WEDDING CINEMA</span>
+              <span>NO. 0613</span>
+            </div>
+            <div>
+              <div class="ticket-movie-title">Yongseok & Munhyun</div>
+              <div class="ticket-subtitle">— A LOVE STORY —</div>
+              <div class="ticket-info-grid">
+                <div class="ticket-info-item">
+                  <div class="label">DATE</div>
+                  <div class="value">06.13.2026</div>
+                </div>
+                <div class="ticket-info-item">
+                  <div class="label">TIME</div>
+                  <div class="value">12:30 PM</div>
+                </div>
+                <div class="ticket-info-item">
+                  <div class="label">VENUE</div>
+                  <div class="value">GRAND HALL</div>
+                </div>
+                <div class="ticket-info-item">
+                  <div class="label">SEAT</div>
+                  <div class="value">A-01</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-stub">
+            <div class="stub-label">ADMIT ONE</div>
+            <div class="stub-num">06<br>13</div>
+            <div class="stub-bar"></div>
+          </div>
+        </div>
+        <div class="ticket-back">
+          <div class="ticket-back-text">"Two souls,<br>one journey begins"</div>
+          <div class="ticket-back-name">용석 ♥ 문현</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticket-hint">↻ TAP THE TICKET</div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv3"></div></div>
+
+  <!-- CALENDAR -->
+  <section class="section reveal">
+    <div class="section-label">THE DAY</div>
+    <h2 class="section-title">결혼합니다</h2>
+    <div class="divider"></div>
+    
+    <div class="calendar-wrap">
+      <div class="calendar-month">JUNE 2026</div>
+      <table class="cal">
+        <thead>
+          <tr><th class="sun">SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+          <tr><td class="sun">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td class="wedding-day">13</td></tr>
+          <tr><td class="sun">14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+          <tr><td class="sun">21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+          <tr><td class="sun">28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="time-info">
+        <div class="day">2026년 6월 13일 토요일</div>
+        <div class="time">오후 12시 30분</div>
+      </div>
+      <div class="countdown-grid">
+        <div class="cd-item"><div class="num" id="cdDays">--</div><div class="label">DAYS</div></div>
+        <div class="cd-item"><div class="num" id="cdHours">--</div><div class="label">HOURS</div></div>
+        <div class="cd-item"><div class="num" id="cdMins">--</div><div class="label">MINS</div></div>
+        <div class="cd-item"><div class="num" id="cdSecs">--</div><div class="label">SECS</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv4"></div></div>
+
+  <!-- GALLERY -->
+  <section class="gallery section">
+    <div class="section-label">GALLERY</div>
+    <h2 class="section-title">우리의 순간</h2>
+    <div class="divider"></div>
+
+    <div class="film-reel">
+      <div class="film-reel-track" id="reelTrack"></div>
+    </div>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item featured" onclick="openImage(1)"><span>SCENE 01</span></div>
+      <div class="gallery-item" onclick="openImage(2)"><span>02</span></div>
+      <div class="gallery-item" onclick="openImage(3)"><span>03</span></div>
+      <div class="gallery-item" onclick="openImage(4)"><span>04</span></div>
+      <div class="gallery-item" onclick="openImage(5)"><span>05</span></div>
+      <div class="gallery-item" onclick="openImage(6)"><span>06</span></div>
+      <div class="gallery-item" onclick="openImage(7)"><span>07</span></div>
+      <div class="gallery-item" onclick="openImage(8)"><span>08</span></div>
+    </div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv5"></div></div>
+
+  <!-- LOCATION -->
+  <section class="location section reveal">
+    <div class="section-label">LOCATION</div>
+    <h2 class="section-title">오시는 길</h2>
+    <div class="divider"></div>
+    
+    <div class="location-name">[웨딩홀 이름]</div>
+    <div class="location-hall">[층/홀 이름]</div>
+    <div class="location-addr">[주소를 입력해주세요]</div>
+    
+    <div class="map-placeholder">
+      <div class="map-pin">⚐</div>
+      <small>MAP</small>
+    </div>
+    
+    <div class="transport-item">
+      <div class="transport-title">SUBWAY</div>
+      <div class="transport-desc">[지하철 호선 / 역 / 출구 / 도보 시간]</div>
+    </div>
+    <div class="transport-item">
+      <div class="transport-title">BUS</div>
+      <div class="transport-desc">[버스 노선 / 정류장]</div>
+    </div>
+    <div class="transport-item">
+      <div class="transport-title">PARKING</div>
+      <div class="transport-desc">[주차 안내]</div>
+    </div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv6"></div></div>
+
+  <!-- ACCOUNT -->
+  <section class="section reveal">
+    <div class="section-label">ACCOUNT</div>
+    <h2 class="section-title">마음 전하실 곳</h2>
+    <div class="divider"></div>
+    
+    <p class="invitation-text" style="margin-bottom: 30px;">
+      참석이 어려우신 분들을 위해<br>
+      계좌번호를 안내드립니다.
+    </p>
+
+    <div class="account-tabs">
+      <button class="account-tab active" onclick="switchTab(event, 'groom')">신랑측</button>
+      <button class="account-tab" onclick="switchTab(event, 'bride')">신부측</button>
+    </div>
+
+    <div class="account-list active" id="groom">
+      <div class="account-card">
+        <div class="account-role">GROOM</div>
+        <div class="account-name">구용석</div>
+        <div class="account-bank">[은행명] [계좌번호]</div>
+        <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
+      </div>
+      <div class="account-card">
+        <div class="account-role">FATHER</div>
+        <div class="account-name">[신랑 아버지]</div>
+        <div class="account-bank">[은행명] [계좌번호]</div>
+        <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
+      </div>
+      <div class="account-card">
+        <div class="account-role">MOTHER</div>
+        <div class="account-name">[신랑 어머니]</div>
+        <div class="account-bank">[은행명] [계좌번호]</div>
+        <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
+      </div>
+    </div>
+
+    <div class="account-list" id="bride">
+      <div class="account-card">
+        <div class="account-role">BRIDE</div>
+        <div class="account-name">전문현</div>
+        <div class="account-bank">[은행명] [계좌번호]</div>
+        <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
+      </div>
+      <div class="account-card">
+        <div class="account-role">FATHER</div>
+        <div class="account-name">[신부 아버지]</div>
+        <div class="account-bank">[은행명] [계좌번호]</div>
+        <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
+      </div>
+      <div class="account-card">
+        <div class="account-role">MOTHER</div>
+        <div class="account-name">[신부 어머니]</div>
+        <div class="account-bank">[은행명] [계좌번호]</div>
+        <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="film-divider"><div class="perforations" id="filmDiv7"></div></div>
+
+  <!-- GUESTBOOK -->
+  <section class="guestbook section reveal">
+    <div class="section-label">GUESTBOOK</div>
+    <h2 class="section-title">방명록</h2>
+    <div class="divider"></div>
+
+    <div class="guestbook-list" id="guestbook-list">
+      <div class="guestbook-item">
+        <div class="guestbook-msg">용석아 문현아 결혼 축하해! 오래오래 행복하길</div>
+        <div class="guestbook-meta"><span>대학동기 지훈</span><span>2026.05.01</span></div>
+      </div>
+      <div class="guestbook-item">
+        <div class="guestbook-msg">두 사람의 새로운 출발을 진심으로 축복합니다.</div>
+        <div class="guestbook-meta"><span>회사동료 영희</span><span>2026.04.28</span></div>
+      </div>
+    </div>
+
+    <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
+  </section>
+
+  <!-- SHARE -->
+  <section class="share">
+    <div style="text-align:center;">
+      <div class="section-label">SHARE</div>
+      <h2 class="section-title">공유하기</h2>
+    </div>
+    <div class="share-buttons">
+      <button class="share-btn" onclick="shareLink()">LINK</button>
+      <button class="share-btn" onclick="shareKakao()">KAKAO</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-mark">— END CREDITS —</div>
+    <div class="footer-thanks">Thank You</div>
+    <div class="footer-credit">DIRECTED BY YONGSEOK & MUNHYUN</div>
+    <div class="video-credit">
+      Stock footage from Pexels (Free License)<br>
+      Largo Editt · Roman Odintsov · Asad Photo Maldives & others
+    </div>
+  </footer>
+
+</div>
+
+<!-- Modals -->
+<div class="modal" id="guestbookModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="section-label" style="text-align:center; margin-bottom:20px;">LEAVE A MESSAGE</div>
+    <input class="modal-input" id="gb-name" placeholder="성함">
+    <textarea class="modal-textarea" id="gb-msg" placeholder="축하 메시지를 남겨주세요"></textarea>
+    <button class="modal-submit" onclick="submitGuestbook()">SUBMIT</button>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-content" id="lightboxContent">SCENE 01</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Loading
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('loading').classList.add('hide'); }, 1800);
+});
+
+// Populate film strips
+['stripL', 'stripR'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    let html = '';
+    for (let i = 0; i < 24; i++) html += '<div class="perf"></div>';
+    el.innerHTML = html;
+  }
+});
+
+// Populate film dividers
+['filmDiv1','filmDiv2','filmDiv3','filmDiv4','filmDiv5','filmDiv6','filmDiv7'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    let html = '';
+    for (let i = 0; i < 30; i++) html += '<div class="perf"></div>';
+    el.innerHTML = html;
+  }
+});
+
+// Gallery reel
+const reel = document.getElementById('reelTrack');
+const labels = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+let reelHtml = '';
+for (let dup = 0; dup < 2; dup++) {
+  labels.forEach(l => { reelHtml += '<div class="film-frame">SCENE ' + l + '</div>'; });
+}
+reel.innerHTML = reelHtml;
+
+// Timecode
+function updateTimecode() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+  const f = String(Math.floor(Math.random() * 24)).padStart(2, '0');
+  const tc = document.getElementById('timecode');
+  if (tc) tc.textContent = h + ':' + m + ':' + s + ':' + f;
+}
+setInterval(updateTimecode, 100);
+
+// Ticket flip
+function flipTicket() {
+  document.getElementById('ticket').classList.toggle('flipped');
+}
+
+// Tabs
+function switchTab(e, side) {
+  document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.account-list').forEach(l => l.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(side).classList.add('active');
+}
+
+// Copy
+function copyAccount(num) {
+  const tmp = document.createElement('textarea');
+  tmp.value = num;
+  document.body.appendChild(tmp);
+  tmp.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(tmp);
+  showToast('계좌번호가 복사되었습니다');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// Guestbook
+function openGuestbook() { document.getElementById('guestbookModal').classList.add('active'); }
+function closeModal() { document.getElementById('guestbookModal').classList.remove('active'); }
+function submitGuestbook() {
+  const name = document.getElementById('gb-name').value.trim();
+  const msg = document.getElementById('gb-msg').value.trim();
+  if (!name || !msg) { showToast('성함과 메시지를 모두 입력해주세요'); return; }
+  const list = document.getElementById('guestbook-list');
+  const today = new Date();
+  const dateStr = today.getFullYear() + '.' + String(today.getMonth()+1).padStart(2,'0') + '.' + String(today.getDate()).padStart(2,'0');
+  const item = document.createElement('div');
+  item.className = 'guestbook-item';
+  item.innerHTML = '<div class="guestbook-msg">' + escapeHtml(msg) + '</div><div class="guestbook-meta"><span>' + escapeHtml(name) + '</span><span>' + dateStr + '</span></div>';
+  list.insertBefore(item, list.firstChild);
+  document.getElementById('gb-name').value = '';
+  document.getElementById('gb-msg').value = '';
+  closeModal();
+  showToast('축하 메시지가 등록되었습니다');
+}
+function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// Lightbox
+function openImage(n) {
+  document.getElementById('lightboxContent').textContent = 'SCENE ' + String(n).padStart(2, '0');
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+// Share
+function shareLink() {
+  if (navigator.share) navigator.share({title:'구용석 ♥ 전문현 결혼합니다', url:location.href});
+  else {
+    const t = document.createElement('textarea');
+    t.value = location.href;
+    document.body.appendChild(t); t.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(t);
+    showToast('링크가 복사되었습니다');
+  }
+}
+function shareKakao() { showToast('카카오톡 공유 (배포 시 SDK 연결)'); }
+
+// Countdown
+function updateCountdown() {
+  const wedding = new Date('2026-06-13T12:30:00+09:00');
+  const diff = wedding - new Date();
+  if (diff <= 0) {
+    ['cdDays','cdHours','cdMins','cdSecs'].forEach(id => document.getElementById(id).textContent = '00');
+    return;
+  }
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const secs = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById('cdDays').textContent = String(days).padStart(3, '0');
+  document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Reveal on scroll - also pause/play videos for performance
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      const v = e.target.querySelector('video');
+      if (v) v.play().catch(()=>{});
+    } else {
+      const v = e.target.querySelector('video');
+      if (v && !v.paused) v.pause();
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .slide-left, .slide-right, .cinema-scene').forEach(el => observer.observe(el));
+
+document.getElementById('guestbookModal').addEventListener('click', (e) => {
+  if (e.target.id === 'guestbookModal') closeModal();
+});
+</script>
+</body>
+</html>
