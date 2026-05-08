@@ -4,17 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>구용석 ♥ 전문현 결혼합니다</title>
+
 <meta property="og:type" content="website">
 <meta property="og:title" content="구용석 ♥ 전문현 결혼합니다">
-<meta property="og:description" content="2026년 6월 13일, 저희 결혼식에 초대합니다.">
-<meta property="og:image" content="https://images.pexels.com/videos/4148225/pexels-photo-4148225.jpeg?auto=compress&cs=tinysrgb&w=1200">
+<meta property="og:description" content="2026년 8월 16일 일요일 오후 1:30, 라도무스 아트센터에서 저희 결혼식에 초대합니다.">
+<meta property="og:image" content="./images/cover.jpg">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="구용석 ♥ 전문현 결혼합니다">
-<meta name="twitter:description" content="2026년 6월 13일, 저희 결혼식에 초대합니다.">
-<meta name="twitter:image" content="https://images.pexels.com/videos/4148225/pexels-photo-4148225.jpeg?auto=compress&cs=tinysrgb&w=1200">
+<meta name="twitter:description" content="2026년 8월 16일, 저희 결혼식에 초대합니다.">
+<meta name="twitter:image" content="./images/cover.jpg">
 <meta name="theme-color" content="#1a1816">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Bebas+Neue&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -116,7 +119,7 @@ html, body {
 }
 @keyframes blink { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
 
-/* ============= COVER ============= */
+/* ============= COVER (with PHOTO background) ============= */
 .cover {
   height: 100vh;
   min-height: 720px;
@@ -128,89 +131,45 @@ html, body {
   overflow: hidden;
 }
 
-.cover-video {
+.cover-photo {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  object-fit: cover;
+  background-image: url('./images/cover.jpg');
+  background-size: cover;
+  background-position: center 30%;
   z-index: 0;
-  filter: grayscale(100%) brightness(0.55) contrast(1.15);
-  opacity: 0.7;
+  animation: kenBurns 20s ease-in-out infinite alternate;
 }
 
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+/* Soft warm overlay for legibility (NOT dark scary one) */
 .cover-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: 
-    radial-gradient(ellipse at center, rgba(13,12,11,0.4) 0%, rgba(13,12,11,0.85) 100%),
-    linear-gradient(180deg, rgba(13,12,11,0.4) 0%, rgba(13,12,11,0.2) 50%, rgba(13,12,11,0.85) 100%);
+    linear-gradient(180deg, 
+      rgba(13,12,11,0.5) 0%, 
+      rgba(13,12,11,0.2) 35%, 
+      rgba(13,12,11,0.4) 65%, 
+      rgba(13,12,11,0.85) 100%);
 }
 
 .cover-vignette {
   position: absolute; inset: 0; z-index: 2;
   pointer-events: none;
-  box-shadow: inset 0 0 150px 50px rgba(0,0,0,0.9);
-}
-
-.cover-grain {
-  position: absolute; inset: 0; z-index: 3;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
-  opacity: 0.15;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  animation: grain 0.4s steps(3) infinite;
-}
-@keyframes grain {
-  0% { transform: translate(0, 0); }
-  33% { transform: translate(-2%, 1%); }
-  66% { transform: translate(2%, -1%); }
-  100% { transform: translate(0, 0); }
-}
-
-.cover-scanlines {
-  position: absolute; inset: 0; z-index: 3;
-  background: repeating-linear-gradient(0deg,
-    transparent 0px, transparent 2px,
-    rgba(0,0,0,0.08) 3px, transparent 4px);
-  pointer-events: none;
-  opacity: 0.5;
+  box-shadow: inset 0 0 120px 30px rgba(0,0,0,0.6);
 }
 
 .cover-frame {
   position: absolute;
   top: 30px; left: 30px; right: 30px; bottom: 30px;
-  border: 1px solid rgba(212, 184, 150, 0.3);
+  border: 1px solid rgba(212, 184, 150, 0.4);
   z-index: 4;
   pointer-events: none;
-}
-
-.film-strip-left, .film-strip-right {
-  position: absolute;
-  top: 0;
-  width: 30px; height: 100%;
-  background: var(--bg-deep);
-  z-index: 5;
-  display: flex; flex-direction: column;
-  justify-content: space-around;
-  padding: 10px 0;
-  overflow: hidden;
-}
-.film-strip-left { left: 0; }
-.film-strip-right { right: 0; }
-.film-strip-left .perfs, .film-strip-right .perfs {
-  display: flex; flex-direction: column;
-  gap: 12px;
-  animation: scrollFilm 4s linear infinite;
-}
-.film-strip-left .perf, .film-strip-right .perf {
-  width: 14px; height: 18px;
-  background: var(--bg);
-  border-radius: 3px;
-  margin: 0 auto;
-  flex-shrink: 0;
-}
-@keyframes scrollFilm {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-30px); }
 }
 
 .cover-inner {
@@ -331,40 +290,6 @@ html, body {
   50% { transform: translateY(8px); }
 }
 
-.rec-indicator {
-  position: absolute;
-  top: 50px; left: 50px;
-  z-index: 6;
-  display: flex; align-items: center;
-  gap: 6px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: var(--ink);
-  opacity: 0.7;
-}
-.rec-dot {
-  width: 8px; height: 8px;
-  background: #c44;
-  border-radius: 50%;
-  animation: recBlink 1.5s infinite;
-}
-@keyframes recBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.timecode {
-  position: absolute;
-  top: 50px; right: 50px;
-  z-index: 6;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--ink);
-  opacity: 0.7;
-}
-
 /* ============= FILM DIVIDER ============= */
 .film-divider {
   background: var(--bg-deep);
@@ -427,7 +352,7 @@ html, body {
   margin: 0 auto 30px;
 }
 
-/* ============= INVITATION (with cinematic videos) ============= */
+/* ============= INVITATION ============= */
 .invitation {
   padding: 100px 0 80px;
   background: var(--bg);
@@ -475,66 +400,52 @@ html, body {
   font-style: normal;
 }
 
-/* Cinematic video card */
+/* Cinematic scene with photo or video */
 .cinema-scene {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 3/4;
   margin: 50px 0;
   overflow: hidden;
   background: var(--bg-deep);
 }
 
-.cinema-scene video {
+.cinema-scene .scene-media {
   width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) brightness(0.6) contrast(1.2);
-  opacity: 0.85;
-  transition: opacity 0.6s, filter 0.6s;
+  display: block;
+  /* 컬러 + 약간의 따뜻한 톤 */
+  filter: brightness(1.02) contrast(1.05) saturate(0.95);
 }
 
-.cinema-scene.visible video {
-  opacity: 0.85;
+.cinema-scene video.scene-media {
+  filter: brightness(1.0) contrast(1.05) saturate(0.9);
 }
 
-/* Letterbox (영화관 화면 비율 효과) */
+/* Letterbox (cinema feel, 작게) */
 .cinema-scene::before,
 .cinema-scene::after {
   content: '';
   position: absolute;
   left: 0; right: 0;
-  height: 25px;
+  height: 20px;
   background: var(--bg-deep);
   z-index: 2;
 }
 .cinema-scene::before { top: 0; }
 .cinema-scene::after { bottom: 0; }
 
-/* Vignette */
 .cinema-scene .scene-vignette {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  box-shadow: inset 0 0 80px 20px rgba(0,0,0,0.7);
+  box-shadow: inset 0 0 60px 10px rgba(0,0,0,0.4);
 }
 
-/* Grain */
-.cinema-scene .scene-grain {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.4'/></svg>");
-  opacity: 0.12;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  animation: grain 0.4s steps(3) infinite;
-}
-
-/* Scene info overlay */
 .scene-info {
   position: absolute;
-  bottom: 35px;
+  bottom: 30px;
   left: 25px;
   z-index: 5;
   text-align: left;
@@ -547,34 +458,33 @@ html, body {
   letter-spacing: 3px;
   color: var(--accent);
   margin-bottom: 4px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
 }
 
 .scene-caption {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
   color: var(--ink);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.95);
+  line-height: 1.4;
 }
 
 .scene-meta {
   position: absolute;
-  top: 35px;
+  top: 30px;
   right: 25px;
   z-index: 5;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   color: var(--ink);
-  opacity: 0.7;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  opacity: 0.8;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.9);
   text-align: right;
 }
 
-/* Subtitle below video (영화 자막 스타일) */
 .scene-subtitle {
   text-align: center;
   margin-top: 16px;
@@ -1008,7 +918,7 @@ table.cal td.wedding-day {
   display: flex;
   gap: 8px;
   padding: 0 8px;
-  animation: reelScroll 30s linear infinite;
+  animation: reelScroll 40s linear infinite;
   width: max-content;
 }
 
@@ -1019,16 +929,15 @@ table.cal td.wedding-day {
 
 .film-frame {
   width: 110px; height: 75px;
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-soft));
   border: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Italiana', serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--ink-mute);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.film-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .gallery-grid {
@@ -1040,37 +949,34 @@ table.cal td.wedding-day {
 
 .gallery-item {
   aspect-ratio: 1;
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Italiana', serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--ink-mute);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: transform 0.3s;
   border: 1px solid var(--line);
+  background: var(--bg-card);
 }
 
-.gallery-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-soft));
-}
-
-.gallery-item span {
-  position: relative;
-  z-index: 1;
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s;
 }
 
 .gallery-item:active { transform: scale(0.97); }
+.gallery-item:hover img { transform: scale(1.05); }
+
 .gallery-item.featured {
   grid-column: span 2;
   grid-row: span 2;
+}
+
+.gallery-note {
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 1px;
 }
 
 /* ============= LOCATION ============= */
@@ -1078,7 +984,7 @@ table.cal td.wedding-day {
 
 .location-name {
   font-family: 'Nanum Myeongjo', serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 6px;
   letter-spacing: 1px;
@@ -1095,51 +1001,66 @@ table.cal td.wedding-day {
 .location-addr {
   font-size: 13px;
   color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.location-tel {
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.location-tel a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+
+/* Naver map iframe wrapper */
+.map-wrap {
+  width: 100%;
+  height: 280px;
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.map-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   margin-bottom: 30px;
 }
 
-.map-placeholder {
-  height: 200px;
-  background: linear-gradient(135deg, #2a2725, #1f1c1a);
-  border: 1px solid var(--line);
+.map-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  margin-bottom: 30px;
-  position: relative;
-  overflow: hidden;
-}
-
-.map-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 184, 150, 0.04) 10px, rgba(212, 184, 150, 0.04) 20px),
-    repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
-}
-
-.map-pin {
-  font-size: 30px;
+  gap: 6px;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--accent);
   color: var(--accent);
-  z-index: 1;
-  animation: pinDrop 2s ease-out infinite;
-}
-
-@keyframes pinDrop {
-  0%, 60%, 100% { transform: translateY(0); }
-  20% { transform: translateY(-15px); }
-  40% { transform: translateY(0); }
-}
-
-.map-placeholder small {
-  z-index: 1;
-  margin-top: 8px;
-  font-family: 'Italiana', serif;
+  text-decoration: none;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
   letter-spacing: 3px;
-  font-size: 11px;
-  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.map-btn:active {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .transport-item {
@@ -1339,17 +1260,6 @@ table.cal td.wedding-day {
   color: var(--ink-mute);
 }
 
-.video-credit {
-  margin-top: 12px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: var(--ink-mute);
-  opacity: 0.6;
-  line-height: 1.6;
-}
-.video-credit a { color: var(--ink-mute); text-decoration: none; }
-
 /* ============= MODAL & TOAST ============= */
 .modal {
   display: none;
@@ -1432,6 +1342,7 @@ table.cal td.wedding-day {
 }
 .toast.show { opacity: 1; }
 
+/* Lightbox for gallery */
 .lightbox {
   display: none;
   position: fixed;
@@ -1440,18 +1351,23 @@ table.cal td.wedding-day {
   z-index: 250;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 .lightbox.active { display: flex; }
-.lightbox-content {
-  max-width: 90%;
-  max-height: 80%;
-  background: var(--bg-card);
-  border: 1px solid var(--accent);
-  padding: 40px;
-  font-family: 'Italiana', serif;
-  font-size: 14px;
-  letter-spacing: 4px;
-  color: var(--ink-soft);
+.lightbox img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: none;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  width: 40px; height: 40px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .reveal {
@@ -1485,7 +1401,7 @@ table.cal td.wedding-day {
     <div class="slate-body">
       <div class="slate-row"><span>SCENE</span><span>TAKE</span></div>
       <div class="slate-title">YS × MH</div>
-      <div class="slate-row"><span>2026.06.13</span><span>ROLL 1</span></div>
+      <div class="slate-row"><span>2026.08.16</span><span>ROLL 1</span></div>
     </div>
   </div>
   <div class="loading-text">NOW SHOWING</div>
@@ -1493,23 +1409,12 @@ table.cal td.wedding-day {
 
 <div class="wrap">
 
-  <!-- COVER -->
+  <!-- ============= COVER (with PHOTO, no scary video) ============= -->
   <section class="cover">
-    <video class="cover-video" autoplay muted loop playsinline preload="metadata"
-           poster="https://images.pexels.com/videos/4148225/pexels-photo-4148225.jpeg?auto=compress&cs=tinysrgb&w=800">
-      <source src="https://videos.pexels.com/video-files/4148225/4148225-hd_1920_1080_24fps.mp4" type="video/mp4">
-    </video>
+    <div class="cover-photo"></div>
     <div class="cover-overlay"></div>
     <div class="cover-vignette"></div>
-    <div class="cover-grain"></div>
-    <div class="cover-scanlines"></div>
     <div class="cover-frame"></div>
-
-    <div class="rec-indicator"><span class="rec-dot"></span><span>REC</span></div>
-    <div class="timecode" id="timecode">00:00:13:06</div>
-
-    <div class="film-strip-left"><div class="perfs" id="stripL"></div></div>
-    <div class="film-strip-right"><div class="perfs" id="stripR"></div></div>
 
     <div class="cover-inner">
       <div class="cover-mark">NOW SHOWING</div>
@@ -1527,18 +1432,22 @@ table.cal td.wedding-day {
           <ellipse cx="65" cy="65" rx="5" ry="11" transform="rotate(-45 65 65)" fill="#c8a888" opacity="0.45"/>
         </g>
       </svg>
-      <div class="cover-names">Yongseok<span class="amp">&</span>Munhyun</div>
+      <div class="cover-names">
+        Yongsuk
+        <span class="amp">&</span>
+        Moonhyun
+      </div>
       <div class="cover-kor">구용석 · 전문현</div>
     </div>
 
     <div class="cover-date">
       WE INVITE YOU
-      <strong>2026 . 06 . 13 . SAT</strong>
+      <strong>2026 . 08 . 16 . SUN</strong>
     </div>
     <div class="scroll-hint">SCROLL ↓</div>
   </section>
 
-  <!-- ============= INVITATION (with cinematic videos) ============= -->
+  <!-- ============= INVITATION ============= -->
   <section class="invitation">
     <div class="invitation-inner">
       <div class="section-label">INVITATION</div>
@@ -1552,26 +1461,22 @@ table.cal td.wedding-day {
       </p>
     </div>
 
-    <!-- SCENE 01 — 노을/일몰 커플 실루엣 -->
+    <!-- SCENE 01 — 두 분이 계단에서 마주보는 사진 -->
     <div class="cinema-scene reveal">
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="https://images.pexels.com/videos/5667123/pexels-photo-5667123.jpeg?auto=compress&cs=tinysrgb&w=800">
-        <source src="https://videos.pexels.com/video-files/5667123/5667123-hd_1080_1920_25fps.mp4" type="video/mp4">
-      </video>
+      <img class="scene-media" src="./images/photo_02298.jpg" alt="Scene 01" loading="lazy">
       <div class="scene-vignette"></div>
-      <div class="scene-grain"></div>
       <div class="scene-meta">
         SCENE 01<br>
-        SUNSET / EXT.
+        STAIRS / INT.
       </div>
       <div class="scene-info">
         <div class="scene-num">— ACT I —</div>
-        <div class="scene-caption">"At the end of the day,<br>we found each other."</div>
+        <div class="scene-caption">"한 걸음씩,<br>함께 올라가는 길"</div>
       </div>
     </div>
     <div class="scene-subtitle">
       <span class="subtitle-mark"></span>
-      어느 노을, 우리는 마주 섰습니다
+      서로를 바라보던 그 순간
       <span class="subtitle-mark"></span>
     </div>
 
@@ -1583,26 +1488,22 @@ table.cal td.wedding-day {
       </p>
     </div>
 
-    <!-- SCENE 02 — 바닷가/해변 산책 -->
+    <!-- SCENE 02 — 신부 단독 (대나무 숲 베일) -->
     <div class="cinema-scene reveal">
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="https://images.pexels.com/videos/9112862/pexels-photo-9112862.jpeg?auto=compress&cs=tinysrgb&w=800">
-        <source src="https://videos.pexels.com/video-files/9112862/9112862-hd_1080_1920_30fps.mp4" type="video/mp4">
-      </video>
+      <img class="scene-media" src="./images/photo_02215.jpg" alt="Scene 02" loading="lazy">
       <div class="scene-vignette"></div>
-      <div class="scene-grain"></div>
       <div class="scene-meta">
         SCENE 02<br>
-        BEACH / EXT.
+        BAMBOO / EXT.
       </div>
       <div class="scene-info">
         <div class="scene-num">— ACT II —</div>
-        <div class="scene-caption">"Walking together,<br>one step at a time."</div>
+        <div class="scene-caption">"고요한 숲의 한 장면"</div>
       </div>
     </div>
     <div class="scene-subtitle">
       <span class="subtitle-mark"></span>
-      파도 소리를 따라 함께 걸었습니다
+      바람결에 흔들린 베일처럼, 설렘이 머물던 날
       <span class="subtitle-mark"></span>
     </div>
 
@@ -1615,55 +1516,22 @@ table.cal td.wedding-day {
       </div>
     </div>
 
-    <!-- SCENE 03 — 비 내리는 창가 -->
+    <!-- SCENE 03 — 두 분 야외 -->
     <div class="cinema-scene reveal">
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="https://images.pexels.com/videos/3214448/free-video-3214448.jpg?auto=compress&cs=tinysrgb&w=800">
-        <source src="https://videos.pexels.com/video-files/3214448/3214448-hd_1920_1080_25fps.mp4" type="video/mp4">
-      </video>
+      <img class="scene-media" src="./images/photo_00081.jpg" alt="Scene 03" loading="lazy">
       <div class="scene-vignette"></div>
-      <div class="scene-grain"></div>
       <div class="scene-meta">
         SCENE 03<br>
-        RAIN / INT.
+        GARDEN / EXT.
       </div>
       <div class="scene-info">
         <div class="scene-num">— ACT III —</div>
-        <div class="scene-caption">"Some days quiet,<br>some days loud — always together."</div>
+        <div class="scene-caption">"나란히, 그리고 단단히"</div>
       </div>
     </div>
     <div class="scene-subtitle">
       <span class="subtitle-mark"></span>
-      비 오는 날에도, 햇살 좋은 날에도
-      <span class="subtitle-mark"></span>
-    </div>
-
-    <div class="invitation-inner" style="padding-top: 40px;">
-      <p class="invitation-text">
-        평범한 날들이 모여 특별한 사랑이 되었습니다.
-      </p>
-    </div>
-
-    <!-- SCENE 04 — 도시 야경 + 손잡기 -->
-    <div class="cinema-scene reveal">
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="https://images.pexels.com/videos/2611250/free-video-2611250.jpg?auto=compress&cs=tinysrgb&w=800">
-        <source src="https://videos.pexels.com/video-files/2611250/2611250-hd_1920_1080_30fps.mp4" type="video/mp4">
-      </video>
-      <div class="scene-vignette"></div>
-      <div class="scene-grain"></div>
-      <div class="scene-meta">
-        SCENE 04<br>
-        CITY / NIGHT
-      </div>
-      <div class="scene-info">
-        <div class="scene-num">— ACT IV —</div>
-        <div class="scene-caption">"Among a million lights,<br>only one stays."</div>
-      </div>
-    </div>
-    <div class="scene-subtitle">
-      <span class="subtitle-mark"></span>
-      불빛 가득한 밤, 서로의 손을 놓지 않았습니다
+      평범한 날들이 모여 특별한 사랑이 되었습니다
       <span class="subtitle-mark"></span>
     </div>
 
@@ -1674,26 +1542,22 @@ table.cal td.wedding-day {
       </p>
     </div>
 
-    <!-- SCENE 05 — 들판/꽃밭 데이트 -->
+    <!-- SCENE 04 — 두 분 마주보는 클로즈업 -->
     <div class="cinema-scene reveal">
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&w=800">
-        <source src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4" type="video/mp4">
-      </video>
+      <img class="scene-media" src="./images/photo_01194.jpg" alt="Scene 04" loading="lazy">
       <div class="scene-vignette"></div>
-      <div class="scene-grain"></div>
       <div class="scene-meta">
-        SCENE 05<br>
-        FIELD / EXT.
+        SCENE 04<br>
+        CLOSE-UP
       </div>
       <div class="scene-info">
         <div class="scene-num">— FINALE —</div>
-        <div class="scene-caption">"And so, our story begins."</div>
+        <div class="scene-caption">"그리고 이제,<br>우리의 이야기를 시작합니다"</div>
       </div>
     </div>
     <div class="scene-subtitle">
       <span class="subtitle-mark"></span>
-      그리고 이제, 우리의 이야기를 시작합니다
+      두 사람의 이야기, 이제 한 권의 책으로
       <span class="subtitle-mark"></span>
     </div>
   </section>
@@ -1708,16 +1572,16 @@ table.cal td.wedding-day {
 
     <div class="cast-card slide-left">
       <div class="role-tag">THE GROOM</div>
-      <div class="name-eng">KIM YONGSEOK</div>
+      <div class="name-eng">YONGSUK KU</div>
       <div class="name-kor">구 용 석</div>
-      <div class="relation">[신랑 아버지] · [신랑 어머니]의 [장남/차남/아들]</div>
+      <div class="relation">구동완 · 이선자의 아들</div>
     </div>
 
     <div class="cast-card slide-right">
       <div class="role-tag">THE BRIDE</div>
-      <div class="name-eng">LEE MUNHYUN</div>
+      <div class="name-eng">MOONHYUN JEON</div>
       <div class="name-kor">전 문 현</div>
-      <div class="relation">[신부 아버지] · [신부 어머니]의 [장녀/차녀/딸]</div>
+      <div class="relation">전경재 · 육근미의 딸</div>
     </div>
 
     <div style="margin-top: 50px;">
@@ -1727,23 +1591,23 @@ table.cal td.wedding-day {
     <div class="parents-grid reveal">
       <div class="parent-item">
         <div class="parent-role">GROOM'S FATHER</div>
-        <div class="parent-name-eng">[Father]</div>
-        <div class="parent-name-kor">김 재 현</div>
+        <div class="parent-name-eng">Ku Dongwan</div>
+        <div class="parent-name-kor">구 동 완</div>
       </div>
       <div class="parent-item">
         <div class="parent-role">GROOM'S MOTHER</div>
-        <div class="parent-name-eng">[Mother]</div>
-        <div class="parent-name-kor">박 미 영</div>
+        <div class="parent-name-eng">Lee Sunja</div>
+        <div class="parent-name-kor">이 선 자</div>
       </div>
       <div class="parent-item">
         <div class="parent-role">BRIDE'S FATHER</div>
-        <div class="parent-name-eng">[Father]</div>
-        <div class="parent-name-kor">이 성 훈</div>
+        <div class="parent-name-eng">Jeon Kyungjae</div>
+        <div class="parent-name-kor">전 경 재</div>
       </div>
       <div class="parent-item">
         <div class="parent-role">BRIDE'S MOTHER</div>
-        <div class="parent-name-eng">[Mother]</div>
-        <div class="parent-name-kor">최 은 경</div>
+        <div class="parent-name-eng">Yook Geunmi</div>
+        <div class="parent-name-kor">육 근 미</div>
       </div>
     </div>
   </section>
@@ -1764,23 +1628,23 @@ table.cal td.wedding-day {
           <div class="ticket-main">
             <div class="ticket-header">
               <span>WEDDING CINEMA</span>
-              <span>NO. 0613</span>
+              <span>NO. 0816</span>
             </div>
             <div>
-              <div class="ticket-movie-title">Yongseok & Munhyun</div>
+              <div class="ticket-movie-title">Yongsuk & Moonhyun</div>
               <div class="ticket-subtitle">— A LOVE STORY —</div>
               <div class="ticket-info-grid">
                 <div class="ticket-info-item">
                   <div class="label">DATE</div>
-                  <div class="value">06.13.2026</div>
+                  <div class="value">08.16.2026</div>
                 </div>
                 <div class="ticket-info-item">
                   <div class="label">TIME</div>
-                  <div class="value">12:30 PM</div>
+                  <div class="value">1:30 PM</div>
                 </div>
                 <div class="ticket-info-item">
                   <div class="label">VENUE</div>
-                  <div class="value">GRAND HALL</div>
+                  <div class="value">LUMINIS HALL</div>
                 </div>
                 <div class="ticket-info-item">
                   <div class="label">SEAT</div>
@@ -1791,7 +1655,7 @@ table.cal td.wedding-day {
           </div>
           <div class="ticket-stub">
             <div class="stub-label">ADMIT ONE</div>
-            <div class="stub-num">06<br>13</div>
+            <div class="stub-num">08<br>16</div>
             <div class="stub-bar"></div>
           </div>
         </div>
@@ -1814,22 +1678,23 @@ table.cal td.wedding-day {
     <div class="divider"></div>
     
     <div class="calendar-wrap">
-      <div class="calendar-month">JUNE 2026</div>
+      <div class="calendar-month">AUGUST 2026</div>
       <table class="cal">
         <thead>
           <tr><th class="sun">SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>
         </thead>
         <tbody>
-          <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-          <tr><td class="sun">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td class="wedding-day">13</td></tr>
-          <tr><td class="sun">14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-          <tr><td class="sun">21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-          <tr><td class="sun">28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td></tr>
+          <tr><td class="sun">2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+          <tr><td class="sun">9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+          <tr><td class="sun wedding-day">16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td></tr>
+          <tr><td class="sun">23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td></tr>
+          <tr><td class="sun">30</td><td>31</td><td></td><td></td><td></td><td></td><td></td></tr>
         </tbody>
       </table>
       <div class="time-info">
-        <div class="day">2026년 6월 13일 토요일</div>
-        <div class="time">오후 12시 30분</div>
+        <div class="day">2026년 8월 16일 일요일</div>
+        <div class="time">오후 1시 30분</div>
       </div>
       <div class="countdown-grid">
         <div class="cd-item"><div class="num" id="cdDays">--</div><div class="label">DAYS</div></div>
@@ -1848,50 +1713,75 @@ table.cal td.wedding-day {
     <h2 class="section-title">우리의 순간</h2>
     <div class="divider"></div>
 
+    <!-- Auto-scrolling film reel with real photos -->
     <div class="film-reel">
       <div class="film-reel-track" id="reelTrack"></div>
     </div>
 
-    <div class="gallery-grid reveal">
-      <div class="gallery-item featured" onclick="openImage(1)"><span>SCENE 01</span></div>
-      <div class="gallery-item" onclick="openImage(2)"><span>02</span></div>
-      <div class="gallery-item" onclick="openImage(3)"><span>03</span></div>
-      <div class="gallery-item" onclick="openImage(4)"><span>04</span></div>
-      <div class="gallery-item" onclick="openImage(5)"><span>05</span></div>
-      <div class="gallery-item" onclick="openImage(6)"><span>06</span></div>
-      <div class="gallery-item" onclick="openImage(7)"><span>07</span></div>
-      <div class="gallery-item" onclick="openImage(8)"><span>08</span></div>
+    <!-- Main gallery grid with all photos -->
+    <div class="gallery-grid reveal" id="galleryGrid">
+      <!-- Filled by JS -->
     </div>
+    <p class="gallery-note">* 사진을 누르면 크게 볼 수 있습니다</p>
   </section>
 
   <div class="film-divider"><div class="perforations" id="filmDiv5"></div></div>
 
-  <!-- LOCATION -->
+  <!-- LOCATION with NAVER MAP -->
   <section class="location section reveal">
     <div class="section-label">LOCATION</div>
     <h2 class="section-title">오시는 길</h2>
     <div class="divider"></div>
     
-    <div class="location-name">[웨딩홀 이름]</div>
-    <div class="location-hall">[층/홀 이름]</div>
-    <div class="location-addr">[주소를 입력해주세요]</div>
+    <div class="location-name">라도무스 아트센터</div>
+    <div class="location-hall">LUMINIS HALL · 루미니스홀</div>
+    <div class="location-addr">대전광역시 유성구 동서대로 639</div>
+    <div class="location-tel">TEL <a href="tel:042-823-5220">042-823-5220</a></div>
     
-    <div class="map-placeholder">
-      <div class="map-pin">⚐</div>
-      <small>MAP</small>
+    <!-- Naver Map Embed -->
+    <div class="map-wrap">
+      <iframe 
+        src="https://www.openstreetmap.org/export/embed.html?bbox=127.3196%2C36.3411%2C127.3396%2C36.3511&amp;layer=mapnik&amp;marker=36.3461%2C127.3296"
+        loading="lazy"
+        title="라도무스 아트센터 위치">
+      </iframe>
+    </div>
+
+    <div class="map-buttons">
+      <a class="map-btn" href="https://map.naver.com/v5/search/라도무스아트센터" target="_blank" rel="noopener">NAVER MAP</a>
+      <a class="map-btn" href="https://map.kakao.com/link/map/라도무스아트센터,36.3461,127.3296" target="_blank" rel="noopener">KAKAO MAP</a>
     </div>
     
     <div class="transport-item">
       <div class="transport-title">SUBWAY</div>
-      <div class="transport-desc">[지하철 호선 / 역 / 출구 / 도보 시간]</div>
+      <div class="transport-desc">
+        대전 1호선 유성온천역 6번 출구<br>
+        도보 15분 / 차량 5분
+      </div>
     </div>
     <div class="transport-item">
       <div class="transport-title">BUS</div>
-      <div class="transport-desc">[버스 노선 / 정류장]</div>
+      <div class="transport-desc">
+        유성온천역 6번 출구 → 106번 / 706번 승차<br>
+        106번 흥도초 하차 / 706번 등기소·아이파크시티 하차<br>
+        목원대사거리 우측방향 500M 도보
+      </div>
+    </div>
+    <div class="transport-item">
+      <div class="transport-title">CAR</div>
+      <div class="transport-desc">
+        유성IC → 유성IC삼거리 '공주·계룡산' 방면 좌회전<br>
+        → '서대전·유성' 방면 좌회전 → 구암역삼거리 좌회전<br>
+        → 유성온천역사거리 우회전 → 도안고등학교<br>
+        → 목원대사거리 우회전 500M
+      </div>
     </div>
     <div class="transport-item">
       <div class="transport-title">PARKING</div>
-      <div class="transport-desc">[주차 안내]</div>
+      <div class="transport-desc">
+        단독건물 전용 주차장 이용<br>
+        넉넉한 주차 공간 보유
+      </div>
     </div>
   </section>
 
@@ -1922,13 +1812,13 @@ table.cal td.wedding-day {
       </div>
       <div class="account-card">
         <div class="account-role">FATHER</div>
-        <div class="account-name">[신랑 아버지]</div>
+        <div class="account-name">구동완</div>
         <div class="account-bank">[은행명] [계좌번호]</div>
         <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
       </div>
       <div class="account-card">
         <div class="account-role">MOTHER</div>
-        <div class="account-name">[신랑 어머니]</div>
+        <div class="account-name">이선자</div>
         <div class="account-bank">[은행명] [계좌번호]</div>
         <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
       </div>
@@ -1943,13 +1833,13 @@ table.cal td.wedding-day {
       </div>
       <div class="account-card">
         <div class="account-role">FATHER</div>
-        <div class="account-name">[신부 아버지]</div>
+        <div class="account-name">전경재</div>
         <div class="account-bank">[은행명] [계좌번호]</div>
         <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
       </div>
       <div class="account-card">
         <div class="account-role">MOTHER</div>
-        <div class="account-name">[신부 어머니]</div>
+        <div class="account-name">육근미</div>
         <div class="account-bank">[은행명] [계좌번호]</div>
         <button class="copy-btn" onclick="copyAccount('계좌번호')">COPY</button>
       </div>
@@ -1967,11 +1857,11 @@ table.cal td.wedding-day {
     <div class="guestbook-list" id="guestbook-list">
       <div class="guestbook-item">
         <div class="guestbook-msg">용석아 문현아 결혼 축하해! 오래오래 행복하길</div>
-        <div class="guestbook-meta"><span>대학동기 지훈</span><span>2026.05.01</span></div>
+        <div class="guestbook-meta"><span>친구</span><span>2026.05.01</span></div>
       </div>
       <div class="guestbook-item">
         <div class="guestbook-msg">두 사람의 새로운 출발을 진심으로 축복합니다.</div>
-        <div class="guestbook-meta"><span>회사동료 영희</span><span>2026.04.28</span></div>
+        <div class="guestbook-meta"><span>지인</span><span>2026.04.28</span></div>
       </div>
     </div>
 
@@ -1994,11 +1884,7 @@ table.cal td.wedding-day {
   <footer class="footer">
     <div class="footer-mark">— END CREDITS —</div>
     <div class="footer-thanks">Thank You</div>
-    <div class="footer-credit">DIRECTED BY YONGSEOK & MUNHYUN</div>
-    <div class="video-credit">
-      Stock footage from Pexels (Free License)<br>
-      Largo Editt · Roman Odintsov · Asad Photo Maldives & others
-    </div>
+    <div class="footer-credit">DIRECTED BY YONGSUK & MOONHYUN</div>
   </footer>
 
 </div>
@@ -2014,26 +1900,27 @@ table.cal td.wedding-day {
   </div>
 </div>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <div class="lightbox-content" id="lightboxContent">SCENE 01</div>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+  <img id="lightboxImg" src="" alt="">
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+// All photo filenames (full size)
+const photos = [
+  'photo_00009.jpg', 'photo_00081.jpg', 'photo_00195.jpg', 'photo_00308.jpg',
+  'photo_00486.jpg', 'photo_00517.jpg', 'photo_00610.jpg', 'photo_00808.jpg',
+  'photo_00843.jpg', 'photo_00925.jpg', 'photo_00979.jpg', 'photo_01194.jpg',
+  'photo_01481.jpg', 'photo_01801.jpg', 'photo_02215.jpg', 'photo_02276.jpg',
+  'photo_02298.jpg', 'photo_02319.jpg'
+];
+
 // Loading
 window.addEventListener('load', () => {
   setTimeout(() => { document.getElementById('loading').classList.add('hide'); }, 1800);
-});
-
-// Populate film strips
-['stripL', 'stripR'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) {
-    let html = '';
-    for (let i = 0; i < 24; i++) html += '<div class="perf"></div>';
-    el.innerHTML = html;
-  }
 });
 
 // Populate film dividers
@@ -2046,26 +1933,37 @@ window.addEventListener('load', () => {
   }
 });
 
-// Gallery reel
+// Populate film reel with thumbnails (continuous loop)
 const reel = document.getElementById('reelTrack');
-const labels = ['01','02','03','04','05','06','07','08','09','10','11','12'];
 let reelHtml = '';
 for (let dup = 0; dup < 2; dup++) {
-  labels.forEach(l => { reelHtml += '<div class="film-frame">SCENE ' + l + '</div>'; });
+  photos.forEach(p => {
+    reelHtml += '<div class="film-frame"><img src="./images/thumbs/' + p + '" alt="" loading="lazy"></div>';
+  });
 }
 reel.innerHTML = reelHtml;
 
-// Timecode
-function updateTimecode() {
-  const now = new Date();
-  const h = String(now.getHours()).padStart(2, '0');
-  const m = String(now.getMinutes()).padStart(2, '0');
-  const s = String(now.getSeconds()).padStart(2, '0');
-  const f = String(Math.floor(Math.random() * 24)).padStart(2, '0');
-  const tc = document.getElementById('timecode');
-  if (tc) tc.textContent = h + ':' + m + ':' + s + ':' + f;
+// Populate gallery grid (featured + regular)
+const grid = document.getElementById('galleryGrid');
+let gridHtml = '';
+photos.forEach((p, idx) => {
+  // 첫 사진은 featured (큰 사진)
+  const cls = idx === 0 ? 'gallery-item featured' : 'gallery-item';
+  gridHtml += '<div class="' + cls + '" onclick="openImage(\'' + p + '\')">' +
+              '<img src="./images/thumbs/' + p + '" alt="Photo ' + (idx+1) + '" loading="lazy">' +
+              '</div>';
+});
+grid.innerHTML = gridHtml;
+
+// Lightbox
+function openImage(filename) {
+  document.getElementById('lightboxImg').src = './images/' + filename;
+  document.getElementById('lightbox').classList.add('active');
 }
-setInterval(updateTimecode, 100);
+function closeLightbox(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('lightbox').classList.remove('active');
+}
 
 // Ticket flip
 function flipTicket() {
@@ -2119,13 +2017,6 @@ function submitGuestbook() {
 }
 function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-// Lightbox
-function openImage(n) {
-  document.getElementById('lightboxContent').textContent = 'SCENE ' + String(n).padStart(2, '0');
-  document.getElementById('lightbox').classList.add('active');
-}
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
-
 // Share
 function shareLink() {
   if (navigator.share) navigator.share({title:'구용석 ♥ 전문현 결혼합니다', url:location.href});
@@ -2142,7 +2033,7 @@ function shareKakao() { showToast('카카오톡 공유 (배포 시 SDK 연결)')
 
 // Countdown
 function updateCountdown() {
-  const wedding = new Date('2026-06-13T12:30:00+09:00');
+  const wedding = new Date('2026-08-16T13:30:00+09:00');
   const diff = wedding - new Date();
   if (diff <= 0) {
     ['cdDays','cdHours','cdMins','cdSecs'].forEach(id => document.getElementById(id).textContent = '00');
@@ -2160,21 +2051,11 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// Reveal on scroll - also pause/play videos for performance
+// Reveal on scroll
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      const v = e.target.querySelector('video');
-      if (v) v.play().catch(()=>{});
-    } else {
-      const v = e.target.querySelector('video');
-      if (v && !v.paused) v.pause();
-    }
-  });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15 });
-
-document.querySelectorAll('.reveal, .slide-left, .slide-right, .cinema-scene').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal, .slide-left, .slide-right').forEach(el => observer.observe(el));
 
 document.getElementById('guestbookModal').addEventListener('click', (e) => {
   if (e.target.id === 'guestbookModal') closeModal();

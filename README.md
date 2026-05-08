@@ -1,138 +1,115 @@
 # 구용석 ♥ 전문현 모바일 청첩장
 
-## 🎬 Vercel 배포 방법
-
-### 방법 1: GitHub + Vercel (추천 ⭐)
-가장 안정적이고 수정도 쉬운 방법입니다.
-
-#### 1단계: GitHub에 업로드
-1. https://github.com 가입/로그인
-2. 우측 상단 `+` → `New repository` 클릭
-3. Repository name: `yongseok-munhyun-wedding` (원하는 이름)
-4. `Public` 선택 → `Create repository`
-5. 다음 화면에서 "uploading an existing file" 클릭
-6. `index.html`, `vercel.json`, `README.md` 파일을 드래그&드롭
-7. 아래 `Commit changes` 클릭
-
-#### 2단계: Vercel 배포
-1. https://vercel.com 접속 → `Sign Up`
-2. **GitHub로 가입** (가장 편함)
-3. 로그인 후 `Add New...` → `Project` 클릭
-4. 방금 만든 `yongseok-munhyun-wedding` 저장소 옆 `Import` 클릭
-5. 별도 설정 없이 `Deploy` 클릭
-6. 약 30초 대기 → 배포 완료!
-7. `your-project-name.vercel.app` 형태의 주소 발급
-
-#### 3단계: 수정하기
-- GitHub에서 `index.html` 파일 클릭 → 연필 아이콘으로 직접 편집
-- 저장하면 Vercel이 **자동으로 재배포** (약 30초 소요)
-
----
-
-### 방법 2: Vercel CLI로 바로 배포
-컴퓨터에서 명령어로 빠르게 배포하는 방법입니다.
-
-```bash
-# Node.js 설치 후
-npm install -g vercel
-
-# wedding-site 폴더에서 실행
-cd wedding-site
-vercel
-
-# 처음 실행 시 로그인 안내 → 이메일 입력하면 인증 메일 받음
-# 질문에 모두 Enter (기본값) → 자동 배포
-```
-
----
-
-### 방법 3: 드래그&드롭 (가장 쉬움)
-1. https://vercel.com 접속 → 가입
-2. 대시보드에서 `Add New...` → `Project`
-3. 또는 https://vercel.com/new 에서 폴더를 직접 드래그
-4. `wedding-site` 폴더 통째로 업로드 → Deploy
-
-⚠️ 단, 이 방법은 나중에 수정하려면 다시 업로드해야 합니다.
-**수정이 잦을 예정이라면 방법 1(GitHub)을 강력 추천합니다.**
-
----
-
-## 🔧 도메인 연결 (선택)
-
-Vercel에서 기본 제공하는 `xxx.vercel.app` 주소 외에,
-원하는 도메인 (예: `yongseok-munhyun.com`)을 연결하고 싶다면:
-
-1. 도메인 구매 (가비아, 후이즈, Namecheap 등)
-2. Vercel 프로젝트 → `Settings` → `Domains`
-3. 도메인 입력 후 안내 따라 DNS 설정
-
----
-
-## ✏️ 수정해야 할 항목
-
-`index.html` 파일을 열어서 다음 부분들을 본인 정보로 변경하세요.
-
-### 1. 부모님 성함 (CAST 섹션)
-```html
-<!-- 신랑 -->
-<div class="relation">[신랑 아버지] · [신랑 어머니]의 [장남/차남/아들]</div>
-
-<!-- 신부 -->
-<div class="relation">[신부 아버지] · [신부 어머니]의 [장녀/차녀/딸]</div>
-
-<!-- SUPPORTING CAST 영역 -->
-<div class="parent-name-kor">[신랑 아버지]</div>
-<div class="parent-name-kor">[신랑 어머니]</div>
-<div class="parent-name-kor">[신부 아버지]</div>
-<div class="parent-name-kor">[신부 어머니]</div>
-```
-
-### 2. 결혼식 날짜/시간
-- 코드 내 `2026.06.13`, `2026 . 06 . 13 . SAT`, `12:30 PM`, `오후 12시 30분` 검색해서 변경
-- JavaScript의 카운트다운: `new Date('2026-06-13T12:30:00+09:00')` 부분 변경
-- 캘린더의 `wedding-day` 클래스가 붙은 날짜 변경
-
-### 3. 웨딩홀 정보 (LOCATION 섹션)
-```html
-<div class="location-name">[웨딩홀 이름]</div>
-<div class="location-hall">[층/홀 이름]</div>
-<div class="location-addr">[주소를 입력해주세요]</div>
-```
-교통 안내(SUBWAY, BUS, PARKING)도 함께 수정
-
-### 4. 계좌번호 (ACCOUNT 섹션)
-신랑측 3개, 신부측 3개의 `[은행명] [계좌번호]` 부분 변경
-복사 버튼의 `onclick="copyAccount('계좌번호')"` 안 계좌번호도 함께 수정
-
-### 5. 카카오 지도 연결 (선택)
-지금은 placeholder만 있음. 실제 지도 연결하려면:
-- 카카오 지도 API 또는 네이버 지도 임베드 코드 추가
-- `<div class="map-placeholder">` 부분을 iframe으로 교체
-
----
+> 2026.08.16 SUN · 라도무스 아트센터 루미니스홀
 
 ## 📂 폴더 구조
 ```
 wedding-site/
-├── index.html       # 청첩장 본체
-├── vercel.json      # Vercel 배포 설정
-└── README.md        # 이 문서
+├── index.html              # 청첩장 본체
+├── vercel.json             # Vercel 배포 설정
+├── README.md               # 이 문서
+└── images/
+    ├── cover.jpg           # 커버 화면 배경 사진
+    ├── photo_*.jpg         # 본문 갤러리 원본 (18장, 1600px)
+    └── thumbs/
+        └── photo_*.jpg     # 갤러리 썸네일 (정사각형 600px, 18장)
 ```
 
+## 🚀 GitHub 업데이트 방법
+
+기존 GitHub 저장소(`wedding-yongsuk-moonhyun`)에 새 파일을 업데이트:
+
+```bash
+cd C:\Users\zige7\Documents\Wedding-Invitation
+
+# 새 파일들을 폴더에 덮어쓴 후
+git add .
+git commit -m "Add photos, embed Naver map, fix English names"
+git push
+```
+
+→ Vercel이 자동 감지해서 30초 안에 재배포!
+
+### ⚠️ 주의: 이미지 폴더 통째로 추가
+- `images/` 폴더가 새로 추가되어 약 11MB 정도 됩니다
+- GitHub 무료 플랜으로 충분히 처리 가능 (저장소당 1GB까지)
+- 첫 push는 시간이 좀 걸릴 수 있어요 (10초~1분)
+
 ---
 
-## 🎥 영상 출처
-모든 배경 영상은 Pexels (https://www.pexels.com)의 무료 라이선스 영상입니다.
-- Largo Editt (커버)
-- ROMAN ODINTSOV (노을 실루엣)
-- Asad Photo Maldives (해변)
-- 외 Pexels 작가들
+## ✏️ 아직 채워야 할 부분
 
-상업적/개인적 사용 모두 무료이며, 수정해서 사용 가능합니다.
+`index.html`에서 검색(Ctrl+F)으로 찾아 변경:
+
+### 1. 계좌번호 (총 6명)
+`[은행명] [계좌번호]` 검색 → 본인 정보로 변경
+복사 버튼의 `'계좌번호'` 자리에도 실제 번호 입력
+
+### 2. 방명록 샘플
+초기 샘플 메시지 2개가 있음. 실제 사용 시 메시지 자체는 방문자가 작성하므로 그대로 둬도 OK.
 
 ---
 
-## 💡 팁
-- 모바일에서 미리보기: 데스크톱에서 Chrome 개발자도구(F12) → 모바일 뷰
-- 카카오톡 공유 시 미리보기 이미지: `<head>`에 Open Graph 태그 추가 필요 (필요시 요청)
-- 청첩장 링크 단축: bit.ly, naver me 등 사용 가능
+## 🔄 사진 변경하기
+
+### 갤러리 사진 추가/교체
+1. 새 사진을 `images/` 폴더에 `photo_XXXXX.jpg` 형태로 저장
+2. `images/thumbs/` 폴더에 같은 이름으로 정사각형 썸네일 저장 (600x600 권장)
+3. `index.html`의 JavaScript 부분에서 `photos` 배열에 파일명 추가
+
+### 커버 사진 변경
+`images/cover.jpg` 파일을 새 사진으로 덮어쓰기 (가로 1920px 권장)
+
+### 시네마 씬 사진 변경 (초대합니다 섹션)
+현재 사용된 사진:
+- SCENE 01: `photo_02298.jpg` (계단)
+- SCENE 02: `photo_02215.jpg` (대나무 베일)
+- SCENE 03: `photo_00081.jpg` (정원)
+- SCENE 04: `photo_01194.jpg` (클로즈업)
+
+`index.html`에서 SCENE 01 ~ SCENE 04의 `<img class="scene-media" src="..." />` 부분 변경
+
+---
+
+## 🗺️ 지도 정보
+
+라도무스 아트센터 정보가 자동 임베드되어 있습니다.
+- 카카오맵 임베드 (메인)
+- 네이버맵 / 카카오맵 외부 링크 버튼
+
+도로명 주소: 대전광역시 유성구 동서대로 639
+
+---
+
+## 🎬 적용된 효과
+
+- ✅ 커버 사진 (Ken Burns 효과 — 천천히 줌인/줌아웃)
+- ✅ 따뜻한 그라디언트 오버레이 (어둡지만 무섭지 않은 무드)
+- ✅ 영화 슬레이트 로딩 화면
+- ✅ 가로로 흐르는 필름 스트립 디바이더
+- ✅ 캘린더 결혼 날짜 펄스 효과
+- ✅ 실시간 카운트다운
+- ✅ 영화 티켓 3D 플립 (탭하면 뒤집힘)
+- ✅ 갤러리 자동 스크롤 필름 릴
+- ✅ 갤러리 클릭 시 라이트박스 (큰 사진 보기)
+- ✅ 스크롤 시 페이드 인 애니메이션
+- ✅ 카카오톡 공유 미리보기 (Open Graph)
+
+---
+
+## 📞 문의 정보
+
+- **장소 문의**: 라도무스 아트센터 042-823-5220
+- **신랑**: 구용석 (Yongsuk Ku)
+- **신부**: 전문현 (Moonhyun Jeon)
+- **결혼식**: 2026년 8월 16일 일요일 오후 1시 30분
+
+---
+
+## 🛠️ Vercel 자동 재배포
+
+GitHub에 push 하면 Vercel이 자동으로 감지하고 재배포합니다.
+- 배포 진행 상황: https://vercel.com 대시보드 → 프로젝트 → Deployments
+- 평균 30초 ~ 1분 소요
+
+배포 후 URL 확인은 Vercel 대시보드의 `Domains` 섹션 참고.
