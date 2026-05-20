@@ -10,38 +10,44 @@
 <meta property="og:description" content="2026년 8월 16일 일요일 오후 1:30, 라도무스 아트센터에서 저희 결혼식에 초대합니다.">
 <meta property="og:image" content="./images/cover.jpg">
 <meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="구용석 ♥ 전문현 결혼합니다">
-<meta name="twitter:description" content="2026년 8월 16일, 저희 결혼식에 초대합니다.">
-<meta name="twitter:image" content="./images/cover.jpg">
-<meta name="theme-color" content="#1a1816">
+<meta name="theme-color" content="#f4efe6">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italiana&family=Bebas+Neue&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  --bg: #1a1816;
-  --bg-soft: #232120;
-  --bg-card: #2a2725;
-  --bg-deep: #0d0c0b;
-  --ink: #f5efe4;
-  --ink-soft: #a89f91;
-  --ink-mute: #6b6359;
-  --accent: #d4b896;
-  --accent-light: #e8d5b5;
-  --line: #3a3633;
-  --rose: #c8a888;
+  /* 밝은 크림/아이보리 톤 */
+  --bg: #f4efe6;
+  --bg-soft: #ede6d8;
+  --bg-card: #faf6ee;
+  --bg-deep: #e6ddc9;
+  --ink: #2e2a24;
+  --ink-soft: #6e6557;
+  --ink-mute: #9a9080;
+  --accent: #b08d57;
+  --accent-light: #c9a876;
+  --line: #ddd3bf;
+  --rose: #b5896c;
+
+  --font-kor: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-serif: 'Marcellus', 'Cormorant Garamond', serif;
+  --font-display: 'Italiana', serif;
+  --font-cor: 'Cormorant Garamond', serif;
 }
 
 html, body {
   background: var(--bg-deep);
   color: var(--ink);
-  font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
-  line-height: 1.7;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  line-height: 2;
+  letter-spacing: 0.02em;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .wrap {
@@ -50,76 +56,69 @@ html, body {
   background: var(--bg);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 80px rgba(0,0,0,0.6);
+  box-shadow: 0 0 60px rgba(0,0,0,0.08);
 }
 
-/* ============= LOADING ============= */
+/* ===== LOADING ===== */
 .loading {
   position: fixed; inset: 0;
-  background: var(--bg-deep);
+  background: var(--bg);
   z-index: 9999;
   display: flex; align-items: center; justify-content: center;
   flex-direction: column;
-  transition: opacity 0.8s, visibility 0.8s;
+  transition: opacity 0.9s, visibility 0.9s;
 }
 .loading.hide { opacity: 0; visibility: hidden; }
 
-.slate {
-  width: 240px; height: 160px;
-  background: var(--ink);
-  position: relative;
-  display: flex; flex-direction: column;
-  border: 3px solid var(--bg-deep);
+.load-flower {
+  width: 60px; height: 60px;
+  animation: spin 8s linear infinite;
 }
-.slate-stripes {
-  height: 30px;
-  background: repeating-linear-gradient(-65deg,
-    var(--bg-deep) 0px, var(--bg-deep) 18px,
-    var(--ink) 18px, var(--ink) 36px);
-  animation: stripeOpen 1.2s ease-out;
-  transform-origin: bottom;
-}
-@keyframes stripeOpen {
-  0% { transform: rotate(-25deg); }
-  60% { transform: rotate(0deg); }
-  75% { transform: rotate(-8deg); }
-  100% { transform: rotate(0deg); }
-}
-.slate-body {
-  flex: 1;
-  background: var(--bg-deep);
-  padding: 14px;
-  color: var(--ink);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  display: flex; flex-direction: column;
-  justify-content: space-between;
-}
-.slate-row {
-  display: flex; justify-content: space-between;
-  border-bottom: 1px solid var(--ink-mute);
-  padding-bottom: 4px;
-}
-.slate-title {
-  text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 3px;
-  color: var(--accent);
-  padding: 8px 0;
-}
-.loading-text {
-  margin-top: 30px;
-  font-family: 'Italiana', serif;
-  font-size: 11px;
-  letter-spacing: 6px;
-  color: var(--ink-soft);
-  animation: blink 1s infinite;
-}
-@keyframes blink { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* ============= COVER (with PHOTO background) ============= */
+.load-text {
+  margin-top: 26px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 8px;
+  color: var(--accent);
+  animation: blink 1.6s infinite;
+}
+@keyframes blink { 0%,100%{opacity:0.35;} 50%{opacity:1;} }
+
+/* ===== BGM TOGGLE ===== */
+.bgm-toggle {
+  position: fixed;
+  top: 18px; right: 18px;
+  z-index: 500;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(250, 246, 238, 0.85);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.bgm-toggle svg { width: 18px; height: 18px; fill: var(--accent); }
+.bgm-toggle .bar {
+  width: 2.5px;
+  background: var(--accent);
+  margin: 0 1px;
+  border-radius: 2px;
+  animation: eq 0.8s ease-in-out infinite alternate;
+}
+.bgm-toggle .bars { display: flex; align-items: flex-end; height: 16px; }
+.bgm-toggle .bar:nth-child(1){ height:6px; animation-delay:0s;}
+.bgm-toggle .bar:nth-child(2){ height:14px; animation-delay:0.2s;}
+.bgm-toggle .bar:nth-child(3){ height:9px; animation-delay:0.4s;}
+.bgm-toggle .bar:nth-child(4){ height:12px; animation-delay:0.1s;}
+@keyframes eq { from { transform: scaleY(0.4);} to { transform: scaleY(1);} }
+.bgm-toggle.paused .bars .bar { animation-play-state: paused; opacity: 0.4; }
+
+/* ===== COVER ===== */
 .cover {
   height: 100vh;
   min-height: 720px;
@@ -127,7 +126,7 @@ html, body {
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   padding: 60px 40px;
-  background: var(--bg-deep);
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -137,37 +136,30 @@ html, body {
   width: 100%; height: 100%;
   background-image: url('./images/cover.jpg');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 28%;
   z-index: 0;
-  animation: kenBurns 20s ease-in-out infinite alternate;
+  animation: kenBurns 24s ease-in-out infinite alternate;
 }
-
 @keyframes kenBurns {
   0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+  100% { transform: scale(1.08); }
 }
 
-/* Soft warm overlay for legibility (NOT dark scary one) */
+/* 밝은 톤: 어두운 오버레이 대신 부드러운 화이트 베일 */
 .cover-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: 
     linear-gradient(180deg, 
-      rgba(13,12,11,0.5) 0%, 
-      rgba(13,12,11,0.2) 35%, 
-      rgba(13,12,11,0.4) 65%, 
-      rgba(13,12,11,0.85) 100%);
-}
-
-.cover-vignette {
-  position: absolute; inset: 0; z-index: 2;
-  pointer-events: none;
-  box-shadow: inset 0 0 120px 30px rgba(0,0,0,0.6);
+      rgba(244,239,230,0.35) 0%, 
+      rgba(244,239,230,0.1) 30%, 
+      rgba(244,239,230,0.15) 60%, 
+      rgba(244,239,230,0.75) 100%);
 }
 
 .cover-frame {
   position: absolute;
-  top: 30px; left: 30px; right: 30px; bottom: 30px;
-  border: 1px solid rgba(212, 184, 150, 0.4);
+  top: 26px; left: 26px; right: 26px; bottom: 26px;
+  border: 1px solid rgba(255,255,255,0.55);
   z-index: 4;
   pointer-events: none;
 }
@@ -181,1113 +173,1156 @@ html, body {
 }
 
 .cover-mark {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
-  letter-spacing: 6px;
-  color: var(--accent);
-  margin-bottom: 14px;
-  padding: 4px 14px;
-  border: 1px solid var(--accent);
-  opacity: 0;
-  animation: fadeUp 1s 0.3s forwards;
-  background: rgba(13, 12, 11, 0.4);
-  backdrop-filter: blur(2px);
-}
-
-.cover-title {
-  font-family: 'Italiana', serif;
+  font-family: var(--font-display);
   font-size: 12px;
-  letter-spacing: 8px;
-  color: var(--ink);
+  letter-spacing: 7px;
+  color: #fff;
   margin-bottom: 30px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
   opacity: 0;
-  animation: fadeUp 1s 0.5s forwards;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-}
-
-.cover-flower {
-  width: 80px; height: 80px;
-  margin-bottom: 35px;
-  opacity: 0;
-  animation: fadeUp 1s 0.7s forwards;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  animation: fadeUp 1.2s 0.3s forwards;
 }
 
 .cover-names {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 38px;
-  font-weight: 300;
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 400;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   line-height: 1.5;
-  color: var(--ink);
+  color: #fff;
   opacity: 0;
-  animation: fadeUp 1s 0.9s forwards;
-  text-shadow: 0 4px 16px rgba(0,0,0,0.9);
+  animation: fadeUp 1.2s 0.6s forwards;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
 }
 
 .cover-names .amp {
   display: block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin: 14px 0;
   font-style: italic;
-  font-size: 28px;
-  color: var(--accent);
-  margin: 8px 0;
+  opacity: 0.9;
 }
 
 .cover-kor {
-  margin-top: 30px;
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 18px;
-  letter-spacing: 4px;
-  color: var(--ink-soft);
+  margin-top: 24px;
+  font-family: var(--font-kor);
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 5px;
+  color: #fff;
   opacity: 0;
-  animation: fadeUp 1s 1.1s forwards;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  animation: fadeUp 1.2s 0.9s forwards;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+  padding-left: 5px;
 }
 
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(18px); }
 }
 
 .cover-date {
   position: absolute;
-  bottom: 95px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  letter-spacing: 6px;
-  color: var(--accent);
+  bottom: 90px;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: #fff;
   text-align: center;
   z-index: 6;
   opacity: 0;
-  animation: fadeUp 1s 1.3s forwards;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  animation: fadeUp 1.2s 1.2s forwards;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.45);
 }
 
 .cover-date strong {
   display: block;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
-  margin-top: 8px;
+  margin-top: 12px;
   letter-spacing: 4px;
-  color: var(--ink);
+  line-height: 1.4;
 }
 
 .scroll-hint {
   position: absolute;
-  bottom: 45px;
+  bottom: 42px;
   font-size: 10px;
   letter-spacing: 4px;
-  color: var(--accent);
-  font-family: 'Italiana', serif;
+  color: #fff;
+  font-family: var(--font-display);
   z-index: 6;
   opacity: 0;
-  animation: fadeUp 1s 1.5s forwards, bounce 2s 2.5s infinite;
+  animation: fadeUp 1.2s 1.5s forwards, bounce 2.2s 2.8s infinite;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
-
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
 }
 
-/* ============= FILM DIVIDER ============= */
-.film-divider {
-  background: var(--bg-deep);
-  height: 50px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-.film-divider .perforations {
-  display: flex;
-  gap: 12px;
-  padding: 0 12px;
-  animation: scrollHoriz 8s linear infinite;
-  white-space: nowrap;
-}
-.film-divider .perf {
-  width: 18px; height: 24px;
-  background: var(--bg);
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-@keyframes scrollHoriz {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-30px); }
-}
-
-/* ============= SECTION ============= */
+/* ===== SECTION ===== */
 .section {
-  padding: 80px 35px;
+  padding: 95px 38px;
   text-align: center;
   position: relative;
   background: var(--bg);
 }
 
 .section-label {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 12px;
-  letter-spacing: 6px;
+  letter-spacing: 7px;
   color: var(--accent);
-  margin-bottom: 14px;
-  display: inline-block;
-  padding: 3px 12px;
-  border: 1px solid var(--accent);
+  margin-bottom: 20px;
+  padding-left: 7px;
 }
 
 .section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
-  font-weight: 300;
-  letter-spacing: 3px;
-  margin: 18px 0 50px;
+  font-family: var(--font-serif);
+  font-size: 27px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 14px 0 0;
   color: var(--ink);
+  line-height: 1.5;
 }
 
-.divider {
-  width: 1px;
-  height: 50px;
+.divider-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 34px 0;
+  gap: 12px;
+}
+.divider-dot::before, .divider-dot::after {
+  content: '';
+  width: 34px;
+  height: 1px;
   background: var(--line);
-  margin: 0 auto 30px;
+}
+.divider-dot span {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
-/* ============= INVITATION ============= */
+/* ===== INVITATION ===== */
 .invitation {
-  padding: 100px 0 80px;
+  padding: 100px 0 90px;
   background: var(--bg);
 }
-
 .invitation-inner {
-  padding: 0 40px;
+  padding: 0 42px;
   text-align: center;
 }
-
 .invitation-text {
-  font-size: 16px;
-  line-height: 2.2;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 2.4;
+  letter-spacing: 0.03em;
   color: var(--ink-soft);
-  margin-bottom: 30px;
+  margin-bottom: 0;
 }
-
 .invitation-quote {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-cor);
   font-style: italic;
-  font-size: 16px;
+  font-size: 17px;
   color: var(--accent);
-  margin: 30px 0;
-  letter-spacing: 1px;
+  margin: 50px 0;
+  letter-spacing: 0.03em;
   position: relative;
-  padding: 20px 0;
+  padding: 34px 0;
+  line-height: 2.1;
 }
 .invitation-quote::before, .invitation-quote::after {
   content: '';
   position: absolute;
   left: 50%;
-  width: 40px;
+  width: 36px;
   height: 1px;
   background: var(--accent);
   transform: translateX(-50%);
+  opacity: 0.6;
 }
 .invitation-quote::before { top: 0; }
 .invitation-quote::after { bottom: 0; }
 .invitation-quote .source {
   display: block;
+  font-family: var(--font-display);
   font-size: 11px;
   letter-spacing: 3px;
   color: var(--ink-mute);
-  margin-top: 8px;
+  margin-top: 16px;
   font-style: normal;
 }
 
-/* Cinematic scene with photo or video */
-.cinema-scene {
-  position: relative;
+/* ===== CINEMA THEATER (사진 구간만 극장처럼 어둡게) ===== */
+.cinema-theater {
   width: 100%;
-  aspect-ratio: 3/4;
-  margin: 50px 0;
+  background: #0a0907;
+  padding: 54px 0 60px;
+  position: relative;
   overflow: hidden;
-  background: var(--bg-deep);
+}
+/* 위아래 크림→블랙 전환 그라데이션 (자연스러운 입장) */
+.cinema-theater::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(180deg, var(--bg) 0%, #0a0907 100%);
+  z-index: 1;
+}
+.cinema-theater::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(0deg, var(--bg) 0%, #0a0907 100%);
+  z-index: 1;
 }
 
-.cinema-scene .scene-media {
-  width: 100%; height: 100%;
-  object-fit: cover;
+/* 극장 헤더 - NOW PLAYING 표시 */
+.theater-marquee {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 42px;
+}
+.theater-marquee .now {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: #d8b87f;
+}
+.theater-marquee .now::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #d8b87f;
+  animation: recDot 1.6s infinite;
+}
+@keyframes recDot { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+.theater-marquee .title {
+  margin-top: 14px;
+  font-family: var(--font-cor);
+  font-style: italic;
+  font-size: 17px;
+  color: #f3ead8;
+  letter-spacing: 0.04em;
+}
+
+/* 영화 한 장면 프레임 */
+.film-scene {
+  width: 100%;
+  margin: 48px 0;
+  position: relative;
+}
+/* 시네마스코프 레터박스 */
+.film-scene .frame {
+  width: 100%;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+.film-scene .frame img {
+  width: 100%;
   display: block;
-  /* 컬러 + 약간의 따뜻한 톤 */
-  filter: brightness(1.02) contrast(1.05) saturate(0.95);
+  filter: brightness(0.92) contrast(1.06) saturate(0.96) sepia(0.08);
 }
-
-.cinema-scene video.scene-media {
-  filter: brightness(1.0) contrast(1.05) saturate(0.9);
-}
-
-/* Letterbox (cinema feel, 작게) */
-.cinema-scene::before,
-.cinema-scene::after {
+/* 위아래 레터박스 띠 */
+.film-scene .frame::before,
+.film-scene .frame::after {
   content: '';
   position: absolute;
   left: 0; right: 0;
-  height: 20px;
-  background: var(--bg-deep);
+  height: 38px;
+  background: #000;
   z-index: 2;
+  pointer-events: none;
 }
-.cinema-scene::before { top: 0; }
-.cinema-scene::after { bottom: 0; }
-
-.cinema-scene .scene-vignette {
+.film-scene .frame::before { top: 0; }
+.film-scene .frame::after { bottom: 0; }
+/* 미세 필름 그레인 */
+.film-scene .frame .grain {
   position: absolute;
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  box-shadow: inset 0 0 60px 10px rgba(0,0,0,0.4);
+  opacity: 0.10;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  animation: grainShift 0.5s steps(2) infinite;
 }
-
-.scene-info {
+@keyframes grainShift {
+  0%{transform:translate(0,0);} 50%{transform:translate(-2%,1%);} 100%{transform:translate(1%,-1%);}
+}
+/* 좌상단 씬 번호 (슬레이트 느낌) */
+.film-scene .slate-tag {
   position: absolute;
-  bottom: 30px;
-  left: 25px;
-  z-index: 5;
-  text-align: left;
-  color: var(--ink);
-}
-
-.scene-num {
-  font-family: 'Bebas Neue', sans-serif;
+  top: 52px; left: 18px;
+  z-index: 4;
+  font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 3px;
-  color: var(--accent);
-  margin-bottom: 4px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  color: rgba(243,234,216,0.75);
 }
-
-.scene-caption {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 16px;
-  letter-spacing: 1px;
-  color: var(--ink);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.95);
-  line-height: 1.4;
-}
-
-.scene-meta {
-  position: absolute;
-  top: 30px;
-  right: 25px;
-  z-index: 5;
-  font-family: 'Bebas Neue', sans-serif;
+.film-scene .slate-tag .cam {
+  display: block;
   font-size: 9px;
   letter-spacing: 2px;
-  color: var(--ink);
-  opacity: 0.8;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.9);
-  text-align: right;
+  color: rgba(216,184,127,0.7);
+  margin-top: 3px;
 }
-
-.scene-subtitle {
+/* 우상단 타임코드 */
+.film-scene .timecode {
+  position: absolute;
+  top: 52px; right: 18px;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(243,234,216,0.55);
+}
+/* 영화 자막 (하단, 흰 글씨 + 그림자) */
+.film-scene .subtitle {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 58px;
+  z-index: 4;
   text-align: center;
-  margin-top: 16px;
-  padding: 0 20px;
-  font-family: 'Gowun Batang', serif;
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--ink-soft);
+  padding: 0 32px;
+  font-family: var(--font-kor);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #fff;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 0 14px rgba(0,0,0,0.7);
 }
-
-.scene-subtitle .subtitle-mark {
-  display: inline-block;
-  width: 16px;
-  height: 1px;
-  background: var(--accent);
-  vertical-align: middle;
-  margin: 0 8px;
+.film-scene .subtitle .small {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.7);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
 }
-
-/* ============= CAST ============= */
-.cast { background: var(--bg-soft); }
-
-.cast-card {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  padding: 30px 25px;
-  margin-bottom: 15px;
+/* 극장 내 막간 텍스트 */
+.theater-text {
   position: relative;
-  overflow: hidden;
+  z-index: 3;
+  text-align: center;
+  padding: 30px 44px;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 2.4;
+  letter-spacing: 0.03em;
+  color: #cfc4ad;
 }
-
-.cast-card::before {
+.theater-quote {
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-cor);
+  font-style: italic;
+  font-size: 17px;
+  color: #d8b87f;
+  margin: 44px 0;
+  padding: 32px 44px;
+  line-height: 2.1;
+  text-align: center;
+}
+.theater-quote::before, .theater-quote::after {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  left: 50%;
+  width: 34px; height: 1px;
+  background: #d8b87f;
+  transform: translateX(-50%);
+  opacity: 0.5;
 }
-
-.cast-card .role-tag {
-  display: inline-block;
-  font-family: 'Bebas Neue', sans-serif;
+.theater-quote::before { top: 0; }
+.theater-quote::after { bottom: 0; }
+.theater-quote .source {
+  display: block;
+  font-family: var(--font-display);
+  font-style: normal;
   font-size: 11px;
   letter-spacing: 3px;
-  background: var(--accent);
-  color: var(--bg);
-  padding: 3px 10px;
-  margin-bottom: 14px;
+  color: rgba(207,196,173,0.7);
+  margin-top: 16px;
 }
 
-.cast-card .name-eng {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 14px;
-  color: var(--ink-soft);
-  margin-bottom: 6px;
-  letter-spacing: 2px;
+/* ===== CAST ===== */
+.cast {
+  background: var(--bg-soft);
+  padding: 100px 42px;
 }
-
-.cast-card .name-kor {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: 5px;
-  margin-bottom: 12px;
+.cast-list {
+  display: flex;
+  flex-direction: column;
 }
-
-.cast-card .relation {
-  font-size: 12px;
-  color: var(--ink-mute);
-  letter-spacing: 1px;
-}
-
-.parents-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 30px;
-}
-
-.parent-item {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  padding: 16px 12px;
+.cast-person {
   text-align: center;
+  padding: 34px 0;
 }
-
-.parent-role {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
-
-.parent-name-eng {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+.cast-role {
+  font-family: var(--font-display);
   font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--accent);
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.cast-role::before, .cast-role::after {
+  content: '';
+  width: 22px; height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+.cast-parents {
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.06em;
   color: var(--ink-soft);
-  margin-bottom: 4px;
+  margin-bottom: 20px;
+  line-height: 1.7;
 }
-
-.parent-name-kor {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 15px;
-  font-weight: 700;
+.cast-parents .of { margin: 0 4px; color: var(--ink-mute); }
+.cast-name-kor {
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 29px;
+  letter-spacing: 11px;
   color: var(--ink);
-  letter-spacing: 2px;
+  margin-bottom: 14px;
+  line-height: 1.3;
+  padding-left: 11px;
+}
+.cast-name-eng {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  text-transform: uppercase;
+  padding-left: 4px;
+}
+.cast-amp {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 34px;
+  color: var(--accent);
+  margin: 16px 0;
+  font-style: italic;
+  line-height: 1;
+  opacity: 0.55;
 }
 
-/* ============= TICKET ============= */
+/* ===== TICKET ===== */
 .ticket-section {
-  background: var(--bg-deep);
-  padding: 80px 25px;
+  background: var(--bg);
+  padding: 95px 28px;
   position: relative;
-  overflow: hidden;
 }
-
-.ticket-bg-grain {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.3'/></svg>");
-  opacity: 0.08;
-  pointer-events: none;
-}
-
 .ticket-wrap {
-  perspective: 1000px;
+  perspective: 2000px;
   margin: 0 auto;
   max-width: 340px;
+  position: relative;
 }
-
 .ticket {
-  background: linear-gradient(135deg, #d4b896 0%, #e8d5b5 100%);
-  color: var(--bg);
   position: relative;
   cursor: pointer;
-  transition: transform 0.6s;
+  transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
   transform-style: preserve-3d;
+  width: 100%;
+  min-height: 218px;
+  filter: drop-shadow(0 10px 28px rgba(120, 100, 60, 0.22));
 }
-
 .ticket.flipped { transform: rotateY(180deg); }
 .ticket-face, .ticket-back {
+  position: absolute;
+  inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-.ticket-back {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: var(--bg-card);
-  color: var(--ink);
-  transform: rotateY(180deg);
   display: flex;
+}
+.ticket-face {
+  background: linear-gradient(135deg, #faf6ee 0%, #f0e8d6 55%, #e6dac1 100%);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.ticket-back {
+  background: linear-gradient(135deg, #b08d57 0%, #c9a876 100%);
+  color: #fff;
+  transform: rotateY(180deg);
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: 30px;
-  border: 1px dashed var(--accent);
 }
-
-.ticket::before, .ticket::after {
+.ticket-face::before, .ticket-face::after,
+.ticket-back::before, .ticket-back::after {
   content: '';
   position: absolute;
-  width: 24px; height: 24px;
-  background: var(--bg-deep);
+  width: 26px; height: 26px;
+  background: var(--bg);
   border-radius: 50%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 }
-.ticket::before { left: -12px; }
-.ticket::after { right: -12px; }
-
-.ticket-face {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  min-height: 200px;
-}
-
+.ticket-face::before, .ticket-back::before { left: -13px; }
+.ticket-face::after, .ticket-back::after { right: -13px; }
 .ticket-main {
-  padding: 25px 20px;
+  flex: 1;
+  padding: 26px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .ticket-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 11px;
   letter-spacing: 2px;
-  color: rgba(26, 24, 22, 0.7);
-  border-bottom: 1px dashed rgba(26, 24, 22, 0.3);
-  padding-bottom: 10px;
-  margin-bottom: 16px;
+  color: var(--ink-mute);
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
 }
-
 .ticket-movie-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+  font-family: var(--font-serif);
   font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 4px;
-  line-height: 1.2;
+  font-weight: 400;
+  margin-bottom: 7px;
+  line-height: 1.35;
+  letter-spacing: 1px;
 }
-
 .ticket-subtitle {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 11px;
-  letter-spacing: 3px;
-  color: rgba(26, 24, 22, 0.7);
-  margin-bottom: 16px;
+  letter-spacing: 4px;
+  color: var(--ink-mute);
+  margin-bottom: 20px;
 }
-
 .ticket-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  font-family: 'Bebas Neue', sans-serif;
+  gap: 14px;
+  font-family: var(--font-kor);
 }
-
 .ticket-info-item .label {
-  letter-spacing: 1.5px;
-  color: rgba(26, 24, 22, 0.6);
-  margin-bottom: 2px;
+  letter-spacing: 2px;
+  color: var(--ink-mute);
+  margin-bottom: 4px;
   font-size: 9px;
+  font-family: var(--font-display);
 }
-
 .ticket-info-item .value {
   font-size: 13px;
-  letter-spacing: 1px;
-  color: var(--bg);
-  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  font-weight: 500;
 }
-
 .ticket-stub {
-  width: 80px;
-  background: rgba(26, 24, 22, 0.1);
-  border-left: 2px dashed rgba(26, 24, 22, 0.3);
+  width: 78px;
+  background: rgba(176, 141, 87, 0.08);
+  border-left: 2px dashed var(--line);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 8px;
-  font-family: 'Bebas Neue', sans-serif;
+  padding: 22px 8px;
+  font-family: var(--font-display);
 }
-
 .ticket-stub .stub-label {
   font-size: 9px;
   letter-spacing: 2px;
-  color: rgba(26, 24, 22, 0.6);
+  color: var(--ink-mute);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
 }
-
 .ticket-stub .stub-num {
-  font-size: 22px;
-  letter-spacing: 2px;
-  color: var(--bg);
-  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--accent);
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.2;
 }
-
 .ticket-stub .stub-bar {
   width: 100%;
-  height: 30px;
+  height: 28px;
   background: repeating-linear-gradient(90deg,
-    var(--bg) 0, var(--bg) 2px,
-    transparent 2px, transparent 5px);
+    var(--ink-mute) 0, var(--ink-mute) 1.5px,
+    transparent 1.5px, transparent 4px);
+  opacity: 0.5;
 }
-
 .ticket-back-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-cor);
   font-style: italic;
-  font-size: 16px;
-  text-align: center;
-  line-height: 1.8;
-  color: var(--ink);
-  margin-bottom: 14px;
-}
-
-.ticket-back-name {
-  font-family: 'Nanum Myeongjo', serif;
   font-size: 18px;
-  color: var(--accent);
-  letter-spacing: 4px;
+  text-align: center;
+  line-height: 2;
+  margin-bottom: 16px;
 }
-
+.ticket-back-divider {
+  width: 30px; height: 1px;
+  background: rgba(255,255,255,0.6);
+  margin: 16px 0;
+}
+.ticket-back-name {
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 5px;
+  padding-left: 5px;
+}
 .ticket-hint {
   text-align: center;
-  margin-top: 20px;
-  font-family: 'Italiana', serif;
+  margin-top: 26px;
+  font-family: var(--font-display);
   font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--ink-soft);
-  position: relative;
-  z-index: 1;
+  letter-spacing: 5px;
+  color: var(--ink-mute);
+  animation: hintBlink 2.2s ease-in-out infinite;
+}
+@keyframes hintBlink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
 }
 
-/* ============= CALENDAR ============= */
+/* ===== CALENDAR ===== */
 .calendar-wrap {
   background: var(--bg-card);
-  padding: 50px 25px;
+  padding: 50px 26px;
   border: 1px solid var(--line);
-  margin: 30px 0;
-  position: relative;
+  margin: 36px 0 0;
 }
-
 .calendar-month {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+  font-family: var(--font-serif);
   font-size: 22px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   color: var(--accent);
-  letter-spacing: 4px;
+  letter-spacing: 3px;
+  line-height: 1.4;
+  padding-left: 3px;
 }
-
 table.cal { width: 100%; border-collapse: collapse; }
-
 table.cal th {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--ink-soft);
-  padding: 8px 0;
-}
-
-table.cal td {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--ink-mute);
   padding: 10px 0;
+}
+table.cal td {
+  padding: 13px 0;
   font-size: 14px;
   color: var(--ink);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-cor);
+  position: relative;
 }
-
 table.cal td.sun { color: var(--rose); }
-
 table.cal td.wedding-day {
   background: var(--accent);
-  color: var(--bg);
+  color: #fff;
   border-radius: 50%;
-  font-weight: 700;
-  position: relative;
-  animation: pulseDay 2s infinite;
+  font-weight: 500;
+  width: 32px; height: 32px;
+  max-width: 32px;
+  animation: pulseDay 2.4s infinite;
 }
-
 @keyframes pulseDay {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 184, 150, 0.5); }
-  50% { box-shadow: 0 0 0 8px rgba(212, 184, 150, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(176,141,87,0.4); }
+  50% { box-shadow: 0 0 0 7px rgba(176,141,87,0); }
 }
-
 .countdown-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
-  margin-top: 25px;
+  margin-top: 30px;
 }
-
 .cd-item {
   background: var(--bg);
   border: 1px solid var(--line);
-  padding: 12px 4px;
+  padding: 15px 4px;
 }
-
 .cd-item .num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
+  font-family: var(--font-serif);
+  font-size: 23px;
   color: var(--accent);
-  letter-spacing: 1px;
 }
-
 .cd-item .label {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   font-size: 9px;
   letter-spacing: 2px;
   color: var(--ink-mute);
-  margin-top: 2px;
+  margin-top: 6px;
 }
-
 .time-info {
-  margin-top: 25px;
-  padding-top: 25px;
+  margin-top: 30px;
+  padding-top: 30px;
   border-top: 1px solid var(--line);
-  font-family: 'Cormorant Garamond', serif;
-  letter-spacing: 2px;
 }
-
 .time-info .day {
+  font-family: var(--font-kor);
+  font-weight: 300;
   font-size: 14px;
   color: var(--accent);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: 3px;
 }
-
 .time-info .time {
-  font-size: 28px;
-  font-weight: 300;
+  font-family: var(--font-serif);
+  font-size: 27px;
+  font-weight: 400;
   color: var(--ink);
+  letter-spacing: 2px;
+  line-height: 1.4;
 }
 
-/* ============= GALLERY ============= */
+/* ===== GALLERY ===== */
 .gallery { background: var(--bg); }
-
-.film-reel {
-  background: var(--bg-deep);
-  padding: 12px 0;
-  margin: 30px -35px 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.film-reel::before, .film-reel::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  height: 12px;
-  background-image: linear-gradient(90deg,
-    var(--bg) 0, var(--bg) 8px,
-    transparent 8px, transparent 20px);
-  background-size: 20px 12px;
-}
-.film-reel::before { top: 0; }
-.film-reel::after { bottom: 0; }
-
-.film-reel-track {
-  display: flex;
-  gap: 8px;
-  padding: 0 8px;
-  animation: reelScroll 40s linear infinite;
-  width: max-content;
-}
-
-@keyframes reelScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.film-frame {
-  width: 110px; height: 75px;
-  border: 1px solid var(--line);
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.film-frame img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin-top: 20px;
+  gap: 5px;
+  margin-top: 30px;
 }
-
 .gallery-item {
   aspect-ratio: 1;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s;
-  border: 1px solid var(--line);
-  background: var(--bg-card);
+  background: var(--bg-soft);
 }
-
 .gallery-item img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.6s;
 }
-
 .gallery-item:active { transform: scale(0.97); }
-.gallery-item:hover img { transform: scale(1.05); }
-
+.gallery-item:hover img { transform: scale(1.06); }
 .gallery-item.featured {
   grid-column: span 2;
   grid-row: span 2;
 }
-
 .gallery-note {
-  margin-top: 20px;
-  font-size: 11px;
+  margin-top: 26px;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 12px;
   color: var(--ink-mute);
-  letter-spacing: 1px;
+  letter-spacing: 0.08em;
 }
 
-/* ============= LOCATION ============= */
-.location { background: var(--bg-soft); }
-
-.location-name {
-  font-family: 'Nanum Myeongjo', serif;
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(40,36,30,0.96);
+  z-index: 250;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.active { display: flex; }
+.lightbox-stage {
+  position: relative;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lightbox-img-wrap {
+  display: flex;
+  width: 100%; height: 100%;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.lightbox img {
+  max-width: 92%;
+  max-height: 85vh;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.lightbox-controls {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  z-index: 5;
+}
+.lightbox-counter {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  padding: 6px 13px;
+}
+.lightbox-close {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  width: 38px; height: 38px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  width: 44px; height: 44px;
   font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  cursor: pointer;
+  z-index: 5;
+}
+.lightbox-nav.prev { left: 10px; }
+.lightbox-nav.next { right: 10px; }
+.lightbox-nav:disabled { opacity: 0.25; }
+.lightbox-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ===== LOCATION ===== */
+.location { background: var(--bg-soft); }
+.location-name {
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 21px;
+  margin-bottom: 10px;
   letter-spacing: 1px;
   color: var(--ink);
 }
-
 .location-hall {
-  font-size: 13px;
+  font-family: var(--font-display);
+  font-size: 12px;
   color: var(--accent);
-  margin-bottom: 10px;
-  letter-spacing: 2px;
+  margin-bottom: 14px;
+  letter-spacing: 3px;
 }
-
 .location-addr {
+  font-family: var(--font-kor);
+  font-weight: 300;
   font-size: 13px;
   color: var(--ink-soft);
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
 }
-
 .location-tel {
+  font-family: var(--font-display);
   font-size: 12px;
   color: var(--ink-mute);
-  margin-bottom: 25px;
-  letter-spacing: 1px;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
 }
-
 .location-tel a {
   color: var(--accent);
   text-decoration: none;
   border-bottom: 1px dotted var(--accent);
 }
-
-/* Naver map iframe wrapper */
 .map-wrap {
   width: 100%;
   height: 280px;
   border: 1px solid var(--line);
   margin-bottom: 16px;
-  position: relative;
   overflow: hidden;
   background: var(--bg-card);
 }
-
 .map-wrap iframe {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   border: none;
 }
-
 .map-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
 }
-
 .map-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 12px;
+  padding: 15px;
   background: var(--bg);
   border: 1px solid var(--accent);
   color: var(--accent);
   text-decoration: none;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
+  font-family: var(--font-display);
+  font-size: 12px;
   letter-spacing: 3px;
   cursor: pointer;
   transition: all 0.2s;
 }
-
-.map-btn:active {
-  background: var(--accent);
-  color: var(--bg);
-}
-
+.map-btn:active { background: var(--accent); color: #fff; }
 .transport-item {
   border-top: 1px solid var(--line);
-  padding: 20px 0;
+  padding: 24px 0;
   text-align: left;
 }
-
 .transport-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 14px;
-  letter-spacing: 3px;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-
-.transport-desc {
-  font-size: 13px;
-  color: var(--ink-soft);
-  line-height: 1.8;
-}
-
-/* ============= ACCOUNT ============= */
-.account-tabs {
-  display: flex;
-  margin-bottom: 30px;
-  border: 1px solid var(--line);
-}
-
-.account-tab {
-  flex: 1;
-  padding: 14px;
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: var(--font-display);
   font-size: 13px;
   letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.transport-desc {
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 2;
+  letter-spacing: 0.02em;
+}
+
+/* ===== ACCOUNT ===== */
+.account-tabs {
+  display: flex;
+  margin-bottom: 32px;
+  border: 1px solid var(--line);
+}
+.account-tab {
+  flex: 1;
+  padding: 15px;
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 3px;
   background: var(--bg-card);
   color: var(--ink-soft);
   border: none;
   cursor: pointer;
   transition: all 0.3s;
 }
-
-.account-tab.active { background: var(--accent); color: var(--bg); }
-
+.account-tab.active { background: var(--accent); color: #fff; }
 .account-list { display: none; }
 .account-list.active { display: block; animation: fadeIn 0.4s; }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .account-card {
   border: 1px solid var(--line);
-  padding: 18px 20px;
+  padding: 20px;
   margin-bottom: 10px;
   text-align: left;
   background: var(--bg-card);
 }
-
 .account-role {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
-  letter-spacing: 2px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 3px;
   color: var(--accent);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-
 .account-name {
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--ink);
-}
-
-.account-bank {
-  font-size: 12px;
-  color: var(--ink-soft);
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 17px;
   margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  color: var(--ink);
+  letter-spacing: 1px;
 }
-
+.account-bank {
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
 .copy-btn {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 4px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 3px;
   cursor: pointer;
   transition: all 0.2s;
 }
+.copy-btn:active { background: var(--accent); color: #fff; }
 
-.copy-btn:active { background: var(--accent); color: var(--bg); }
-
-/* ============= GUESTBOOK ============= */
+/* ===== GUESTBOOK ===== */
 .guestbook { background: var(--bg-soft); }
-
-.guestbook-list { text-align: left; margin-bottom: 25px; }
-
+.guestbook-list { text-align: left; margin-bottom: 30px; }
 .guestbook-item {
   background: var(--bg-card);
-  padding: 18px 20px;
+  padding: 22px;
   margin-bottom: 10px;
   border-left: 2px solid var(--accent);
 }
-
 .guestbook-msg {
-  font-size: 13px;
-  line-height: 1.7;
-  margin-bottom: 8px;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 12px;
   color: var(--ink);
 }
-
 .guestbook-meta {
+  font-family: var(--font-display);
   font-size: 11px;
   color: var(--ink-mute);
   display: flex;
   justify-content: space-between;
+  letter-spacing: 1.5px;
 }
-
 .write-btn {
-  padding: 12px 30px;
+  padding: 14px 34px;
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-size: 13px;
   letter-spacing: 4px;
   cursor: pointer;
 }
+.write-btn:active { background: var(--accent); color: #fff; }
 
-.write-btn:active { background: var(--accent); color: var(--bg); }
-
-/* ============= SHARE & FOOTER ============= */
-.share { background: var(--bg); padding: 80px 35px 40px; }
-
+/* ===== SHARE & FOOTER ===== */
+.share { background: var(--bg); padding: 95px 38px 50px; }
 .share-buttons {
   display: flex;
   gap: 10px;
-  margin-top: 30px;
+  margin-top: 36px;
 }
-
 .share-btn {
   flex: 1;
-  padding: 14px 0;
+  padding: 16px 0;
   background: transparent;
   border: 1px solid var(--line);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
+  font-family: var(--font-display);
+  font-size: 12px;
   letter-spacing: 3px;
   cursor: pointer;
   color: var(--ink-soft);
 }
-
-.share-btn:active {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
-
+.share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .footer {
   text-align: center;
-  padding: 50px 30px;
-  background: var(--bg-deep);
-  border-top: 1px solid var(--line);
+  padding: 80px 30px 70px;
+  background: #0a0907;
+  position: relative;
+  overflow: hidden;
 }
-
-.footer-mark {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
-  letter-spacing: 5px;
-  color: var(--accent);
-  margin-bottom: 12px;
-  padding: 4px 14px;
-  border: 1px solid var(--accent);
-  display: inline-block;
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 90px;
+  background: linear-gradient(180deg, var(--bg-soft) 0%, #0a0907 100%);
 }
-
-.footer-thanks {
-  font-family: 'Cormorant Garamond', serif;
+.footer-fin {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-cor);
   font-style: italic;
-  font-size: 22px;
-  color: var(--ink);
-  letter-spacing: 2px;
-  margin-top: 16px;
-}
-
-.footer-credit {
-  margin-top: 20px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 9px;
+  font-size: 30px;
+  color: #d8b87f;
   letter-spacing: 3px;
-  color: var(--ink-mute);
+  margin-bottom: 50px;
+}
+.credit-roll {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: center;
+}
+.credit-block .role {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(216,184,127,0.65);
+  margin-bottom: 8px;
+}
+.credit-block .name {
+  font-family: var(--font-kor);
+  font-weight: 400;
+  font-size: 15px;
+  color: #f3ead8;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+.credit-block .name.eng {
+  font-family: var(--font-serif);
+  letter-spacing: 3px;
+}
+.footer-end {
+  position: relative;
+  z-index: 2;
+  margin-top: 55px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(216,184,127,0.2);
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(207,196,173,0.5);
 }
 
-/* ============= MODAL & TOAST ============= */
+/* ===== MODAL & TOAST ===== */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.92);
+  background: rgba(40,36,30,0.7);
   z-index: 200;
   align-items: center;
   justify-content: center;
   padding: 30px;
 }
 .modal.active { display: flex; }
-
 .modal-content {
   background: var(--bg-card);
-  padding: 30px;
+  padding: 32px;
   width: 100%;
   max-width: 380px;
   position: relative;
   border: 1px solid var(--line);
   animation: modalIn 0.3s;
 }
-
 @keyframes modalIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
-
 .modal-close {
   position: absolute;
   top: 10px; right: 15px;
@@ -1297,97 +1332,64 @@ table.cal td.wedding-day {
   cursor: pointer;
   color: var(--ink-soft);
 }
-
 .modal-input, .modal-textarea {
   width: 100%;
-  padding: 12px;
+  padding: 13px;
   border: 1px solid var(--line);
-  background: var(--bg-soft);
+  background: var(--bg);
   color: var(--ink);
-  font-family: inherit;
-  font-size: 13px;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 14px;
   margin-bottom: 10px;
 }
-
-.modal-textarea { min-height: 100px; resize: vertical; }
-
+.modal-textarea { min-height: 110px; resize: vertical; }
 .modal-submit {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background: var(--accent);
-  color: var(--bg);
+  color: #fff;
   border: none;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 4px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
 }
-
 .toast {
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
+  background: var(--ink);
   color: var(--bg);
-  padding: 12px 24px;
+  padding: 13px 26px;
+  font-family: var(--font-kor);
+  font-weight: 400;
   font-size: 13px;
   letter-spacing: 1px;
   z-index: 300;
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
-  font-weight: 500;
 }
 .toast.show { opacity: 1; }
 
-/* Lightbox for gallery */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  z-index: 250;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.lightbox.active { display: flex; }
-.lightbox img {
-  max-width: 100%;
-  max-height: 90vh;
-  object-fit: contain;
-}
-.lightbox-close {
-  position: absolute;
-  top: 20px; right: 20px;
-  background: none;
-  border: 1px solid var(--ink);
-  color: var(--ink);
-  width: 40px; height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s, transform 0.8s;
+  transform: translateY(34px);
+  transition: opacity 1s, transform 1s;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
 .slide-left {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 1s, transform 1s;
+  transform: translateX(-36px);
+  transition: opacity 1.1s, transform 1.1s;
 }
 .slide-left.visible { opacity: 1; transform: translateX(0); }
-
 .slide-right {
   opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 1s, transform 1s;
+  transform: translateX(36px);
+  transition: opacity 1.1s, transform 1.1s;
 }
 .slide-right.visible { opacity: 1; transform: translateX(0); }
 </style>
@@ -1396,63 +1398,62 @@ table.cal td.wedding-day {
 
 <!-- LOADING -->
 <div class="loading" id="loading">
-  <div class="slate">
-    <div class="slate-stripes"></div>
-    <div class="slate-body">
-      <div class="slate-row"><span>SCENE</span><span>TAKE</span></div>
-      <div class="slate-title">YS × MH</div>
-      <div class="slate-row"><span>2026.08.16</span><span>ROLL 1</span></div>
-    </div>
+  <svg class="load-flower" viewBox="0 0 100 100" fill="none">
+    <g stroke="#b08d57" stroke-width="0.8" fill="none">
+      <circle cx="50" cy="50" r="3" fill="#c9a876"/>
+      <ellipse cx="50" cy="30" rx="6" ry="14" fill="#c9a876" opacity="0.4"/>
+      <ellipse cx="50" cy="70" rx="6" ry="14" fill="#c9a876" opacity="0.4"/>
+      <ellipse cx="30" cy="50" rx="14" ry="6" fill="#c9a876" opacity="0.4"/>
+      <ellipse cx="70" cy="50" rx="14" ry="6" fill="#c9a876" opacity="0.4"/>
+      <ellipse cx="35" cy="35" rx="5" ry="11" transform="rotate(-45 35 35)" fill="#b5896c" opacity="0.35"/>
+      <ellipse cx="65" cy="35" rx="5" ry="11" transform="rotate(45 65 35)" fill="#b5896c" opacity="0.35"/>
+      <ellipse cx="35" cy="65" rx="5" ry="11" transform="rotate(45 35 65)" fill="#b5896c" opacity="0.35"/>
+      <ellipse cx="65" cy="65" rx="5" ry="11" transform="rotate(-45 65 65)" fill="#b5896c" opacity="0.35"/>
+    </g>
+  </svg>
+  <div class="load-text">YONGSUK &amp; MOONHYUN</div>
+</div>
+
+<!-- BGM -->
+<audio id="bgm" loop preload="auto">
+  <source src="./assets/bgm.mp3" type="audio/mpeg">
+</audio>
+<div class="bgm-toggle paused" id="bgmToggle" onclick="toggleBgm()" title="음악 재생/정지">
+  <div class="bars">
+    <div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div>
   </div>
-  <div class="loading-text">NOW SHOWING</div>
 </div>
 
 <div class="wrap">
 
-  <!-- ============= COVER (with PHOTO, no scary video) ============= -->
   <section class="cover">
     <div class="cover-photo"></div>
     <div class="cover-overlay"></div>
-    <div class="cover-vignette"></div>
     <div class="cover-frame"></div>
 
     <div class="cover-inner">
-      <div class="cover-mark">NOW SHOWING</div>
-      <div class="cover-title">A LOVE STORY</div>
-      <svg class="cover-flower" viewBox="0 0 100 100" fill="none">
-        <g stroke="#d4b896" stroke-width="0.8" fill="none">
-          <circle cx="50" cy="50" r="3" fill="#e8d5b5"/>
-          <ellipse cx="50" cy="30" rx="6" ry="14" fill="#d4b896" opacity="0.5"/>
-          <ellipse cx="50" cy="70" rx="6" ry="14" fill="#d4b896" opacity="0.5"/>
-          <ellipse cx="30" cy="50" rx="14" ry="6" fill="#d4b896" opacity="0.5"/>
-          <ellipse cx="70" cy="50" rx="14" ry="6" fill="#d4b896" opacity="0.5"/>
-          <ellipse cx="35" cy="35" rx="5" ry="11" transform="rotate(-45 35 35)" fill="#c8a888" opacity="0.45"/>
-          <ellipse cx="65" cy="35" rx="5" ry="11" transform="rotate(45 65 35)" fill="#c8a888" opacity="0.45"/>
-          <ellipse cx="35" cy="65" rx="5" ry="11" transform="rotate(45 35 65)" fill="#c8a888" opacity="0.45"/>
-          <ellipse cx="65" cy="65" rx="5" ry="11" transform="rotate(-45 65 65)" fill="#c8a888" opacity="0.45"/>
-        </g>
-      </svg>
+      <div class="cover-mark">WE INVITE YOU</div>
       <div class="cover-names">
         Yongsuk
-        <span class="amp">&</span>
+        <span class="amp">&amp;</span>
         Moonhyun
       </div>
       <div class="cover-kor">구용석 · 전문현</div>
     </div>
 
     <div class="cover-date">
-      WE INVITE YOU
-      <strong>2026 . 08 . 16 . SUN</strong>
+      THE WEDDING DAY
+      <strong>2026 . 08 . 16</strong>
     </div>
     <div class="scroll-hint">SCROLL ↓</div>
   </section>
 
-  <!-- ============= INVITATION ============= -->
   <section class="invitation">
     <div class="invitation-inner">
       <div class="section-label">INVITATION</div>
       <h2 class="section-title">초대합니다</h2>
-      <div class="divider"></div>
+      <div class="divider-dot"><span></span></div>
       <p class="invitation-text">
         서로가 마주보며 다져온 사랑을<br>
         이제 함께 한 곳을 바라보며<br>
@@ -1460,166 +1461,117 @@ table.cal td.wedding-day {
         키우고자 합니다.
       </p>
     </div>
-
-    <!-- SCENE 01 — 두 분이 계단에서 마주보는 사진 -->
-    <div class="cinema-scene reveal">
-      <img class="scene-media" src="./images/photo_02298.jpg" alt="Scene 01" loading="lazy">
-      <div class="scene-vignette"></div>
-      <div class="scene-meta">
-        SCENE 01<br>
-        STAIRS / INT.
-      </div>
-      <div class="scene-info">
-        <div class="scene-num">— ACT I —</div>
-        <div class="scene-caption">"한 걸음씩,<br>함께 올라가는 길"</div>
-      </div>
-    </div>
-    <div class="scene-subtitle">
-      <span class="subtitle-mark"></span>
-      서로를 바라보던 그 순간
-      <span class="subtitle-mark"></span>
-    </div>
-
-    <div class="invitation-inner" style="padding-top: 40px;">
-      <p class="invitation-text">
-        매일이 영화 같지는 않아도<br>
-        하루하루가 우리에게는 한 컷,<br>
-        그 모든 순간이 모여 한 편의 이야기가 되었습니다.
-      </p>
-    </div>
-
-    <!-- SCENE 02 — 신부 단독 (대나무 숲 베일) -->
-    <div class="cinema-scene reveal">
-      <img class="scene-media" src="./images/photo_02215.jpg" alt="Scene 02" loading="lazy">
-      <div class="scene-vignette"></div>
-      <div class="scene-meta">
-        SCENE 02<br>
-        BAMBOO / EXT.
-      </div>
-      <div class="scene-info">
-        <div class="scene-num">— ACT II —</div>
-        <div class="scene-caption">"고요한 숲의 한 장면"</div>
-      </div>
-    </div>
-    <div class="scene-subtitle">
-      <span class="subtitle-mark"></span>
-      바람결에 흔들린 베일처럼, 설렘이 머물던 날
-      <span class="subtitle-mark"></span>
-    </div>
-
-    <div class="invitation-inner" style="padding-top: 40px;">
-      <div class="invitation-quote">
-        "인생은 모두가 함께하는 여행이다.<br>
-        매일매일 사는 동안 우리가 할 수 있는 건<br>
-        최선을 다해 이 멋진 여행을 만끽하는 것이다."
-        <span class="source">— 영화 〈ABOUT TIME〉 중 —</span>
-      </div>
-    </div>
-
-    <!-- SCENE 03 — 두 분 야외 -->
-    <div class="cinema-scene reveal">
-      <img class="scene-media" src="./images/photo_00081.jpg" alt="Scene 03" loading="lazy">
-      <div class="scene-vignette"></div>
-      <div class="scene-meta">
-        SCENE 03<br>
-        GARDEN / EXT.
-      </div>
-      <div class="scene-info">
-        <div class="scene-num">— ACT III —</div>
-        <div class="scene-caption">"나란히, 그리고 단단히"</div>
-      </div>
-    </div>
-    <div class="scene-subtitle">
-      <span class="subtitle-mark"></span>
-      평범한 날들이 모여 특별한 사랑이 되었습니다
-      <span class="subtitle-mark"></span>
-    </div>
-
-    <div class="invitation-inner" style="padding-top: 40px;">
-      <p class="invitation-text">
-        새로운 여행의 출발선에 서있는<br>
-        저희를 축복해 주시면 감사하겠습니다.
-      </p>
-    </div>
-
-    <!-- SCENE 04 — 두 분 마주보는 클로즈업 -->
-    <div class="cinema-scene reveal">
-      <img class="scene-media" src="./images/photo_01194.jpg" alt="Scene 04" loading="lazy">
-      <div class="scene-vignette"></div>
-      <div class="scene-meta">
-        SCENE 04<br>
-        CLOSE-UP
-      </div>
-      <div class="scene-info">
-        <div class="scene-num">— FINALE —</div>
-        <div class="scene-caption">"그리고 이제,<br>우리의 이야기를 시작합니다"</div>
-      </div>
-    </div>
-    <div class="scene-subtitle">
-      <span class="subtitle-mark"></span>
-      두 사람의 이야기, 이제 한 권의 책으로
-      <span class="subtitle-mark"></span>
-    </div>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv1"></div></div>
+  <!-- ===== 극장 입장: 사진 구간만 어둡게 ===== -->
+  <div class="cinema-theater">
 
-  <!-- CAST -->
-  <section class="cast section">
-    <div class="section-label">CAST</div>
-    <h2 class="section-title">우리의 시작</h2>
-    <div class="divider"></div>
-
-    <div class="cast-card slide-left">
-      <div class="role-tag">THE GROOM</div>
-      <div class="name-eng">YONGSUK KU</div>
-      <div class="name-kor">구 용 석</div>
-      <div class="relation">구동완 · 이선자의 아들</div>
+    <div class="theater-marquee reveal">
+      <div class="now">NOW PLAYING</div>
+      <div class="title">우리, 함께 쓰는 이야기</div>
     </div>
 
-    <div class="cast-card slide-right">
-      <div class="role-tag">THE BRIDE</div>
-      <div class="name-eng">MOONHYUN JEON</div>
-      <div class="name-kor">전 문 현</div>
-      <div class="relation">전경재 · 육근미의 딸</div>
+    <!-- SCENE 01 -->
+    <div class="film-scene reveal">
+      <div class="frame">
+        <img src="./images/photo_02298.jpg" alt="Scene 1" loading="lazy">
+        <div class="grain"></div>
+        <div class="slate-tag">SCENE 01<span class="cam">CAM A · TAKE 1</span></div>
+        <div class="timecode">00:01:12</div>
+        <div class="subtitle">
+          서로를 바라보던 그 순간, 우리는 알았습니다
+          <span class="small">— ACT I. THE BEGINNING —</span>
+        </div>
+      </div>
     </div>
 
-    <div style="margin-top: 50px;">
-      <div class="section-label" style="font-size: 11px;">SUPPORTING CAST</div>
+    <div class="theater-text reveal">
+      매일이 영화 같지는 않아도<br>
+      하루하루가 우리에게는 한 컷,<br>
+      그 모든 순간이 모여<br>
+      한 편의 이야기가 되었습니다.
     </div>
 
-    <div class="parents-grid reveal">
-      <div class="parent-item">
-        <div class="parent-role">GROOM'S FATHER</div>
-        <div class="parent-name-eng">Ku Dongwan</div>
-        <div class="parent-name-kor">구 동 완</div>
+    <!-- SCENE 02 -->
+    <div class="film-scene reveal">
+      <div class="frame">
+        <img src="./images/photo_02215.jpg" alt="Scene 2" loading="lazy">
+        <div class="grain"></div>
+        <div class="slate-tag">SCENE 02<span class="cam">CAM B · TAKE 3</span></div>
+        <div class="timecode">00:24:08</div>
+        <div class="subtitle">
+          바람결에 흔들린 베일처럼, 설렘이 머물던 날
+          <span class="small">— ACT II. THE PROMISE —</span>
+        </div>
       </div>
-      <div class="parent-item">
-        <div class="parent-role">GROOM'S MOTHER</div>
-        <div class="parent-name-eng">Lee Sunja</div>
-        <div class="parent-name-kor">이 선 자</div>
+    </div>
+
+    <div class="theater-quote reveal">
+      인생은 모두가 함께하는 여행이다.<br>
+      매일매일 사는 동안 우리가 할 수 있는 건<br>
+      최선을 다해 이 멋진 여행을<br>
+      만끽하는 것이다.
+      <span class="source">— 영화 〈ABOUT TIME〉 중 —</span>
+    </div>
+
+    <!-- SCENE 03 -->
+    <div class="film-scene reveal">
+      <div class="frame">
+        <img src="./images/photo_00081.jpg" alt="Scene 3" loading="lazy">
+        <div class="grain"></div>
+        <div class="slate-tag">SCENE 03<span class="cam">CAM A · TAKE 2</span></div>
+        <div class="timecode">01:02:45</div>
+        <div class="subtitle">
+          나란히, 그리고 단단히 — 이제 함께 걷습니다
+          <span class="small">— FINAL ACT. FOREVER —</span>
+        </div>
       </div>
-      <div class="parent-item">
-        <div class="parent-role">BRIDE'S FATHER</div>
-        <div class="parent-name-eng">Jeon Kyungjae</div>
-        <div class="parent-name-kor">전 경 재</div>
+    </div>
+
+    <div class="theater-text reveal" style="padding-bottom:10px;">
+      새로운 여행의 출발선에 서있는<br>
+      저희를 축복해 주시면<br>
+      감사하겠습니다.
+    </div>
+
+  </div>
+  <!-- ===== 극장 퇴장 ===== -->
+
+  <section class="cast">
+    <div style="text-align:center;">
+      <div class="section-label">CAST</div>
+      <h2 class="section-title">신랑 &amp; 신부</h2>
+      <div class="divider-dot"><span></span></div>
+    </div>
+
+    <div class="cast-list">
+      <div class="cast-person slide-left">
+        <div class="cast-role">THE GROOM</div>
+        <div class="cast-parents">
+          구동완<span class="of"> · </span>이선자<span class="of"> 의 </span>아들
+        </div>
+        <div class="cast-name-kor">구 용 석</div>
+        <div class="cast-name-eng">Yongsuk Ku</div>
       </div>
-      <div class="parent-item">
-        <div class="parent-role">BRIDE'S MOTHER</div>
-        <div class="parent-name-eng">Yook Geunmi</div>
-        <div class="parent-name-kor">육 근 미</div>
+
+      <div class="cast-amp">&amp;</div>
+
+      <div class="cast-person slide-right">
+        <div class="cast-role">THE BRIDE</div>
+        <div class="cast-parents">
+          전경재<span class="of"> · </span>육근미<span class="of"> 의 </span>딸
+        </div>
+        <div class="cast-name-kor">전 문 현</div>
+        <div class="cast-name-eng">Moonhyun Jeon</div>
       </div>
     </div>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv2"></div></div>
-
-  <!-- TICKET -->
   <section class="ticket-section">
-    <div class="ticket-bg-grain"></div>
-    <div style="text-align: center; margin-bottom: 30px; position: relative; z-index: 1;">
+    <div style="text-align: center; margin-bottom: 40px;">
       <div class="section-label">ADMIT ONE</div>
-      <h2 class="section-title" style="margin: 18px 0 0;">Wedding Ticket</h2>
+      <h2 class="section-title">Wedding Ticket</h2>
+      <div class="divider-dot"><span></span></div>
     </div>
 
     <div class="ticket-wrap">
@@ -1631,8 +1583,8 @@ table.cal td.wedding-day {
               <span>NO. 0816</span>
             </div>
             <div>
-              <div class="ticket-movie-title">Yongsuk & Moonhyun</div>
-              <div class="ticket-subtitle">— A LOVE STORY —</div>
+              <div class="ticket-movie-title">Yongsuk &amp; Moonhyun</div>
+              <div class="ticket-subtitle">A LOVE STORY · RATED: ALL AGES</div>
               <div class="ticket-info-grid">
                 <div class="ticket-info-item">
                   <div class="label">DATE</div>
@@ -1647,8 +1599,8 @@ table.cal td.wedding-day {
                   <div class="value">LUMINIS HALL</div>
                 </div>
                 <div class="ticket-info-item">
-                  <div class="label">SEAT</div>
-                  <div class="value">A-01</div>
+                  <div class="label">RUNNING TIME</div>
+                  <div class="value">FOREVER</div>
                 </div>
               </div>
             </div>
@@ -1660,7 +1612,8 @@ table.cal td.wedding-day {
           </div>
         </div>
         <div class="ticket-back">
-          <div class="ticket-back-text">"Two souls,<br>one journey begins"</div>
+          <div class="ticket-back-text">Two souls,<br>one journey begins</div>
+          <div class="ticket-back-divider"></div>
           <div class="ticket-back-name">용석 ♥ 문현</div>
         </div>
       </div>
@@ -1669,13 +1622,10 @@ table.cal td.wedding-day {
     <div class="ticket-hint">↻ TAP THE TICKET</div>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv3"></div></div>
-
-  <!-- CALENDAR -->
   <section class="section reveal">
     <div class="section-label">THE DAY</div>
-    <h2 class="section-title">결혼합니다</h2>
-    <div class="divider"></div>
+    <h2 class="section-title">Our Wedding Day</h2>
+    <div class="divider-dot"><span></span></div>
     
     <div class="calendar-wrap">
       <div class="calendar-month">AUGUST 2026</div>
@@ -1694,7 +1644,7 @@ table.cal td.wedding-day {
       </table>
       <div class="time-info">
         <div class="day">2026년 8월 16일 일요일</div>
-        <div class="time">오후 1시 30분</div>
+        <div class="time">1 : 30 PM</div>
       </div>
       <div class="countdown-grid">
         <div class="cd-item"><div class="num" id="cdDays">--</div><div class="label">DAYS</div></div>
@@ -1705,46 +1655,30 @@ table.cal td.wedding-day {
     </div>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv4"></div></div>
-
-  <!-- GALLERY -->
   <section class="gallery section">
     <div class="section-label">GALLERY</div>
-    <h2 class="section-title">우리의 순간</h2>
-    <div class="divider"></div>
+    <h2 class="section-title">Behind the Scenes</h2>
+    <div class="divider-dot"><span></span></div>
+    <p class="gallery-note" style="margin:0 0 4px;">CONTACT SHEET · 36 EXP</p>
 
-    <!-- Auto-scrolling film reel with real photos -->
-    <div class="film-reel">
-      <div class="film-reel-track" id="reelTrack"></div>
-    </div>
-
-    <!-- Main gallery grid with all photos -->
-    <div class="gallery-grid reveal" id="galleryGrid">
-      <!-- Filled by JS -->
-    </div>
-    <p class="gallery-note">* 사진을 누르면 크게 볼 수 있습니다</p>
+    <div class="gallery-grid reveal" id="galleryGrid"></div>
+    <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv5"></div></div>
-
-  <!-- LOCATION with NAVER MAP -->
   <section class="location section reveal">
     <div class="section-label">LOCATION</div>
-    <h2 class="section-title">오시는 길</h2>
-    <div class="divider"></div>
+    <h2 class="section-title">Venue</h2>
+    <div class="divider-dot"><span></span></div>
     
     <div class="location-name">라도무스 아트센터</div>
     <div class="location-hall">LUMINIS HALL · 루미니스홀</div>
     <div class="location-addr">대전광역시 유성구 동서대로 639</div>
-    <div class="location-tel">TEL <a href="tel:042-823-5220">042-823-5220</a></div>
+    <div class="location-tel">TEL <a href="tel:042-823-5220">042 · 823 · 5220</a></div>
     
-    <!-- Naver Map Embed -->
     <div class="map-wrap">
       <iframe 
         src="https://www.openstreetmap.org/export/embed.html?bbox=127.3196%2C36.3411%2C127.3396%2C36.3511&amp;layer=mapnik&amp;marker=36.3461%2C127.3296"
-        loading="lazy"
-        title="라도무스 아트센터 위치">
-      </iframe>
+        loading="lazy" title="라도무스 아트센터 위치"></iframe>
     </div>
 
     <div class="map-buttons">
@@ -1755,8 +1689,7 @@ table.cal td.wedding-day {
     <div class="transport-item">
       <div class="transport-title">SUBWAY</div>
       <div class="transport-desc">
-        대전 1호선 유성온천역 6번 출구<br>
-        도보 15분 / 차량 5분
+        대전 1호선 유성온천역 6번 출구<br>도보 15분 / 차량 5분
       </div>
     </div>
     <div class="transport-item">
@@ -1779,21 +1712,17 @@ table.cal td.wedding-day {
     <div class="transport-item">
       <div class="transport-title">PARKING</div>
       <div class="transport-desc">
-        단독건물 전용 주차장 이용<br>
-        넉넉한 주차 공간 보유
+        단독건물 전용 주차장 이용<br>넉넉한 주차 공간 보유
       </div>
     </div>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv6"></div></div>
-
-  <!-- ACCOUNT -->
   <section class="section reveal">
     <div class="section-label">ACCOUNT</div>
     <h2 class="section-title">마음 전하실 곳</h2>
-    <div class="divider"></div>
+    <div class="divider-dot"><span></span></div>
     
-    <p class="invitation-text" style="margin-bottom: 30px;">
+    <p class="invitation-text" style="margin-bottom: 36px; color: var(--ink-soft);">
       참석이 어려우신 분들을 위해<br>
       계좌번호를 안내드립니다.
     </p>
@@ -1846,33 +1775,30 @@ table.cal td.wedding-day {
     </div>
   </section>
 
-  <div class="film-divider"><div class="perforations" id="filmDiv7"></div></div>
-
-  <!-- GUESTBOOK -->
   <section class="guestbook section reveal">
     <div class="section-label">GUESTBOOK</div>
     <h2 class="section-title">방명록</h2>
-    <div class="divider"></div>
+    <div class="divider-dot"><span></span></div>
 
     <div class="guestbook-list" id="guestbook-list">
       <div class="guestbook-item">
-        <div class="guestbook-msg">용석아 문현아 결혼 축하해! 오래오래 행복하길</div>
-        <div class="guestbook-meta"><span>친구</span><span>2026.05.01</span></div>
+        <div class="guestbook-msg">용석아 문현아 결혼 축하해! 오래오래 행복하길 💛</div>
+        <div class="guestbook-meta"><span>FRIEND</span><span>2026.05.01</span></div>
       </div>
       <div class="guestbook-item">
         <div class="guestbook-msg">두 사람의 새로운 출발을 진심으로 축복합니다.</div>
-        <div class="guestbook-meta"><span>지인</span><span>2026.04.28</span></div>
+        <div class="guestbook-meta"><span>FAMILY</span><span>2026.04.28</span></div>
       </div>
     </div>
 
     <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
   </section>
 
-  <!-- SHARE -->
   <section class="share">
     <div style="text-align:center;">
       <div class="section-label">SHARE</div>
-      <h2 class="section-title">공유하기</h2>
+      <h2 class="section-title">Share</h2>
+      <div class="divider-dot"><span></span></div>
     </div>
     <div class="share-buttons">
       <button class="share-btn" onclick="shareLink()">LINK</button>
@@ -1880,123 +1806,192 @@ table.cal td.wedding-day {
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-mark">— END CREDITS —</div>
-    <div class="footer-thanks">Thank You</div>
-    <div class="footer-credit">DIRECTED BY YONGSUK & MOONHYUN</div>
+    <div class="footer-fin reveal">Fin.</div>
+
+    <div class="credit-roll">
+      <div class="credit-block reveal">
+        <div class="role">DIRECTED BY</div>
+        <div class="name">구용석 &amp; 전문현</div>
+      </div>
+      <div class="credit-block reveal">
+        <div class="role">STARRING</div>
+        <div class="name eng">Yongsuk Ku &amp; Moonhyun Jeon</div>
+      </div>
+      <div class="credit-block reveal">
+        <div class="role">PRODUCED BY</div>
+        <div class="name">구동완 · 이선자<br>전경재 · 육근미</div>
+      </div>
+      <div class="credit-block reveal">
+        <div class="role">SPECIAL THANKS TO</div>
+        <div class="name">함께해 주신 모든 분들께</div>
+      </div>
+      <div class="credit-block reveal">
+        <div class="role">FILMED ON LOCATION</div>
+        <div class="name">라도무스 아트센터, 대전<br>2026 . 08 . 16</div>
+      </div>
+    </div>
+
+    <div class="footer-end reveal">— THE END —</div>
   </footer>
 
 </div>
 
-<!-- Modals -->
 <div class="modal" id="guestbookModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="section-label" style="text-align:center; margin-bottom:20px;">LEAVE A MESSAGE</div>
+    <div class="section-label" style="text-align:center; margin-bottom:22px; display:block;">LEAVE A MESSAGE</div>
     <input class="modal-input" id="gb-name" placeholder="성함">
     <textarea class="modal-textarea" id="gb-msg" placeholder="축하 메시지를 남겨주세요"></textarea>
     <button class="modal-submit" onclick="submitGuestbook()">SUBMIT</button>
   </div>
 </div>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
-  <img id="lightboxImg" src="" alt="">
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-controls">
+    <div class="lightbox-counter" id="lbCounter">01 / 18</div>
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  </div>
+  <div class="lightbox-stage" id="lbStage">
+    <div class="lightbox-img-wrap" id="lbImgWrap">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+  </div>
+  <button class="lightbox-nav prev" onclick="navLightbox(-1)">‹</button>
+  <button class="lightbox-nav next" onclick="navLightbox(1)">›</button>
+  <div class="lightbox-hint">SWIPE OR TAP ARROWS</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// All photo filenames (full size)
 const photos = [
-  'photo_00009.jpg', 'photo_00081.jpg', 'photo_00195.jpg', 'photo_00308.jpg',
-  'photo_00486.jpg', 'photo_00517.jpg', 'photo_00610.jpg', 'photo_00808.jpg',
-  'photo_00843.jpg', 'photo_00925.jpg', 'photo_00979.jpg', 'photo_01194.jpg',
-  'photo_01481.jpg', 'photo_01801.jpg', 'photo_02215.jpg', 'photo_02276.jpg',
-  'photo_02298.jpg', 'photo_02319.jpg'
+  'photo_00009.jpg','photo_00081.jpg','photo_00195.jpg','photo_00308.jpg',
+  'photo_00486.jpg','photo_00517.jpg','photo_00610.jpg','photo_00808.jpg',
+  'photo_00843.jpg','photo_00925.jpg','photo_00979.jpg','photo_01194.jpg',
+  'photo_01481.jpg','photo_01801.jpg','photo_02215.jpg','photo_02276.jpg',
+  'photo_02298.jpg','photo_02319.jpg'
 ];
 
-// Loading
 window.addEventListener('load', () => {
-  setTimeout(() => { document.getElementById('loading').classList.add('hide'); }, 1800);
+  setTimeout(() => { document.getElementById('loading').classList.add('hide'); }, 1900);
 });
 
-// Populate film dividers
-['filmDiv1','filmDiv2','filmDiv3','filmDiv4','filmDiv5','filmDiv6','filmDiv7'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) {
-    let html = '';
-    for (let i = 0; i < 30; i++) html += '<div class="perf"></div>';
-    el.innerHTML = html;
+// BGM
+const bgm = document.getElementById('bgm');
+const bgmToggle = document.getElementById('bgmToggle');
+let bgmPlaying = false;
+function toggleBgm() {
+  if (bgmPlaying) {
+    bgm.pause();
+    bgmToggle.classList.add('paused');
+    bgmPlaying = false;
+  } else {
+    bgm.play().then(() => {
+      bgmToggle.classList.remove('paused');
+      bgmPlaying = true;
+    }).catch(() => {
+      showToast('음악 파일이 아직 없어요 (assets/bgm.mp3)');
+    });
   }
-});
-
-// Populate film reel with thumbnails (continuous loop)
-const reel = document.getElementById('reelTrack');
-let reelHtml = '';
-for (let dup = 0; dup < 2; dup++) {
-  photos.forEach(p => {
-    reelHtml += '<div class="film-frame"><img src="./images/thumbs/' + p + '" alt="" loading="lazy"></div>';
-  });
 }
-reel.innerHTML = reelHtml;
+// 첫 탭/스크롤 시 자동재생 시도 (브라우저 정책)
+let bgmTried = false;
+function tryAutoplay() {
+  if (bgmTried) return;
+  bgmTried = true;
+  bgm.play().then(() => {
+    bgmToggle.classList.remove('paused');
+    bgmPlaying = true;
+  }).catch(() => {});
+}
+document.addEventListener('touchstart', tryAutoplay, { once: true });
+document.addEventListener('click', tryAutoplay, { once: true });
 
-// Populate gallery grid (featured + regular)
+// Gallery
 const grid = document.getElementById('galleryGrid');
 let gridHtml = '';
 photos.forEach((p, idx) => {
-  // 첫 사진은 featured (큰 사진)
   const cls = idx === 0 ? 'gallery-item featured' : 'gallery-item';
-  gridHtml += '<div class="' + cls + '" onclick="openImage(\'' + p + '\')">' +
-              '<img src="./images/thumbs/' + p + '" alt="Photo ' + (idx+1) + '" loading="lazy">' +
-              '</div>';
+  gridHtml += '<div class="'+cls+'" onclick="openImage('+idx+')">' +
+              '<img src="./images/thumbs/'+p+'" alt="Photo '+(idx+1)+'" loading="lazy"></div>';
 });
 grid.innerHTML = gridHtml;
 
-// Lightbox
-function openImage(filename) {
-  document.getElementById('lightboxImg').src = './images/' + filename;
+let currentIdx = 0;
+function openImage(idx) {
+  currentIdx = idx;
+  updateLightbox();
   document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
-function closeLightbox(e) {
-  if (e) e.stopPropagation();
+function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
 }
+function updateLightbox() {
+  document.getElementById('lightboxImg').src = './images/' + photos[currentIdx];
+  document.getElementById('lbCounter').textContent =
+    String(currentIdx+1).padStart(2,'0') + ' / ' + String(photos.length).padStart(2,'0');
+  document.querySelector('.lightbox-nav.prev').disabled = (currentIdx === 0);
+  document.querySelector('.lightbox-nav.next').disabled = (currentIdx === photos.length-1);
+}
+function navLightbox(dir) {
+  const wrap = document.getElementById('lbImgWrap');
+  const next = currentIdx + dir;
+  if (next < 0 || next >= photos.length) return;
+  wrap.style.transform = 'translateX(' + (-dir*100) + '%)';
+  setTimeout(() => {
+    currentIdx = next;
+    updateLightbox();
+    wrap.style.transition = 'none';
+    wrap.style.transform = 'translateX(' + (dir*100) + '%)';
+    setTimeout(() => {
+      wrap.style.transition = '';
+      wrap.style.transform = 'translateX(0)';
+    }, 20);
+  }, 400);
+}
+let tsX = 0;
+const lbStage = document.getElementById('lbStage');
+lbStage.addEventListener('touchstart', e => { tsX = e.changedTouches[0].screenX; }, {passive:true});
+lbStage.addEventListener('touchend', e => {
+  const d = tsX - e.changedTouches[0].screenX;
+  if (Math.abs(d) > 50) navLightbox(d > 0 ? 1 : -1);
+}, {passive:true});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') navLightbox(-1);
+  else if (e.key === 'ArrowRight') navLightbox(1);
+  else if (e.key === 'Escape') closeLightbox();
+});
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target.id === 'lightbox' || e.target.id === 'lbStage') closeLightbox();
+});
 
-// Ticket flip
 function flipTicket() {
   document.getElementById('ticket').classList.toggle('flipped');
 }
-
-// Tabs
 function switchTab(e, side) {
   document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.account-list').forEach(l => l.classList.remove('active'));
   e.target.classList.add('active');
   document.getElementById(side).classList.add('active');
 }
-
-// Copy
 function copyAccount(num) {
-  const tmp = document.createElement('textarea');
-  tmp.value = num;
-  document.body.appendChild(tmp);
-  tmp.select();
+  const t = document.createElement('textarea');
+  t.value = num;
+  document.body.appendChild(t); t.select();
   try { document.execCommand('copy'); } catch(e) {}
-  document.body.removeChild(tmp);
+  document.body.removeChild(t);
   showToast('계좌번호가 복사되었습니다');
 }
-
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2000);
 }
-
-// Guestbook
 function openGuestbook() { document.getElementById('guestbookModal').classList.add('active'); }
 function closeModal() { document.getElementById('guestbookModal').classList.remove('active'); }
 function submitGuestbook() {
@@ -2005,19 +2000,17 @@ function submitGuestbook() {
   if (!name || !msg) { showToast('성함과 메시지를 모두 입력해주세요'); return; }
   const list = document.getElementById('guestbook-list');
   const today = new Date();
-  const dateStr = today.getFullYear() + '.' + String(today.getMonth()+1).padStart(2,'0') + '.' + String(today.getDate()).padStart(2,'0');
+  const ds = today.getFullYear()+'.'+String(today.getMonth()+1).padStart(2,'0')+'.'+String(today.getDate()).padStart(2,'0');
   const item = document.createElement('div');
   item.className = 'guestbook-item';
-  item.innerHTML = '<div class="guestbook-msg">' + escapeHtml(msg) + '</div><div class="guestbook-meta"><span>' + escapeHtml(name) + '</span><span>' + dateStr + '</span></div>';
+  item.innerHTML = '<div class="guestbook-msg">'+esc(msg)+'</div><div class="guestbook-meta"><span>'+esc(name)+'</span><span>'+ds+'</span></div>';
   list.insertBefore(item, list.firstChild);
-  document.getElementById('gb-name').value = '';
-  document.getElementById('gb-msg').value = '';
+  document.getElementById('gb-name').value='';
+  document.getElementById('gb-msg').value='';
   closeModal();
   showToast('축하 메시지가 등록되었습니다');
 }
-function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-// Share
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function shareLink() {
   if (navigator.share) navigator.share({title:'구용석 ♥ 전문현 결혼합니다', url:location.href});
   else {
@@ -2031,33 +2024,24 @@ function shareLink() {
 }
 function shareKakao() { showToast('카카오톡 공유 (배포 시 SDK 연결)'); }
 
-// Countdown
 function updateCountdown() {
-  const wedding = new Date('2026-08-16T13:30:00+09:00');
-  const diff = wedding - new Date();
-  if (diff <= 0) {
-    ['cdDays','cdHours','cdMins','cdSecs'].forEach(id => document.getElementById(id).textContent = '00');
-    return;
-  }
-  const days = Math.floor(diff / (1000*60*60*24));
-  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-  const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-  const secs = Math.floor((diff % (1000*60)) / 1000);
-  document.getElementById('cdDays').textContent = String(days).padStart(3, '0');
-  document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
-  document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+  const w = new Date('2026-08-16T13:30:00+09:00');
+  const diff = w - new Date();
+  if (diff <= 0) { ['cdDays','cdHours','cdMins','cdSecs'].forEach(i=>document.getElementById(i).textContent='00'); return; }
+  document.getElementById('cdDays').textContent = String(Math.floor(diff/86400000)).padStart(3,'0');
+  document.getElementById('cdHours').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cdMins').textContent = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('cdSecs').textContent = String(Math.floor(diff%60000/1000)).padStart(2,'0');
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// Reveal on scroll
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 document.querySelectorAll('.reveal, .slide-left, .slide-right').forEach(el => observer.observe(el));
 
-document.getElementById('guestbookModal').addEventListener('click', (e) => {
+document.getElementById('guestbookModal').addEventListener('click', e => {
   if (e.target.id === 'guestbookModal') closeModal();
 });
 </script>
