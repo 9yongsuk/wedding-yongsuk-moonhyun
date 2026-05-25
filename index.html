@@ -661,6 +661,142 @@ html, body {
   color: rgba(255,255,255,0.7);
   text-shadow: 0 1px 3px rgba(0,0,0,0.9);
 }
+
+/* ============= FILM CAROUSEL (SCENE 1~3 통합) ============= */
+.film-carousel {
+  position: relative;
+  width: 100%;
+  margin: 40px 0;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.film-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.film-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.film-slide .frame {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.film-slide .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92) contrast(1.06) saturate(0.96) sepia(0.08);
+}
+
+/* 위아래 레터박스 */
+.film-slide .frame::before,
+.film-slide .frame::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 32px;
+  background: #000;
+  z-index: 2;
+  pointer-events: none;
+}
+.film-slide .frame::before { top: 0; }
+.film-slide .frame::after { bottom: 0; }
+
+.film-slide .frame .grain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.10;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  animation: grainShift 0.5s steps(2) infinite;
+}
+
+.film-slide .slate-tag {
+  position: absolute;
+  top: 44px; left: 18px;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(243,234,216,0.75);
+}
+.film-slide .slate-tag .cam {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(216,184,127,0.7);
+  margin-top: 3px;
+}
+.film-slide .timecode {
+  position: absolute;
+  top: 44px; right: 18px;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(243,234,216,0.55);
+}
+
+/* 좌우 네비게이션 버튼 */
+.film-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(243,234,216,0.3);
+  color: #f3ead8;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: serif;
+  line-height: 1;
+  padding-bottom: 3px;
+  transition: background 0.2s;
+}
+.film-nav:hover { background: rgba(0,0,0,0.75); }
+.film-nav.prev { left: 18px; }
+.film-nav.next { right: 18px; }
+
+/* 인디케이터 점 */
+.film-dots {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 4;
+}
+.film-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(243,234,216,0.35);
+  transition: all 0.3s;
+}
+.film-dots .dot.active {
+  background: #d8b87f;
+  width: 22px;
+  border-radius: 3px;
+}
 /* 극장 내 막간 텍스트 */
 .theater-text {
   position: relative;
@@ -1671,17 +1807,42 @@ table.cal td.wedding-day {
       <div class="title">우리, 함께 쓰는 이야기</div>
     </div>
 
-    <!-- SCENE 01 -->
-    <div class="film-scene reveal">
-      <div class="frame">
-        <img src="./images/photo_02298.jpg" alt="Scene 1" loading="lazy">
-        <div class="grain"></div>
-        <div class="slate-tag">SCENE 01<span class="cam">CAM A · TAKE 1</span></div>
-        <div class="timecode">00:01:12</div>
-        <div class="subtitle">
-          서로를 바라보던 그 순간, 우리는 알았습니다
-          <span class="small">— ACT I. THE BEGINNING —</span>
+    <!-- 영화 필름 캐러셀 (SCENE 1~3 통합, 좌우 슬라이드) -->
+    <div class="film-carousel reveal">
+      <div class="film-track" id="filmTrack">
+        <div class="film-slide">
+          <div class="frame">
+            <img src="./images/photo_02298.jpg" alt="Scene 1" loading="lazy">
+            <div class="grain"></div>
+            <div class="slate-tag">SCENE 01<span class="cam">CAM A · TAKE 1</span></div>
+            <div class="timecode">00:01:12</div>
+          </div>
         </div>
+        <div class="film-slide">
+          <div class="frame">
+            <img src="./images/photo_02215.jpg" alt="Scene 2" loading="lazy">
+            <div class="grain"></div>
+            <div class="slate-tag">SCENE 02<span class="cam">CAM B · TAKE 3</span></div>
+            <div class="timecode">00:24:08</div>
+          </div>
+        </div>
+        <div class="film-slide">
+          <div class="frame">
+            <img src="./images/photo_00081.jpg" alt="Scene 3" loading="lazy">
+            <div class="grain"></div>
+            <div class="slate-tag">SCENE 03<span class="cam">CAM A · TAKE 2</span></div>
+            <div class="timecode">01:02:45</div>
+          </div>
+        </div>
+      </div>
+      <!-- 좌우 버튼 -->
+      <button class="film-nav prev" onclick="filmNav(-1)" aria-label="이전">‹</button>
+      <button class="film-nav next" onclick="filmNav(1)" aria-label="다음">›</button>
+      <!-- 인디케이터 -->
+      <div class="film-dots">
+        <span class="dot active" data-idx="0"></span>
+        <span class="dot" data-idx="1"></span>
+        <span class="dot" data-idx="2"></span>
       </div>
     </div>
 
@@ -1692,40 +1853,12 @@ table.cal td.wedding-day {
       한 편의 이야기가 되었습니다.
     </div>
 
-    <!-- SCENE 02 -->
-    <div class="film-scene reveal">
-      <div class="frame">
-        <img src="./images/photo_02215.jpg" alt="Scene 2" loading="lazy">
-        <div class="grain"></div>
-        <div class="slate-tag">SCENE 02<span class="cam">CAM B · TAKE 3</span></div>
-        <div class="timecode">00:24:08</div>
-        <div class="subtitle">
-          바람결에 흔들린 베일처럼, 설렘이 머물던 날
-          <span class="small">— ACT II. THE PROMISE —</span>
-        </div>
-      </div>
-    </div>
-
     <div class="theater-quote reveal">
       인생은 모두가 함께하는 여행이다.<br>
       매일매일 사는 동안 우리가 할 수 있는 건<br>
       최선을 다해 이 멋진 여행을<br>
       만끽하는 것이다.
       <span class="source">— 영화 〈ABOUT TIME〉 중 —</span>
-    </div>
-
-    <!-- SCENE 03 -->
-    <div class="film-scene reveal">
-      <div class="frame">
-        <img src="./images/photo_00081.jpg" alt="Scene 3" loading="lazy">
-        <div class="grain"></div>
-        <div class="slate-tag">SCENE 03<span class="cam">CAM A · TAKE 2</span></div>
-        <div class="timecode">01:02:45</div>
-        <div class="subtitle">
-          나란히, 그리고 단단히 — 이제 함께 걷습니다
-          <span class="small">— FINAL ACT. FOREVER —</span>
-        </div>
-      </div>
     </div>
 
     <div class="theater-text reveal" style="padding-bottom:10px;">
@@ -2309,6 +2442,59 @@ if (footerEl) {
 document.getElementById('guestbookModal').addEventListener('click', e => {
   if (e.target.id === 'guestbookModal') closeModal();
 });
+
+// ============= 필름 캐러셀 =============
+let filmIdx = 0;
+const filmTotal = 3;
+const filmTrack = document.getElementById('filmTrack');
+const filmDots = document.querySelectorAll('.film-dots .dot');
+
+function filmGo(idx) {
+  filmIdx = (idx + filmTotal) % filmTotal;
+  if (filmTrack) {
+    filmTrack.style.transform = 'translateX(' + (-filmIdx * 100) + '%)';
+  }
+  filmDots.forEach((d, i) => {
+    d.classList.toggle('active', i === filmIdx);
+  });
+}
+
+function filmNav(dir) {
+  filmGo(filmIdx + dir);
+  resetFilmAuto();
+}
+
+// 점 클릭
+filmDots.forEach(d => {
+  d.addEventListener('click', () => {
+    const idx = parseInt(d.dataset.idx);
+    filmGo(idx);
+    resetFilmAuto();
+  });
+});
+
+// 자동 재생 (5초마다 다음 슬라이드)
+let filmAutoTimer = null;
+function startFilmAuto() {
+  if (filmAutoTimer) clearInterval(filmAutoTimer);
+  filmAutoTimer = setInterval(() => filmGo(filmIdx + 1), 5000);
+}
+function resetFilmAuto() {
+  startFilmAuto();
+}
+startFilmAuto();
+
+// 터치 스와이프
+if (filmTrack) {
+  let startX = 0;
+  filmTrack.parentElement.addEventListener('touchstart', e => {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  filmTrack.parentElement.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 40) filmNav(diff > 0 ? 1 : -1);
+  }, { passive: true });
+}
 </script>
 </body>
 </html>
