@@ -795,13 +795,16 @@ html, body {
   width: 100%;
   min-height: 260px;
   filter: drop-shadow(0 10px 28px rgba(120, 100, 60, 0.22));
-  /* 처음 로드 시 뒤집힌 상태로 시작 (자동 회전 진입용) */
-  transform: rotateY(180deg);
 }
-/* 자동 회전 완료된 상태 (앞면 보임) */
-.ticket.auto-revealed { transform: rotateY(0deg); }
-/* 사용자가 클릭해서 뒤집은 상태 (다시 뒷면) */
+/* 클릭으로 뒤집은 상태 */
 .ticket.flipped { transform: rotateY(180deg); }
+/* 자동 회전 (한 바퀴 도는 효과) */
+.ticket.auto-spin { animation: ticketSpin 1.8s ease-in-out; }
+@keyframes ticketSpin {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
 .ticket-face, .ticket-back {
   position: absolute;
   inset: 0;
@@ -1410,7 +1413,9 @@ table.cal td.wedding-day {
   color: #d8b87f;
   letter-spacing: 4px;
   margin-bottom: 50px;
+  opacity: 0;
 }
+.footer.rolling .footer-fin { opacity: 1; }
 .credit-roll {
   position: relative;
   z-index: 2;
@@ -1451,6 +1456,8 @@ table.cal td.wedding-day {
   0% { opacity: 0; transform: translateY(20px); letter-spacing: 8px; }
   100% { opacity: 1; transform: translateY(0); letter-spacing: 4px; }
 }
+.credit-block { opacity: 0; }
+.footer.rolling .credit-block { opacity: 1; }
 .credit-block .role {
   font-family: var(--font-display);
   font-size: 10px;
@@ -1480,7 +1487,9 @@ table.cal td.wedding-day {
   font-size: 10px;
   letter-spacing: 4px;
   color: rgba(207,196,173,0.5);
+  opacity: 0;
 }
+.footer.rolling .footer-end { opacity: 1; }
 
 /* ===== MODAL & TOAST ===== */
 .modal {
@@ -1996,9 +2005,7 @@ table.cal td.wedding-day {
 
     <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
   </section>
-  <!-- 위 섹션(베이지)이 크림 위로 거칠게 찢어진 끝 -->
   <section class="share">
-    <div class="tear-down tear-beige"></div>
     <div style="text-align:center;">
       <div class="section-label">SHARE</div>
       <h2 class="section-title">Share</h2>
@@ -2009,9 +2016,7 @@ table.cal td.wedding-day {
       <button class="share-btn" onclick="shareKakao()">KAKAO</button>
     </div>
   </section>
-  <!-- 위 섹션(크림)이 검정 위로 거칠게 찢어진 끝 -->
   <footer class="footer">
-    <div class="tear-down tear-cream v2"></div>
     <div class="footer-fin">Fin.</div>
 
     <div class="credit-roll">
@@ -2176,39 +2181,44 @@ document.getElementById('lightbox').addEventListener('click', e => {
 
 function flipTicket() {
   const t = document.getElementById('ticket');
-  if (!t.classList.contains('auto-revealed')) return;
+  // 자동 회전 중이면 무시
+  if (t.classList.contains('auto-spin')) return;
   t.classList.toggle('flipped');
 }
 
-// 티켓 자동 회전 트리거 함수
-function revealTicket() {
+// 티켓을 한 바퀴 돌리는 함수
+function spinTicket() {
   const t = document.getElementById('ticket');
-  if (t && !t.classList.contains('auto-revealed')) {
-    t.classList.add('auto-revealed');
-  }
+  if (!t) return;
+  // 현재 클릭으로 뒤집힌 상태면 회전 스킵
+  if (t.classList.contains('flipped')) return;
+  
+  // auto-spin 클래스 추가했다가 애니메이션 끝나면 제거
+  t.classList.add('auto-spin');
+  setTimeout(() => {
+    t.classList.remove('auto-spin');
+  }, 1800);
 }
 
-// 방법 1: IntersectionObserver로 화면에 보일 때 회전
+// 10초 주기로 자동 회전 (페이지 로드 시 한 번, 이후 10초마다)
 const ticketEl = document.getElementById('ticket');
 if (ticketEl) {
+  // IntersectionObserver로 화면에 처음 보일 때 시작
+  let spinStarted = false;
   const ticketObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        setTimeout(revealTicket, 600);
-        ticketObs.unobserve(ticketEl);
+      if (e.isIntersecting && !spinStarted) {
+        spinStarted = true;
+        // 처음 보일 때 1초 후 첫 회전
+        setTimeout(() => {
+          spinTicket();
+          // 그 다음부터 10초 주기로 회전
+          setInterval(spinTicket, 10000);
+        }, 1000);
       }
     });
   }, { threshold: 0.3 });
   ticketObs.observe(ticketEl);
-  
-  // 방법 2 (백업): 페이지 로드 후 4초 안에 보이지 않았어도 회전 (이미 지나친 경우 대비)
-  // 그리고 페이지 진입 시 이미 티켓 영역이 보이면 즉시 회전
-  setTimeout(() => {
-    const rect = ticketEl.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      revealTicket();
-    }
-  }, 2000);
 }
 
 function copyAccount(num) {
@@ -2284,8 +2294,16 @@ if (footerEl) {
         footerObs.unobserve(footerEl);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
   footerObs.observe(footerEl);
+  
+  // 백업: 페이지 로드 후 footer가 이미 화면에 보이는 상태면 즉시 활성화
+  setTimeout(() => {
+    const rect = footerEl.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      footerEl.classList.add('rolling');
+    }
+  }, 1500);
 }
 
 document.getElementById('guestbookModal').addEventListener('click', e => {
