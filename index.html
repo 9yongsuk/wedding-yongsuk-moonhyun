@@ -110,7 +110,7 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 38px;
+  height: 42px;
   margin: 0;
   z-index: 4;
   pointer-events: none;
@@ -769,12 +769,17 @@ html, body {
 .ticket {
   position: relative;
   cursor: pointer;
-  transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: transform 1.4s cubic-bezier(0.4, 0.0, 0.2, 1);
   transform-style: preserve-3d;
   width: 100%;
   min-height: 260px;
   filter: drop-shadow(0 10px 28px rgba(120, 100, 60, 0.22));
+  /* 처음 로드 시 뒤집힌 상태로 시작 (자동 회전 진입용) */
+  transform: rotateY(180deg);
 }
+/* 자동 회전 완료된 상태 (앞면 보임) */
+.ticket.auto-revealed { transform: rotateY(0deg); }
+/* 사용자가 클릭해서 뒤집은 상태 (다시 뒷면) */
 .ticket.flipped { transform: rotateY(180deg); }
 .ticket-face, .ticket-back {
   position: absolute;
@@ -1371,6 +1376,7 @@ table.cal td.wedding-day {
   background: #0a0907;
   position: relative;
   overflow: hidden;
+  min-height: 500px;
 }
 /* footer 위 그라데이션 제거: 한지 가장자리에서 깔끔하게 검정 시작 */
 .footer-fin {
@@ -1388,8 +1394,40 @@ table.cal td.wedding-day {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 30px;
   align-items: center;
+}
+
+/* 크레딧 진입 애니메이션: 푸터가 화면에 보이면 활성화 */
+.footer.rolling .footer-fin {
+  animation: finPulse 4s ease-in-out;
+}
+@keyframes finPulse {
+  0% { opacity: 0; transform: scale(0.9); }
+  20% { opacity: 1; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.footer.rolling .credit-block {
+  animation: creditRollUp 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+}
+.footer.rolling .credit-block:nth-child(1) { animation-delay: 0.8s; }
+.footer.rolling .credit-block:nth-child(2) { animation-delay: 1.3s; }
+.footer.rolling .credit-block:nth-child(3) { animation-delay: 1.8s; }
+.footer.rolling .credit-block:nth-child(4) { animation-delay: 2.3s; }
+.footer.rolling .credit-block:nth-child(5) { animation-delay: 2.8s; }
+@keyframes creditRollUp {
+  0% { opacity: 0; transform: translateY(80px); }
+  60% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.footer.rolling .footer-end {
+  animation: endFade 1s 3.5s ease-out backwards;
+}
+@keyframes endFade {
+  0% { opacity: 0; transform: translateY(20px); letter-spacing: 8px; }
+  100% { opacity: 1; transform: translateY(0); letter-spacing: 4px; }
 }
 .credit-block .role {
   font-family: var(--font-display);
@@ -1967,32 +2005,32 @@ table.cal td.wedding-day {
   <div class="tear-down tear-cream v2"></div>
 
   <footer class="footer">
-    <div class="footer-fin reveal">Fin.</div>
+    <div class="footer-fin">Fin.</div>
 
     <div class="credit-roll">
-      <div class="credit-block reveal">
+      <div class="credit-block">
         <div class="role">DIRECTED BY</div>
         <div class="name">구용석 &amp; 전문현</div>
       </div>
-      <div class="credit-block reveal">
+      <div class="credit-block">
         <div class="role">STARRING</div>
         <div class="name eng">Yongsuk Ku &amp; Moonhyun Jeon</div>
       </div>
-      <div class="credit-block reveal">
+      <div class="credit-block">
         <div class="role">PRODUCED BY</div>
         <div class="name">구동완 · 이선자<br>전경재 · 육근미</div>
       </div>
-      <div class="credit-block reveal">
+      <div class="credit-block">
         <div class="role">SPECIAL THANKS TO</div>
         <div class="name">함께해 주신 모든 분들께</div>
       </div>
-      <div class="credit-block reveal">
+      <div class="credit-block">
         <div class="role">FILMED ON LOCATION</div>
         <div class="name">라도무스 아트센터, 대전<br>2026 . 08 . 16</div>
       </div>
     </div>
 
-    <div class="footer-end reveal">— THE END —</div>
+    <div class="footer-end">— THE END —</div>
   </footer>
 
 </div>
@@ -2130,7 +2168,27 @@ document.getElementById('lightbox').addEventListener('click', e => {
 });
 
 function flipTicket() {
-  document.getElementById('ticket').classList.toggle('flipped');
+  const t = document.getElementById('ticket');
+  // 자동 회전이 아직 안 일어났으면 무시 (회전 중일 수 있음)
+  if (!t.classList.contains('auto-revealed')) return;
+  t.classList.toggle('flipped');
+}
+
+// 티켓 자동 회전: IntersectionObserver로 화면에 보일 때 한번만
+const ticketEl = document.getElementById('ticket');
+if (ticketEl) {
+  const ticketObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        // 살짝 딜레이 후 회전 시작
+        setTimeout(() => {
+          ticketEl.classList.add('auto-revealed');
+        }, 600);
+        ticketObs.unobserve(ticketEl);
+      }
+    });
+  }, { threshold: 0.4 });
+  ticketObs.observe(ticketEl);
 }
 
 function copyAccount(num) {
@@ -2195,6 +2253,20 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal, .slide-left, .slide-right').forEach(el => observer.observe(el));
+
+// 엔드 크레딧 푸터 진입 시 위로 올라가는 애니메이션
+const footerEl = document.querySelector('.footer');
+if (footerEl) {
+  const footerObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        footerEl.classList.add('rolling');
+        footerObs.unobserve(footerEl);
+      }
+    });
+  }, { threshold: 0.2 });
+  footerObs.observe(footerEl);
+}
 
 document.getElementById('guestbookModal').addEventListener('click', e => {
   if (e.target.id === 'guestbookModal') closeModal();
