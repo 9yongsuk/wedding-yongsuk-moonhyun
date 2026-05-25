@@ -14,7 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+KR:wght@200;300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -133,6 +133,27 @@
 .tear-down.tear-beige { background-image: url("./images/tear_beige_v1.png"); }
 .tear-down.tear-beige.v2 { background-image: url("./images/tear_beige_v2.png"); }
 .tear-down.tear-beige.v3 { background-image: url("./images/tear_beige_v3.png"); }
+
+/* 섹션 내부 맨 위에 위치한 tear-down은 absolute로 처리해서 padding 영향 무시 */
+.cinema-theater > .tear-down,
+section > .tear-down,
+footer > .tear-down {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: -1px; /* 위 섹션과 1px 겹쳐서 빈틈 제거 */
+}
+.cinema-theater,
+.ticket-section,
+.cast,
+.location,
+.guestbook,
+.share,
+.section,
+footer.footer {
+  position: relative;
+}
+
 
 /* 종이 질감 - 미세한 노이즈와 종이 결 */
 .paper-texture {
@@ -1382,11 +1403,12 @@ table.cal td.wedding-day {
 .footer-fin {
   position: relative;
   z-index: 2;
-  font-family: var(--font-cor);
+  font-family: 'Noto Serif KR', 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 30px;
+  font-weight: 200;
+  font-size: 32px;
   color: #d8b87f;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   margin-bottom: 50px;
 }
 .credit-roll {
@@ -1437,8 +1459,8 @@ table.cal td.wedding-day {
   margin-bottom: 8px;
 }
 .credit-block .name {
-  font-family: var(--font-kor);
-  font-weight: 400;
+  font-family: 'Noto Serif KR', 'Marcellus', serif;
+  font-weight: 300;
   font-size: 15px;
   color: #f3ead8;
   letter-spacing: 2px;
@@ -1630,11 +1652,10 @@ table.cal td.wedding-day {
     </div>
   </section>
 
-  <!-- 위 섹션(크림)이 검정 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-cream"></div>
-
   <!-- ===== 극장 입장: 사진 구간만 어둡게 ===== -->
   <div class="cinema-theater">
+    <!-- 검정 위에 크림 한지가 거칠게 찢어진 끝으로 진입 -->
+    <div class="tear-down tear-cream"></div>
 
     <div class="theater-marquee reveal">
       <div class="now">NOW PLAYING</div>
@@ -1706,11 +1727,9 @@ table.cal td.wedding-day {
 
   </div>
   <!-- ===== 극장 퇴장 ===== -->
-
   <!-- 위 섹션(검정)이 베이지 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-black v2"></div>
-
   <section class="cast">
+    <div class="tear-down tear-black v2"></div>
     <div style="text-align:center;">
       <div class="section-label">CAST</div>
       <h2 class="section-title">신랑 &amp; 신부</h2>
@@ -1739,11 +1758,9 @@ table.cal td.wedding-day {
       </div>
     </div>
   </section>
-
   <!-- 위 섹션(베이지)이 크림 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-beige v3"></div>
-
   <section class="ticket-section">
+    <div class="tear-down tear-beige v3"></div>
     <div style="text-align: center; margin-bottom: 40px;">
       <div class="section-label">ADMIT ONE</div>
       <h2 class="section-title">Wedding Ticket</h2>
@@ -1840,11 +1857,9 @@ table.cal td.wedding-day {
     <div class="gallery-grid reveal" id="galleryGrid"></div>
     <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
   </section>
-
   <!-- 위 섹션(크림)이 베이지 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-cream"></div>
-
   <section class="location section reveal">
+    <div class="tear-down tear-cream"></div>
     <div class="section-label">LOCATION</div>
     <h2 class="section-title">Venue</h2>
     <div class="divider-dot"><span></span></div>
@@ -1895,11 +1910,9 @@ table.cal td.wedding-day {
       </div>
     </div>
   </section>
-
   <!-- 위 섹션(베이지)이 크림 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-beige v2"></div>
-
   <section class="section reveal">
+    <div class="tear-down tear-beige v2"></div>
     <div class="section-label">ACCOUNT</div>
     <h2 class="section-title">마음 전하실 곳</h2>
     <div class="divider-dot"><span></span></div>
@@ -1963,11 +1976,9 @@ table.cal td.wedding-day {
       </div>
     </div>
   </section>
-
   <!-- 위 섹션(크림)이 베이지 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-cream v3"></div>
-
   <section class="guestbook section reveal">
+    <div class="tear-down tear-cream v3"></div>
     <div class="section-label">GUESTBOOK</div>
     <h2 class="section-title">방명록</h2>
     <div class="divider-dot"><span></span></div>
@@ -1985,11 +1996,9 @@ table.cal td.wedding-day {
 
     <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
   </section>
-
   <!-- 위 섹션(베이지)이 크림 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-beige"></div>
-
   <section class="share">
+    <div class="tear-down tear-beige"></div>
     <div style="text-align:center;">
       <div class="section-label">SHARE</div>
       <h2 class="section-title">Share</h2>
@@ -2000,11 +2009,9 @@ table.cal td.wedding-day {
       <button class="share-btn" onclick="shareKakao()">KAKAO</button>
     </div>
   </section>
-
   <!-- 위 섹션(크림)이 검정 위로 거칠게 찢어진 끝 -->
-  <div class="tear-down tear-cream v2"></div>
-
   <footer class="footer">
+    <div class="tear-down tear-cream v2"></div>
     <div class="footer-fin">Fin.</div>
 
     <div class="credit-roll">
@@ -2169,26 +2176,39 @@ document.getElementById('lightbox').addEventListener('click', e => {
 
 function flipTicket() {
   const t = document.getElementById('ticket');
-  // 자동 회전이 아직 안 일어났으면 무시 (회전 중일 수 있음)
   if (!t.classList.contains('auto-revealed')) return;
   t.classList.toggle('flipped');
 }
 
-// 티켓 자동 회전: IntersectionObserver로 화면에 보일 때 한번만
+// 티켓 자동 회전 트리거 함수
+function revealTicket() {
+  const t = document.getElementById('ticket');
+  if (t && !t.classList.contains('auto-revealed')) {
+    t.classList.add('auto-revealed');
+  }
+}
+
+// 방법 1: IntersectionObserver로 화면에 보일 때 회전
 const ticketEl = document.getElementById('ticket');
 if (ticketEl) {
   const ticketObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        // 살짝 딜레이 후 회전 시작
-        setTimeout(() => {
-          ticketEl.classList.add('auto-revealed');
-        }, 600);
+        setTimeout(revealTicket, 600);
         ticketObs.unobserve(ticketEl);
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.3 });
   ticketObs.observe(ticketEl);
+  
+  // 방법 2 (백업): 페이지 로드 후 4초 안에 보이지 않았어도 회전 (이미 지나친 경우 대비)
+  // 그리고 페이지 진입 시 이미 티켓 영역이 보이면 즉시 회전
+  setTimeout(() => {
+    const rect = ticketEl.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      revealTicket();
+    }
+  }, 2000);
 }
 
 function copyAccount(num) {
