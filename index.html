@@ -1649,11 +1649,11 @@ table.cal td.wedding-day {
 .share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .footer {
   text-align: center;
-  padding: 140px 30px 110px;
+  padding: 100px 30px 100px;
   background: #0a0907;
   position: relative;
   overflow: hidden;
-  min-height: 750px;
+  min-height: 1400px;
 }
 /* footer 위 그라데이션 제거: 한지 가장자리에서 깔끔하게 검정 시작 */
 .footer-fin {
@@ -1662,11 +1662,10 @@ table.cal td.wedding-day {
   font-family: 'Noto Serif KR', 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 200;
-  font-size: 36px;
+  font-size: 42px;
   color: #d8b87f;
   letter-spacing: 6px;
-  margin-bottom: 90px;
-  opacity: 0;
+  margin-bottom: 60px;
 }
 .footer.rolling .footer-fin { opacity: 1; }
 .credit-roll {
@@ -1674,50 +1673,52 @@ table.cal td.wedding-day {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 28px;
   align-items: center;
+  padding: 20px 0;
 }
 
-/* 크레딧 진입 애니메이션: 푸터가 화면에 보이면 활성화 (영화 끝 분위기) */
-.footer.rolling .footer-fin {
-  animation: finPulse 5s ease-in-out;
-}
-@keyframes finPulse {
-  0% { opacity: 0; transform: scale(0.92); letter-spacing: 12px; }
-  30% { opacity: 1; transform: scale(1); letter-spacing: 6px; }
-  100% { opacity: 1; transform: scale(1); letter-spacing: 6px; }
+/* ============= 영화관 엔딩 크레딧 (전체 통합 스크롤) =============
+   Fin. + 크레딧 + THE END를 하나의 컨테이너(.credits-scroll)로 묶고,
+   화면 아래에서 시작해서 통째로 위로 흐르다가 상단에서 정지.
+   진짜 영화관 엔딩 크레딧 방식. */
+
+.credits-scroll {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  /* 초기 위치: 화면 하단 살짝 아래에서 시작 (바로 보이기 시작) */
+  transform: translateY(50vh);
 }
 
-/* 크레딧 블록: 더 천천히 더 멀리서 올라옴 */
-.footer.rolling .credit-block {
-  animation: creditRollUp 2.4s cubic-bezier(0.16, 0.84, 0.44, 1) backwards;
-}
-.footer.rolling .credit-block:nth-child(1) { animation-delay: 1.8s; }
-.footer.rolling .credit-block:nth-child(2) { animation-delay: 3.0s; }
-.footer.rolling .credit-block:nth-child(3) { animation-delay: 4.2s; }
-.footer.rolling .credit-block:nth-child(4) { animation-delay: 5.4s; }
-.footer.rolling .credit-block:nth-child(5) { animation-delay: 6.6s; }
-@keyframes creditRollUp {
-  0% { opacity: 0; transform: translateY(120px); }
-  40% { opacity: 0.6; transform: translateY(50px); }
-  100% { opacity: 1; transform: translateY(0); }
+.footer.rolling .credits-scroll {
+  animation: creditsScrollUp 16s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
 }
 
-.footer.rolling .footer-end {
-  animation: endFade 2.5s 9s ease-out backwards;
+@keyframes creditsScrollUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50vh);
+  }
+  2% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    /* 상단에서 정지 */
+    transform: translateY(0);
+  }
 }
-@keyframes endFade {
-  0% { opacity: 0; transform: translateY(30px); letter-spacing: 12px; }
-  100% { opacity: 1; transform: translateY(0); letter-spacing: 6px; }
-}
-.credit-block { opacity: 0; }
-.footer.rolling .credit-block { opacity: 1; }
 .credit-block .role {
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 4px;
   color: rgba(216,184,127,0.65);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 .credit-block .name {
   font-family: 'Noto Serif KR', 'Marcellus', serif;
@@ -1727,6 +1728,14 @@ table.cal td.wedding-day {
   letter-spacing: 2px;
   line-height: 1.8;
 }
+
+.paw-icon {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  vertical-align: -3px;
+  margin-left: 4px;
+}
 .credit-block .name.eng {
   font-family: var(--font-serif);
   letter-spacing: 3px;
@@ -1734,14 +1743,13 @@ table.cal td.wedding-day {
 .footer-end {
   position: relative;
   z-index: 2;
-  margin-top: 90px;
-  padding-top: 45px;
+  margin-top: 60px;
+  padding-top: 35px;
   border-top: 1px solid rgba(216,184,127,0.2);
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 6px;
   color: rgba(207,196,173,0.5);
-  opacity: 0;
 }
 .footer.rolling .footer-end { opacity: 1; }
 
@@ -2316,6 +2324,7 @@ table.cal td.wedding-day {
     </div>
   </section>
   <footer class="footer">
+    <div class="credits-scroll">
     <div class="footer-fin">Fin.</div>
 
     <div class="credit-roll">
@@ -2336,6 +2345,10 @@ table.cal td.wedding-day {
         <div class="name">함께해 주신 모든 분들께</div>
       </div>
       <div class="credit-block">
+        <div class="role">OUR LOVELY CATS</div>
+        <div class="name">봉봉 · 슈슈 · 마롱 · 레오 <svg class="paw-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#f3ead8"><ellipse cx="12" cy="16" rx="4.5" ry="3.5"/><ellipse cx="5" cy="11" rx="2.2" ry="2.8"/><ellipse cx="9" cy="7" rx="2" ry="2.6"/><ellipse cx="15" cy="7" rx="2" ry="2.6"/><ellipse cx="19" cy="11" rx="2.2" ry="2.8"/></svg></div>
+      </div>
+      <div class="credit-block">
         <div class="role">FILMED ON LOCATION</div>
         <div class="name">라도무스 아트센터, 대전<br>2026 . 08 . 16</div>
       </div>
@@ -2346,6 +2359,7 @@ table.cal td.wedding-day {
       <div class="music-credit-line">이 영상은 뮤팟에서 제공한 음원 소스를 사용했습니다.</div>
       <div class="music-credit-song">숲 속 드라이브 — <a href="https://mewc.at/songs/6471" target="_blank" rel="noopener">mewc.at/songs/6471</a> 🎫</div>
     </div>
+    </div><!-- /credits-scroll -->
   </footer>
 
 </div>
@@ -2685,7 +2699,7 @@ if (footerEl) {
         footerObs.unobserve(footerEl);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px 100px 0px' });
   footerObs.observe(footerEl);
   
   // 백업: 페이지 로드 후 footer가 이미 화면에 보이는 상태면 즉시 활성화
@@ -2766,13 +2780,13 @@ if (filmTrack) {
 
   // ⚠️ Firebase 설정 - 사용자가 직접 값을 채워야 함 (FIREBASE_SETUP.md 참고)
   const firebaseConfig = {
-    apiKey: "AIzaSyAi-XOSdXWUFbxVwVcoxOwbAvrclZtL6Xk",
-    authDomain: "wedding-yongsuk-moonhyun.firebaseapp.com",
-    databaseURL: "https://wedding-yongsuk-moonhyun-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "wedding-yongsuk-moonhyun",
-    storageBucket: "wedding-yongsuk-moonhyun.firebasestorage.app",
-    messagingSenderId: "439645140996",
-    appId: "1:439645140996:web:0141c7e0b5a96111f69d51"
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
   };
 
   // 설정값이 placeholder면 Firebase 연결 건너뛰기 (로컬 모드로 작동)
