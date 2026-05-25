@@ -706,52 +706,37 @@ html, body {
 }
 .film-slide .frame img {
   position: absolute;
-  top: 28px;
-  bottom: 28px;
+  top: 32px;
+  bottom: 32px;
   left: 10px;
   right: 10px;
   width: calc(100% - 20px);
-  height: calc(100% - 56px);
+  height: calc(100% - 64px);
   object-fit: cover;
   display: block;
-}
-
-.film-slide .frame img {
   filter: brightness(0.92) contrast(1.06) saturate(0.96) sepia(0.08);
 }
 
-/* 필름 스트립: 위아래 sprocket holes (필름 구멍 패턴) */
+
+
+/* 필름 스트립: 위아래 진짜 sprocket holes (사각형 구멍) */
 .film-slide .frame::before,
 .film-slide .frame::after {
   content: '';
   position: absolute;
   left: 0; right: 0;
-  height: 28px;
+  height: 32px;
   background-color: #000;
-  /* 필름 구멍: 검은 배경에 직사각형 구멍 패턴 */
-  background-image: 
-    radial-gradient(
-      ellipse 9px 5px at 50% 50%,
-      #1a1a1a 0%,
-      #1a1a1a 60%,
-      transparent 100%
-    );
-  background-size: 22px 28px;
+  /* SVG로 또렷한 직사각형 구멍 패턴 (둥근 모서리) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect x='8' y='9' width='16' height='14' rx='2.5' ry='2.5' fill='%23f4efe6'/></svg>");
+  background-size: 32px 32px;
   background-repeat: repeat-x;
-  background-position: center;
+  background-position: left center;
   z-index: 2;
   pointer-events: none;
-  /* 위쪽 sprocket과 사진 사이에 가는 라인 */
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
 }
-.film-slide .frame::before { 
-  top: 0; 
-  border-bottom: 1px solid #1a1a1a;
-}
-.film-slide .frame::after { 
-  bottom: 0;
-  border-top: 1px solid #1a1a1a;
-}
+.film-slide .frame::before { top: 0; }
+.film-slide .frame::after { bottom: 0; }
 
 .film-slide .frame .grain {
   position: absolute;
@@ -765,7 +750,7 @@ html, body {
 
 .film-slide .slate-tag {
   position: absolute;
-  top: 40px; left: 22px;
+  top: 44px; left: 22px;
   z-index: 4;
   font-family: var(--font-display);
   font-size: 10px;
@@ -782,7 +767,7 @@ html, body {
 }
 .film-slide .timecode {
   position: absolute;
-  top: 40px; right: 22px;
+  top: 44px; right: 22px;
   z-index: 4;
   font-family: var(--font-display);
   font-size: 10px;
@@ -1518,6 +1503,21 @@ table.cal td.wedding-day {
 
 /* ===== GUESTBOOK ===== */
 .guestbook { background: var(--bg-soft); }
+/* 방명록 위 필름릴 아이콘 */
+.film-reel-deco {
+  display: flex;
+  justify-content: center;
+  margin: -10px 0 28px;
+}
+.film-reel-deco svg {
+  width: 60px;
+  height: 60px;
+  animation: reelSpin 8s linear infinite;
+}
+@keyframes reelSpin {
+  to { transform: rotate(360deg); }
+}
+
 .guestbook-list { text-align: left; margin-bottom: 20px; }
 
 /* 접힌 상태: 최근 3개만 표시 */
@@ -1560,27 +1560,61 @@ table.cal td.wedding-day {
 .guestbook-more-btn.expanded .more-text::after {
   transform: rotate(180deg);
 }
+/* 방명록 메시지: 영화 필름 한 컷 스타일 (연한 갈색) */
 .guestbook-item {
-  background: var(--bg-card);
-  padding: 22px;
-  margin-bottom: 10px;
-  border-left: 2px solid var(--accent);
+  position: relative;
+  background: #8a6d4f;
+  padding: 24px 22px 22px;
+  margin-bottom: 14px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(107,80,55,0.18);
+}
+/* 위쪽 sprocket holes */
+.guestbook-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 18px;
+  background-color: #6b5037;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='18' viewBox='0 0 22 18'><rect x='6' y='5' width='10' height='8' rx='1.5' ry='1.5' fill='%23f4efe6'/></svg>");
+  background-size: 22px 18px;
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+/* 아래쪽 sprocket holes */
+.guestbook-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 18px;
+  background-color: #6b5037;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='18' viewBox='0 0 22 18'><rect x='6' y='5' width='10' height='8' rx='1.5' ry='1.5' fill='%23f4efe6'/></svg>");
+  background-size: 22px 18px;
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+/* 메시지 내용 컨테이너 */
+.guestbook-item > * {
+  position: relative;
+  z-index: 1;
 }
 .guestbook-msg {
   font-family: var(--font-kor);
   font-weight: 300;
   font-size: 14px;
   line-height: 1.9;
-  margin-bottom: 12px;
-  color: var(--ink);
+  margin: 18px 0 14px;
+  color: #f3ead8;
+  text-align: center;
 }
 .guestbook-meta {
   font-family: var(--font-display);
-  font-size: 11px;
-  color: var(--ink-mute);
+  font-size: 10px;
+  color: rgba(243,234,216,0.55);
   display: flex;
   justify-content: space-between;
   letter-spacing: 1.5px;
+  padding-bottom: 6px;
 }
 .write-btn {
   padding: 14px 34px;
@@ -1615,11 +1649,11 @@ table.cal td.wedding-day {
 .share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .footer {
   text-align: center;
-  padding: 80px 30px 70px;
+  padding: 140px 30px 110px;
   background: #0a0907;
   position: relative;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 750px;
 }
 /* footer 위 그라데이션 제거: 한지 가장자리에서 깔끔하게 검정 시작 */
 .footer-fin {
@@ -1628,10 +1662,10 @@ table.cal td.wedding-day {
   font-family: 'Noto Serif KR', 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 200;
-  font-size: 32px;
+  font-size: 36px;
   color: #d8b87f;
-  letter-spacing: 4px;
-  margin-bottom: 50px;
+  letter-spacing: 6px;
+  margin-bottom: 90px;
   opacity: 0;
 }
 .footer.rolling .footer-fin { opacity: 1; }
@@ -1640,40 +1674,41 @@ table.cal td.wedding-day {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 56px;
   align-items: center;
 }
 
-/* 크레딧 진입 애니메이션: 푸터가 화면에 보이면 활성화 */
+/* 크레딧 진입 애니메이션: 푸터가 화면에 보이면 활성화 (영화 끝 분위기) */
 .footer.rolling .footer-fin {
-  animation: finPulse 4s ease-in-out;
+  animation: finPulse 5s ease-in-out;
 }
 @keyframes finPulse {
-  0% { opacity: 0; transform: scale(0.9); }
-  20% { opacity: 1; transform: scale(1); }
-  100% { opacity: 1; transform: scale(1); }
+  0% { opacity: 0; transform: scale(0.92); letter-spacing: 12px; }
+  30% { opacity: 1; transform: scale(1); letter-spacing: 6px; }
+  100% { opacity: 1; transform: scale(1); letter-spacing: 6px; }
 }
 
+/* 크레딧 블록: 더 천천히 더 멀리서 올라옴 */
 .footer.rolling .credit-block {
-  animation: creditRollUp 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+  animation: creditRollUp 2.4s cubic-bezier(0.16, 0.84, 0.44, 1) backwards;
 }
-.footer.rolling .credit-block:nth-child(1) { animation-delay: 0.8s; }
-.footer.rolling .credit-block:nth-child(2) { animation-delay: 1.3s; }
-.footer.rolling .credit-block:nth-child(3) { animation-delay: 1.8s; }
-.footer.rolling .credit-block:nth-child(4) { animation-delay: 2.3s; }
-.footer.rolling .credit-block:nth-child(5) { animation-delay: 2.8s; }
+.footer.rolling .credit-block:nth-child(1) { animation-delay: 1.8s; }
+.footer.rolling .credit-block:nth-child(2) { animation-delay: 3.0s; }
+.footer.rolling .credit-block:nth-child(3) { animation-delay: 4.2s; }
+.footer.rolling .credit-block:nth-child(4) { animation-delay: 5.4s; }
+.footer.rolling .credit-block:nth-child(5) { animation-delay: 6.6s; }
 @keyframes creditRollUp {
-  0% { opacity: 0; transform: translateY(80px); }
-  60% { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translateY(120px); }
+  40% { opacity: 0.6; transform: translateY(50px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
 .footer.rolling .footer-end {
-  animation: endFade 1s 3.5s ease-out backwards;
+  animation: endFade 2.5s 9s ease-out backwards;
 }
 @keyframes endFade {
-  0% { opacity: 0; transform: translateY(20px); letter-spacing: 8px; }
-  100% { opacity: 1; transform: translateY(0); letter-spacing: 4px; }
+  0% { opacity: 0; transform: translateY(30px); letter-spacing: 12px; }
+  100% { opacity: 1; transform: translateY(0); letter-spacing: 6px; }
 }
 .credit-block { opacity: 0; }
 .footer.rolling .credit-block { opacity: 1; }
@@ -1682,7 +1717,7 @@ table.cal td.wedding-day {
   font-size: 10px;
   letter-spacing: 4px;
   color: rgba(216,184,127,0.65);
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 .credit-block .name {
   font-family: 'Noto Serif KR', 'Marcellus', serif;
@@ -1699,12 +1734,12 @@ table.cal td.wedding-day {
 .footer-end {
   position: relative;
   z-index: 2;
-  margin-top: 55px;
-  padding-top: 30px;
+  margin-top: 90px;
+  padding-top: 45px;
   border-top: 1px solid rgba(216,184,127,0.2);
   font-family: var(--font-display);
   font-size: 10px;
-  letter-spacing: 4px;
+  letter-spacing: 6px;
   color: rgba(207,196,173,0.5);
   opacity: 0;
 }
@@ -2235,16 +2270,31 @@ table.cal td.wedding-day {
     <div class="section-label">GUESTBOOK</div>
     <h2 class="section-title">방명록</h2>
     <div class="divider-dot"><span></span></div>
+    
+    <!-- 필름릴 데코 -->
+    <div class="film-reel-deco">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- 외곽 원 (릴 카세트) -->
+        <circle cx="40" cy="40" r="34" fill="#1a1a1a" stroke="#d4b896" stroke-width="1.5"/>
+        <!-- 안쪽 원 -->
+        <circle cx="40" cy="40" r="14" fill="none" stroke="#d4b896" stroke-width="1" opacity="0.6"/>
+        <!-- 중심 -->
+        <circle cx="40" cy="40" r="3" fill="#d4b896"/>
+        <!-- 스포크 (6개) -->
+        <line x1="40" y1="14" x2="40" y2="26" stroke="#d4b896" stroke-width="1" opacity="0.5"/>
+        <line x1="40" y1="54" x2="40" y2="66" stroke="#d4b896" stroke-width="1" opacity="0.5"/>
+        <line x1="62.5" y1="27" x2="51.5" y2="33.5" stroke="#d4b896" stroke-width="1" opacity="0.5"/>
+        <line x1="28.5" y1="46.5" x2="17.5" y2="53" stroke="#d4b896" stroke-width="1" opacity="0.5"/>
+        <line x1="62.5" y1="53" x2="51.5" y2="46.5" stroke="#d4b896" stroke-width="1" opacity="0.5"/>
+        <line x1="28.5" y1="33.5" x2="17.5" y2="27" stroke="#d4b896" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
 
     <div class="guestbook-list collapsed" id="guestbook-list">
-      <div class="guestbook-item">
-        <div class="guestbook-msg">용석아 문현아 결혼 축하해! 오래오래 행복하길 💛</div>
-        <div class="guestbook-meta"><span>FRIEND</span><span>2026.05.01</span></div>
-      </div>
-      <div class="guestbook-item">
-        <div class="guestbook-msg">두 사람의 새로운 출발을 진심으로 축복합니다.</div>
-        <div class="guestbook-meta"><span>FAMILY</span><span>2026.04.28</span></div>
-      </div>
+      <!-- 메시지는 Firebase에서 실시간 로드되거나, 로컬 모드일 경우 빈 상태로 시작 -->
+    </div>
+    <div id="guestbook-empty" style="text-align:center; padding:30px 0; color:var(--ink-mute); font-size:13px;">
+      첫 번째 축하 메시지를 남겨주세요 ♥
     </div>
 
     <button class="guestbook-more-btn" id="guestbook-more-btn" onclick="toggleGuestbookMore()" style="display:none;">
@@ -2528,10 +2578,10 @@ function submitGuestbook() {
 
 function submitLocal(name, msg, ds) {
   const list = document.getElementById('guestbook-list');
-  // "첫 번째 축하 메시지를 남겨주세요" 안내문이 있으면 제거
-  if (list.children.length === 1 && list.children[0].tagName === 'DIV' && !list.children[0].classList.contains('guestbook-item')) {
-    list.innerHTML = '';
-  }
+  const emptyMsg = document.getElementById('guestbook-empty');
+  // 안내문 숨기기
+  if (emptyMsg) emptyMsg.style.display = 'none';
+  
   const item = document.createElement('div');
   item.className = 'guestbook-item';
   item.innerHTML = '<div class="guestbook-msg">'+esc(msg)+'</div><div class="guestbook-meta"><span>'+esc(name)+'</span><span>'+ds+'</span></div>';
@@ -2753,10 +2803,13 @@ if (filmTrack) {
         // 최신순 정렬 (역순)
         messages.reverse();
         
+        const emptyMsg = document.getElementById('guestbook-empty');
         if (messages.length === 0) {
-          // 메시지 없으면 안내
-          list.innerHTML = '<div style="text-align:center; padding:30px 0; color:var(--ink-mute); font-size:13px;">첫 번째 축하 메시지를 남겨주세요 ♥</div>';
+          // 메시지 없으면 안내문 표시
+          if (emptyMsg) emptyMsg.style.display = 'block';
         } else {
+          // 메시지 있으면 안내문 숨김
+          if (emptyMsg) emptyMsg.style.display = 'none';
           messages.forEach((m) => {
             const item = document.createElement('div');
             item.className = 'guestbook-item';
