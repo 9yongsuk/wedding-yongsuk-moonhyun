@@ -674,7 +674,18 @@ html, body {
 .film-track {
   display: flex;
   width: 100%;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.7s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+/* 필름 넘김 순간에 살짝 흔들리는 효과 */
+.film-track.advancing {
+  animation: filmJitter 0.7s ease-out;
+}
+@keyframes filmJitter {
+  0%, 100% { filter: brightness(1); }
+  20% { filter: brightness(1.08) blur(0.5px); }
+  40% { filter: brightness(0.95); }
+  60% { filter: brightness(1.05) blur(0.3px); }
+  80% { filter: brightness(0.98); }
 }
 
 .film-slide {
@@ -689,29 +700,58 @@ html, body {
   background: #000;
   overflow: hidden;
   aspect-ratio: 4 / 5;
+  /* 양 옆 검은 띠 (필름 가장자리) */
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.film-slide .frame img {
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: 10px;
+  right: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 56px);
+  object-fit: cover;
+  display: block;
 }
 
 .film-slide .frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
   filter: brightness(0.92) contrast(1.06) saturate(0.96) sepia(0.08);
 }
 
-/* 위아래 레터박스 */
+/* 필름 스트립: 위아래 sprocket holes (필름 구멍 패턴) */
 .film-slide .frame::before,
 .film-slide .frame::after {
   content: '';
   position: absolute;
   left: 0; right: 0;
-  height: 32px;
-  background: #000;
+  height: 28px;
+  background-color: #000;
+  /* 필름 구멍: 검은 배경에 직사각형 구멍 패턴 */
+  background-image: 
+    radial-gradient(
+      ellipse 9px 5px at 50% 50%,
+      #1a1a1a 0%,
+      #1a1a1a 60%,
+      transparent 100%
+    );
+  background-size: 22px 28px;
+  background-repeat: repeat-x;
+  background-position: center;
   z-index: 2;
   pointer-events: none;
+  /* 위쪽 sprocket과 사진 사이에 가는 라인 */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
 }
-.film-slide .frame::before { top: 0; }
-.film-slide .frame::after { bottom: 0; }
+.film-slide .frame::before { 
+  top: 0; 
+  border-bottom: 1px solid #1a1a1a;
+}
+.film-slide .frame::after { 
+  bottom: 0;
+  border-top: 1px solid #1a1a1a;
+}
 
 .film-slide .frame .grain {
   position: absolute;
@@ -725,12 +765,13 @@ html, body {
 
 .film-slide .slate-tag {
   position: absolute;
-  top: 44px; left: 18px;
+  top: 40px; left: 22px;
   z-index: 4;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 3px;
   color: rgba(243,234,216,0.75);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 .film-slide .slate-tag .cam {
   display: block;
@@ -741,12 +782,13 @@ html, body {
 }
 .film-slide .timecode {
   position: absolute;
-  top: 44px; right: 18px;
+  top: 40px; right: 22px;
   z-index: 4;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 2px;
   color: rgba(243,234,216,0.55);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 /* 좌우 네비게이션 버튼 */
@@ -1476,7 +1518,48 @@ table.cal td.wedding-day {
 
 /* ===== GUESTBOOK ===== */
 .guestbook { background: var(--bg-soft); }
-.guestbook-list { text-align: left; margin-bottom: 30px; }
+.guestbook-list { text-align: left; margin-bottom: 20px; }
+
+/* 접힌 상태: 최근 3개만 표시 */
+.guestbook-list.collapsed .guestbook-item:nth-child(n+4) {
+  display: none;
+}
+
+/* 더보기 버튼 */
+.guestbook-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  margin-bottom: 22px;
+  transition: all 0.2s;
+}
+.guestbook-more-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.guestbook-more-btn .more-count {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--ink-mute);
+}
+.guestbook-more-btn .more-text::after {
+  content: ' ↓';
+  display: inline-block;
+  margin-left: 4px;
+  transition: transform 0.3s;
+}
+.guestbook-list.expanded ~ .guestbook-more-btn .more-text::after,
+.guestbook-more-btn.expanded .more-text::after {
+  transform: rotate(180deg);
+}
 .guestbook-item {
   background: var(--bg-card);
   padding: 22px;
@@ -1626,6 +1709,34 @@ table.cal td.wedding-day {
   opacity: 0;
 }
 .footer.rolling .footer-end { opacity: 1; }
+
+/* 음원 크레딧 (푸터 맨 아래) */
+.music-credit {
+  position: relative;
+  z-index: 2;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(216,184,127,0.1);
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 1.7;
+  color: rgba(207,196,173,0.4);
+  letter-spacing: 0.5px;
+}
+.music-credit-line {
+  margin-bottom: 4px;
+}
+.music-credit-song {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+}
+.music-credit-song a {
+  color: rgba(216,184,127,0.55);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(216,184,127,0.3);
+}
+
 
 /* ===== MODAL & TOAST ===== */
 .modal {
@@ -2125,7 +2236,7 @@ table.cal td.wedding-day {
     <h2 class="section-title">방명록</h2>
     <div class="divider-dot"><span></span></div>
 
-    <div class="guestbook-list" id="guestbook-list">
+    <div class="guestbook-list collapsed" id="guestbook-list">
       <div class="guestbook-item">
         <div class="guestbook-msg">용석아 문현아 결혼 축하해! 오래오래 행복하길 💛</div>
         <div class="guestbook-meta"><span>FRIEND</span><span>2026.05.01</span></div>
@@ -2135,6 +2246,11 @@ table.cal td.wedding-day {
         <div class="guestbook-meta"><span>FAMILY</span><span>2026.04.28</span></div>
       </div>
     </div>
+
+    <button class="guestbook-more-btn" id="guestbook-more-btn" onclick="toggleGuestbookMore()" style="display:none;">
+      <span class="more-text">VIEW ALL</span>
+      <span class="more-count" id="more-count"></span>
+    </button>
 
     <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
   </section>
@@ -2176,6 +2292,10 @@ table.cal td.wedding-day {
     </div>
 
     <div class="footer-end">— THE END —</div>
+    <div class="music-credit">
+      <div class="music-credit-line">이 영상은 뮤팟에서 제공한 음원 소스를 사용했습니다.</div>
+      <div class="music-credit-song">숲 속 드라이브 — <a href="https://mewc.at/songs/6471" target="_blank" rel="noopener">mewc.at/songs/6471</a> 🎫</div>
+    </div>
   </footer>
 
 </div>
@@ -2374,9 +2494,44 @@ function submitGuestbook() {
   const name = document.getElementById('gb-name').value.trim();
   const msg = document.getElementById('gb-msg').value.trim();
   if (!name || !msg) { showToast('성함과 메시지를 모두 입력해주세요'); return; }
-  const list = document.getElementById('guestbook-list');
+  
   const today = new Date();
   const ds = today.getFullYear()+'.'+String(today.getMonth()+1).padStart(2,'0')+'.'+String(today.getDate()).padStart(2,'0');
+  
+  // Firebase가 연결되어 있으면 DB에 저장 (실시간 onValue로 자동 표시됨)
+  if (window.firebaseReady && window.firebaseDb) {
+    try {
+      const { push, guestbookRef } = window.firebaseDb;
+      push(guestbookRef, {
+        name: name,
+        msg: msg,
+        date: ds,
+        timestamp: Date.now()
+      }).then(() => {
+        document.getElementById('gb-name').value = '';
+        document.getElementById('gb-msg').value = '';
+        closeModal();
+        showToast('축하 메시지가 등록되었습니다');
+      }).catch((err) => {
+        console.error('Firebase 저장 실패:', err);
+        submitLocal(name, msg, ds);
+      });
+      return;
+    } catch (e) {
+      console.error('Firebase 오류:', e);
+    }
+  }
+  
+  // Firebase 안 되면 로컬에만 저장 (예전 방식)
+  submitLocal(name, msg, ds);
+}
+
+function submitLocal(name, msg, ds) {
+  const list = document.getElementById('guestbook-list');
+  // "첫 번째 축하 메시지를 남겨주세요" 안내문이 있으면 제거
+  if (list.children.length === 1 && list.children[0].tagName === 'DIV' && !list.children[0].classList.contains('guestbook-item')) {
+    list.innerHTML = '';
+  }
   const item = document.createElement('div');
   item.className = 'guestbook-item';
   item.innerHTML = '<div class="guestbook-msg">'+esc(msg)+'</div><div class="guestbook-meta"><span>'+esc(name)+'</span><span>'+ds+'</span></div>';
@@ -2385,7 +2540,60 @@ function submitGuestbook() {
   document.getElementById('gb-msg').value='';
   closeModal();
   showToast('축하 메시지가 등록되었습니다');
+  updateGuestbookMoreBtn();
 }
+
+// 방명록 더보기 토글
+function toggleGuestbookMore() {
+  const list = document.getElementById('guestbook-list');
+  const btn = document.getElementById('guestbook-more-btn');
+  const txt = btn.querySelector('.more-text');
+  const cnt = document.getElementById('more-count');
+  
+  if (list.classList.contains('collapsed')) {
+    // 펼치기
+    list.classList.remove('collapsed');
+    list.classList.add('expanded');
+    btn.classList.add('expanded');
+    txt.textContent = 'SHOW LESS';
+    cnt.textContent = '';
+  } else {
+    // 접기
+    list.classList.add('collapsed');
+    list.classList.remove('expanded');
+    btn.classList.remove('expanded');
+    updateGuestbookMoreBtn();
+    // 스크롤을 방명록 위로
+    document.querySelector('.guestbook').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// 더보기 버튼 표시 여부 + 카운트 업데이트
+function updateGuestbookMoreBtn() {
+  const list = document.getElementById('guestbook-list');
+  const btn = document.getElementById('guestbook-more-btn');
+  const cnt = document.getElementById('more-count');
+  const txt = btn.querySelector('.more-text');
+  const items = list.querySelectorAll('.guestbook-item');
+  
+  if (items.length > 3) {
+    btn.style.display = 'inline-flex';
+    if (list.classList.contains('collapsed')) {
+      txt.textContent = 'VIEW ALL';
+      cnt.textContent = '(' + items.length + ')';
+    } else {
+      txt.textContent = 'SHOW LESS';
+      cnt.textContent = '';
+    }
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+// 페이지 로드 시 초기 상태 적용
+document.addEventListener('DOMContentLoaded', updateGuestbookMoreBtn);
+// 이미 로드된 경우 대비
+updateGuestbookMoreBtn();
 function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function shareLink() {
   if (navigator.share) navigator.share({title:'구용석 ♥ 전문현 결혼합니다', url:location.href});
@@ -2453,6 +2661,10 @@ function filmGo(idx) {
   filmIdx = (idx + filmTotal) % filmTotal;
   if (filmTrack) {
     filmTrack.style.transform = 'translateX(' + (-filmIdx * 100) + '%)';
+    // 필름 흔들림 효과
+    filmTrack.classList.remove('advancing');
+    void filmTrack.offsetWidth; // 강제 리플로우
+    filmTrack.classList.add('advancing');
   }
   filmDots.forEach((d, i) => {
     d.classList.toggle('active', i === filmIdx);
@@ -2495,6 +2707,83 @@ if (filmTrack) {
     if (Math.abs(diff) > 40) filmNav(diff > 0 ? 1 : -1);
   }, { passive: true });
 }
+</script>
+
+<!-- ============= Firebase Realtime Database for Guestbook ============= -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, push, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+  // ⚠️ Firebase 설정 - 사용자가 직접 값을 채워야 함 (FIREBASE_SETUP.md 참고)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAi-XOSdXWUFbxVwVcoxOwbAvrclZtL6Xk",
+    authDomain: "wedding-yongsuk-moonhyun.firebaseapp.com",
+    databaseURL: "https://wedding-yongsuk-moonhyun-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "wedding-yongsuk-moonhyun",
+    storageBucket: "wedding-yongsuk-moonhyun.firebasestorage.app",
+    messagingSenderId: "439645140996",
+    appId: "1:439645140996:web:0141c7e0b5a96111f69d51"
+  };
+
+  // 설정값이 placeholder면 Firebase 연결 건너뛰기 (로컬 모드로 작동)
+  const isPlaceholder = firebaseConfig.apiKey === "YOUR_API_KEY";
+  
+  if (!isPlaceholder) {
+    try {
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const guestbookRef = ref(db, 'guestbook');
+      
+      // 글로벌 변수로 노출 (submitGuestbook이 접근 가능하게)
+      window.firebaseDb = { db, ref, push, guestbookRef };
+      
+      // 실시간 메시지 받기 (최신 100개)
+      const recentQuery = query(guestbookRef, orderByChild('timestamp'), limitToLast(100));
+      onValue(recentQuery, (snapshot) => {
+        const list = document.getElementById('guestbook-list');
+        if (!list) return;
+        
+        // 기존 항목 모두 지움
+        list.innerHTML = '';
+        
+        const messages = [];
+        snapshot.forEach((child) => {
+          messages.push({ key: child.key, ...child.val() });
+        });
+        // 최신순 정렬 (역순)
+        messages.reverse();
+        
+        if (messages.length === 0) {
+          // 메시지 없으면 안내
+          list.innerHTML = '<div style="text-align:center; padding:30px 0; color:var(--ink-mute); font-size:13px;">첫 번째 축하 메시지를 남겨주세요 ♥</div>';
+        } else {
+          messages.forEach((m) => {
+            const item = document.createElement('div');
+            item.className = 'guestbook-item';
+            const safeMsg = (m.msg || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+            const safeName = (m.name || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+            item.innerHTML = '<div class="guestbook-msg">' + safeMsg + '</div>' +
+                             '<div class="guestbook-meta"><span>' + safeName + '</span><span>' + (m.date || '') + '</span></div>';
+            list.appendChild(item);
+          });
+        }
+        
+        // 더보기 버튼 갱신
+        if (typeof updateGuestbookMoreBtn === 'function') updateGuestbookMoreBtn();
+      }, (error) => {
+        console.warn('Firebase 읽기 실패:', error);
+      });
+      
+      window.firebaseReady = true;
+      console.log('✅ Firebase 연결됨');
+    } catch (e) {
+      console.warn('Firebase 초기화 실패 - 로컬 모드로 작동:', e);
+      window.firebaseReady = false;
+    }
+  } else {
+    console.log('Firebase 설정 안 됨 - 로컬 모드로 작동');
+    window.firebaseReady = false;
+  }
 </script>
 </body>
 </html>
