@@ -2713,23 +2713,35 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal, .slide-left, .slide-right').forEach(el => observer.observe(el));
 
-// 엔드 크레딧 푸터 진입 시 위로 올라가는 애니메이션
+// 엔드 크레딧: 푸터 맨 아래(페이지 끝)에 도달했을 때 시작
+// 별도 sentinel(빈 div)을 푸터 끝 직전에 두고, 그게 화면에 보이면 트리거
 const footerEl = document.querySelector('.footer');
 if (footerEl) {
+  // 푸터 끝 직전에 sentinel 요소 동적 삽입
+  const sentinel = document.createElement('div');
+  sentinel.id = 'footer-bottom-sentinel';
+  sentinel.style.cssText = 'position:absolute; bottom:0; left:0; right:0; height:1px; pointer-events:none;';
+  // .footer가 position:relative이므로 sentinel이 그 안에 absolute로 깔림
+  footerEl.appendChild(sentinel);
+  
   const footerObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         footerEl.classList.add('rolling');
-        footerObs.unobserve(footerEl);
+        footerObs.unobserve(sentinel);
       }
     });
-  }, { threshold: 0.01, rootMargin: '0px 0px 100px 0px' });
-  footerObs.observe(footerEl);
+  }, { 
+    threshold: 0,
+    // sentinel이 viewport에 잡힐 때 = 사용자가 페이지 끝에 거의 도달했을 때
+    rootMargin: '0px 0px -50px 0px'
+  });
+  footerObs.observe(sentinel);
   
-  // 백업: 페이지 로드 후 footer가 이미 화면에 보이는 상태면 즉시 활성화
+  // 백업: 이미 페이지 끝에 도달한 상태면 즉시
   setTimeout(() => {
-    const rect = footerEl.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
+    const rect = sentinel.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 50) {
       footerEl.classList.add('rolling');
     }
   }, 1500);
@@ -2798,23 +2810,19 @@ if (filmTrack) {
 </script>
 
 <!-- ============= Firebase Realtime Database for Guestbook ============= -->
+<!-- Firebase 키는 별도 파일에서 로드 (없어도 청첩장은 정상 작동, 단지 방명록이 로컬 모드) -->
+<script src="./firebase-config.js" onerror="console.log('firebase-config.js 없음 - 로컬 모드로 작동')"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getDatabase, ref, push, onValue, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-  // ⚠️ Firebase 설정 - 사용자가 직접 값을 채워야 함 (FIREBASE_SETUP.md 참고)
-  const firebaseConfig = {
-    apiKey: "AIzaSyAi-XOSdXWUFbxVwVcoxOwbAvrclZtL6Xk",
-    authDomain: "wedding-yongsuk-moonhyun.firebaseapp.com",
-    databaseURL: "https://wedding-yongsuk-moonhyun-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "wedding-yongsuk-moonhyun",
-    storageBucket: "wedding-yongsuk-moonhyun.firebasestorage.app",
-    messagingSenderId: "439645140996",
-    appId: "1:439645140996:web:0141c7e0b5a96111f69d51"
+  // Firebase 설정은 별도 파일(firebase-config.js)에서 읽어옴
+  // 그 파일이 없거나 window.firebaseConfig가 정의 안 되어 있으면 로컬 모드로 작동
+  const firebaseConfig = window.firebaseConfig || {
+    apiKey: "YOUR_API_KEY"
   };
 
-  // 설정값이 placeholder면 Firebase 연결 건너뛰기 (로컬 모드로 작동)
-  const isPlaceholder = firebaseConfig.apiKey === "YOUR_API_KEY";
+  const isPlaceholder = !window.firebaseConfig || firebaseConfig.apiKey === "YOUR_API_KEY";
   
   if (!isPlaceholder) {
     try {
