@@ -2713,38 +2713,31 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal, .slide-left, .slide-right').forEach(el => observer.observe(el));
 
-// 엔드 크레딧: 푸터 맨 아래(페이지 끝)에 도달했을 때 시작
-// 별도 sentinel(빈 div)을 푸터 끝 직전에 두고, 그게 화면에 보이면 트리거
+// 엔드 크레딧: 페이지 맨 아래에 도달했을 때 시작 (스크롤 이벤트 직접 감지)
 const footerEl = document.querySelector('.footer');
 if (footerEl) {
-  // 푸터 끝 직전에 sentinel 요소 동적 삽입
-  const sentinel = document.createElement('div');
-  sentinel.id = 'footer-bottom-sentinel';
-  sentinel.style.cssText = 'position:absolute; bottom:0; left:0; right:0; height:1px; pointer-events:none;';
-  // .footer가 position:relative이므로 sentinel이 그 안에 absolute로 깔림
-  footerEl.appendChild(sentinel);
+  let triggered = false;
   
-  const footerObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        footerEl.classList.add('rolling');
-        footerObs.unobserve(sentinel);
-      }
-    });
-  }, { 
-    threshold: 0,
-    // sentinel이 viewport에 잡힐 때 = 사용자가 페이지 끝에 거의 도달했을 때
-    rootMargin: '0px 0px -50px 0px'
-  });
-  footerObs.observe(sentinel);
-  
-  // 백업: 이미 페이지 끝에 도달한 상태면 즉시
-  setTimeout(() => {
-    const rect = sentinel.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 50) {
+  function checkBottomReached() {
+    if (triggered) return;
+    
+    // 페이지 전체 높이 - (스크롤 위치 + 화면 높이) = 남은 스크롤 거리
+    const scrolled = window.innerHeight + window.scrollY;
+    const total = document.documentElement.scrollHeight;
+    const remaining = total - scrolled;
+    
+    // 페이지 끝까지 100px 이내로 다가오면 트리거
+    if (remaining < 100) {
+      triggered = true;
       footerEl.classList.add('rolling');
+      window.removeEventListener('scroll', checkBottomReached);
     }
-  }, 1500);
+  }
+  
+  window.addEventListener('scroll', checkBottomReached, { passive: true });
+  
+  // 이미 페이지 끝에 있을 때 대비
+  setTimeout(checkBottomReached, 500);
 }
 
 document.getElementById('guestbookModal').addEventListener('click', e => {
