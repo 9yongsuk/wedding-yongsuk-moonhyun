@@ -1521,66 +1521,50 @@ table.cal td.wedding-day-cell {
   letter-spacing: 0.08em;
 }
 
-/* ===== 갤러리 가로 스와이프 ===== */
-.photo-carousel {
+/* ===== 갤러리 필름 스트립 (여러 줄) ===== */
+.film-gallery {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.film-strip {
   position: relative;
-  width: 100%;
-  max-width: 360px;
-  margin: 34px auto 0;
-  overflow: hidden;
-  background: var(--bg-soft);
-  box-shadow: 0 6px 22px rgba(60,45,30,0.14);
-  touch-action: pan-y;
-  cursor: grab;
+  background: #141414;
+  padding: 13px 6px;
+  display: flex;
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(20,15,10,0.18);
 }
-.photo-carousel:active { cursor: grabbing; }
-.photo-track { display: flex; will-change: transform; }
-.photo-track.animate { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-.photo-slide {
-  flex: 0 0 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: var(--bg-soft);
-  -webkit-user-select: none;
-  user-select: none;
+.film-strip::before, .film-strip::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 13px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='17' height='13' viewBox='0 0 17 13'><rect x='4' y='3.5' width='9' height='6' rx='1.4' ry='1.4' fill='%23efe7d8'/></svg>");
+  background-size: 17px 13px;
+  background-repeat: repeat-x;
+  background-position: center;
 }
-.photo-slide img {
+.film-strip::before { top: 0; }
+.film-strip::after { bottom: 0; }
+.film-frame {
+  flex: 0 0 calc((100% - 10px) / 3);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+  position: relative;
+}
+.film-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  pointer-events: none;
+  filter: grayscale(100%) contrast(1.03);
+  transition: transform 0.5s, filter 0.5s;
 }
-.photo-counter {
-  position: absolute;
-  bottom: 12px; right: 12px;
-  background: rgba(20,15,10,0.55);
-  color: #f3ead8;
-  font-family: var(--font-display);
-  font-size: 11px;
-  letter-spacing: 2px;
-  padding: 4px 11px;
-  backdrop-filter: blur(4px);
-}
-.photo-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: rgba(20,15,10,0.32);
-  color: #fff;
-  border: none;
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(4px);
-  transition: background 0.2s;
-  z-index: 2;
-}
-.photo-nav:hover { background: rgba(20,15,10,0.6); }
-.photo-nav.prev { left: 8px; }
-.photo-nav.next { right: 8px; }
+.film-frame:active img { transform: scale(0.96); }
+.film-frame:hover img { filter: grayscale(0%); }
 
 /* ===== LIGHTBOX ===== */
 .lightbox {
@@ -2052,117 +2036,98 @@ body.lightbox-open .bgm-toggle {
   letter-spacing: 1.5px;
   padding-bottom: 6px;
 }
-/* ===== 방명록 가로 슬라이드 (정사각형 필름 카드) ===== */
-.gb-carousel {
-  position: relative;
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto 16px;
-  overflow: hidden;
-  touch-action: pan-y;
+/* ===== 방명록 가로 필름 스트립 (밝은 안쪽 + 갈색 글자) ===== */
+.gb-strip {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding: 0 12%;
+  padding: 6px 12% 6px;
+  margin: 6px 0 22px;
+  scrollbar-width: none;
   cursor: grab;
 }
-.gb-carousel:active { cursor: grabbing; }
-.gb-track {
-  display: flex;
-  will-change: transform;
-}
-.gb-track.animate {
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.gb-slide {
-  flex: 0 0 100%;
-  box-sizing: border-box;
-  padding: 4px;
-  -webkit-user-select: none;
-  user-select: none;
-}
+.gb-strip:active { cursor: grabbing; }
+.gb-strip::-webkit-scrollbar { display: none; }
+
 .gb-card {
   position: relative;
-  aspect-ratio: 1 / 1;
-  background: #2a2018;
+  flex: 0 0 76%;
+  max-width: 300px;
+  scroll-snap-align: center;
+  aspect-ratio: 5 / 4;
+  background: #221b15;
+  padding: 9px 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px 36px;
-  box-shadow: 0 4px 16px rgba(60,45,30,0.24);
-  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(60,45,30,0.2);
+  -webkit-user-select: none;
+  user-select: none;
 }
 /* 좌우 세로 필름 구멍 */
 .gb-card::before, .gb-card::after {
   content: '';
   position: absolute;
   top: 0; bottom: 0;
-  width: 16px;
-  z-index: 0;
-  background-color: #1b140f;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='22' viewBox='0 0 16 22'><rect x='4' y='6' width='8' height='10' rx='1.6' ry='1.6' fill='%23efe7d8'/></svg>");
-  background-size: 16px 22px;
+  width: 14px;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='18' viewBox='0 0 14 18'><rect x='3.5' y='5' width='7' height='8' rx='1.5' ry='1.5' fill='%23efe7d8'/></svg>");
+  background-size: 14px 18px;
   background-repeat: repeat-y;
   background-position: center;
 }
 .gb-card::before { left: 0; }
 .gb-card::after { right: 0; }
-.gb-card-msg {
+/* 밝은 안쪽 패널 */
+.gb-inner {
   position: relative;
-  z-index: 1;
+  z-index: 0;
+  flex: 1;
+  background: #f7f1e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 14px;
+  overflow: hidden;
+}
+.gb-card-msg {
   font-family: var(--font-kor);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.85;
-  color: #f3ead8;
-  max-height: 58%;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #5a4632;
+  max-height: 64%;
   overflow: hidden;
 }
 .gb-card-sign {
-  position: relative;
-  z-index: 1;
-  margin-top: 16px;
+  margin-top: 10px;
   font-family: var(--font-kor);
-  font-size: 12px;
-  color: #d8c4a6;
-  letter-spacing: 0.5px;
+  font-size: 11px;
+  color: #8a6d4f;
+  letter-spacing: 0.3px;
 }
 .gb-card-date {
-  position: relative;
-  z-index: 1;
-  margin-top: 6px;
+  margin-top: 4px;
   font-family: var(--font-display);
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  color: rgba(243,234,216,0.5);
-}
-.gb-dots {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-  margin-bottom: 24px;
-}
-.gb-dots .gb-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: rgba(138,109,79,0.35);
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.gb-dots .gb-dot.active {
-  background: var(--accent);
-  width: 18px;
-  border-radius: 3px;
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  color: rgba(90,70,50,0.55);
 }
 .write-btn {
-  padding: 14px 34px;
-  background: transparent;
+  padding: 15px 40px;
+  background: var(--accent);
   border: 1px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-size: 13px;
-  letter-spacing: 4px;
+  color: #fff;
+  font-family: var(--font-kor);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
   cursor: pointer;
 }
-.write-btn:active { background: var(--accent); color: #fff; }
+.write-btn:active { background: var(--accent-light); border-color: var(--accent-light); }
 
 /* ===== SHARE & FOOTER ===== */
 .share { background: var(--bg); padding: 95px 38px 50px; }
@@ -3135,13 +3100,8 @@ body.lightbox-open .bgm-toggle {
     <h2 class="section-title">Behind the Scenes</h2>
     <div class="divider-dot"><span></span></div>
 
-    <div class="photo-carousel reveal" id="photoCarousel">
-      <div class="photo-track" id="photoTrack"></div>
-      <div class="photo-counter" id="photoCounter">01 / 01</div>
-      <button class="photo-nav prev" onclick="photoNav(-1)" aria-label="이전">‹</button>
-      <button class="photo-nav next" onclick="photoNav(1)" aria-label="다음">›</button>
-    </div>
-    <p class="gallery-note">사진을 넘기거나 누르면 크게 볼 수 있어요</p>
+    <div class="film-gallery reveal" id="filmGallery"></div>
+    <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
   </section>
   <!-- 위 섹션(크림)이 베이지 위로 거칠게 찢어진 끝 -->
   <section class="location section reveal">
@@ -3227,7 +3187,7 @@ body.lightbox-open .bgm-toggle {
         </div>
         <div class="account-row-info">
           <span class="acc-bank">하나은행</span>
-          <span class="acc-num">66091128128107</span>
+          <span class="acc-num">660-911281-28107</span>
         </div>
         <button class="copy-link" onclick="copyAccount('66091128128107')">복사하기</button>
       </div>
@@ -3259,15 +3219,12 @@ body.lightbox-open .bgm-toggle {
       </svg>
     </div>
 
-    <div class="gb-carousel" id="gbCarousel" style="display:none;">
-      <div class="gb-track" id="gbTrack"></div>
-    </div>
-    <div class="gb-dots" id="gbDots" style="display:none;"></div>
+    <div class="gb-strip" id="gbStrip" style="display:none;"></div>
     <div id="guestbook-empty" style="text-align:center; padding:30px 0; color:var(--ink-mute); font-size:13px;">
       첫 번째 축하 메시지를 남겨주세요 ♥
     </div>
 
-    <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
+    <button class="write-btn" onclick="openGuestbook()">방명록 작성하기</button>
   </section>
   <section class="share">
     <div style="text-align:center;">
@@ -3407,74 +3364,23 @@ function tryAutoplay() {
 document.addEventListener('touchstart', tryAutoplay, { once: true });
 document.addEventListener('click', tryAutoplay, { once: true });
 
-// Gallery — 가로 스와이프 캐러셀
-const photoTrack = document.getElementById('photoTrack');
-let pHtml = '';
-photos.forEach((p, idx) => {
-  pHtml += '<div class="photo-slide" data-idx="'+idx+'"><img src="./images/'+p+'" alt="Photo '+(idx+1)+'" loading="lazy"></div>';
+// Gallery — 필름 스트립 (여러 줄, 클릭하면 라이트박스로 크게)
+const filmGallery = document.getElementById('filmGallery');
+const perRow = 3;
+let fgHtml = '';
+for (let i = 0; i < photos.length; i += perRow) {
+  fgHtml += '<div class="film-strip">';
+  for (let j = i; j < Math.min(i + perRow, photos.length); j++) {
+    fgHtml += '<div class="film-frame" data-idx="' + j + '">' +
+              '<img src="./images/' + photos[j] + '" alt="Photo ' + (j + 1) + '" loading="lazy"></div>';
+  }
+  fgHtml += '</div>';
+}
+filmGallery.innerHTML = fgHtml;
+filmGallery.addEventListener('click', e => {
+  const fr = e.target.closest('.film-frame');
+  if (fr) openImage(parseInt(fr.dataset.idx));
 });
-photoTrack.innerHTML = pHtml;
-
-let photoIdx = 0;
-const photoTotal = photos.length;
-function photoGo(idx, animate) {
-  if (animate === undefined) animate = true;
-  photoIdx = (idx + photoTotal) % photoTotal;
-  photoTrack.classList.toggle('animate', animate);
-  photoTrack.style.transform = 'translateX(' + (-photoIdx * 100) + '%)';
-  document.getElementById('photoCounter').textContent =
-    String(photoIdx + 1).padStart(2, '0') + ' / ' + String(photoTotal).padStart(2, '0');
-}
-function photoNav(dir) { photoGo(photoIdx + dir); resetPhotoAuto(); }
-
-let photoAutoTimer = null;
-function startPhotoAuto() {
-  if (photoAutoTimer) clearInterval(photoAutoTimer);
-  if (photoTotal <= 1) return;
-  photoAutoTimer = setInterval(() => photoGo(photoIdx + 1), 4000);
-}
-function resetPhotoAuto() { startPhotoAuto(); }
-photoGo(0, false);
-startPhotoAuto();
-
-// 드래그/스와이프 + 탭하면 라이트박스로 확대
-(function initPhotoDrag() {
-  const car = document.getElementById('photoCarousel');
-  if (!car) return;
-  let sx = 0, dx = 0, drag = false, w = 0, moved = false;
-  const down = (x) => {
-    drag = true; sx = x; dx = 0; moved = false; w = car.clientWidth || 1;
-    photoTrack.classList.remove('animate');
-    if (photoAutoTimer) clearInterval(photoAutoTimer);
-  };
-  const move = (x) => {
-    if (!drag) return;
-    dx = x - sx;
-    if (Math.abs(dx) > 6) moved = true;
-    photoTrack.style.transform = 'translateX(calc(' + (-photoIdx * 100) + '% + ' + dx + 'px))';
-  };
-  const up = () => {
-    if (!drag) return;
-    drag = false;
-    const th = w * 0.18;
-    if (dx < -th) photoGo(photoIdx + 1);
-    else if (dx > th) photoGo(photoIdx - 1);
-    else photoGo(photoIdx);
-    resetPhotoAuto();
-  };
-  car.addEventListener('touchstart', e => down(e.touches[0].clientX), { passive: true });
-  car.addEventListener('touchmove', e => { if (drag) move(e.touches[0].clientX); }, { passive: true });
-  car.addEventListener('touchend', up);
-  car.addEventListener('mousedown', e => { e.preventDefault(); down(e.clientX); });
-  window.addEventListener('mousemove', e => move(e.clientX));
-  window.addEventListener('mouseup', up);
-  // 드래그가 아니라 탭이면 라이트박스 열기
-  photoTrack.addEventListener('click', e => {
-    if (moved) return;
-    const slide = e.target.closest('.photo-slide');
-    if (slide) openImage(parseInt(slide.dataset.idx));
-  });
-})();
 
 let currentIdx = 0;
 function openImage(idx) {
@@ -3856,69 +3762,62 @@ function submitLocal(name, msg, ds) {
   showToast('축하 메시지가 등록되었습니다');
 }
 
-// ===== 방명록 가로 슬라이드 캐러셀 =====
+// ===== 방명록 가로 필름 스트립 =====
 let gbMessages = [];
 let gbIdx = 0;
 let gbAutoTimer = null;
+let gbPauseUntil = 0;
 
 function renderGuestbook() {
-  const track = document.getElementById('gbTrack');
-  const dots = document.getElementById('gbDots');
+  const strip = document.getElementById('gbStrip');
   const empty = document.getElementById('guestbook-empty');
-  const carousel = document.getElementById('gbCarousel');
-  if (!track) return;
+  if (!strip) return;
 
-  track.innerHTML = '';
-  dots.innerHTML = '';
+  strip.innerHTML = '';
 
   if (!gbMessages.length) {
     if (empty) empty.style.display = 'block';
-    carousel.style.display = 'none';
-    dots.style.display = 'none';
+    strip.style.display = 'none';
     if (gbAutoTimer) clearInterval(gbAutoTimer);
     return;
   }
 
   if (empty) empty.style.display = 'none';
-  carousel.style.display = '';
-  dots.style.display = gbMessages.length > 1 ? 'flex' : 'none';
+  strip.style.display = 'flex';
 
-  gbMessages.forEach((m, i) => {
-    const slide = document.createElement('div');
-    slide.className = 'gb-slide';
-    slide.innerHTML =
-      '<div class="gb-card">' +
+  gbMessages.forEach((m) => {
+    const card = document.createElement('div');
+    card.className = 'gb-card';
+    card.innerHTML =
+      '<div class="gb-inner">' +
         '<div class="gb-card-msg">' + esc(m.msg || '') + '</div>' +
         '<div class="gb-card-sign">— ' + esc(m.name || '') + '</div>' +
         '<div class="gb-card-date">' + esc(m.date || '') + '</div>' +
       '</div>';
-    track.appendChild(slide);
-
-    const dot = document.createElement('span');
-    dot.className = 'gb-dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => { gbGo(i); resetGbAuto(); });
-    dots.appendChild(dot);
+    strip.appendChild(card);
   });
 
-  if (gbIdx >= gbMessages.length) gbIdx = 0;
-  gbGo(gbIdx, false);
+  strip.scrollLeft = 0;
   startGbAuto();
-}
-
-function gbGo(idx, animate) {
-  const track = document.getElementById('gbTrack');
-  if (!track || !gbMessages.length) return;
-  if (animate === undefined) animate = true;
-  gbIdx = (idx + gbMessages.length) % gbMessages.length;
-  track.classList.toggle('animate', animate);
-  track.style.transform = 'translateX(' + (-gbIdx * 100) + '%)';
-  document.querySelectorAll('#gbDots .gb-dot').forEach((d, i) => d.classList.toggle('active', i === gbIdx));
 }
 
 function startGbAuto() {
   if (gbAutoTimer) clearInterval(gbAutoTimer);
   if (gbMessages.length <= 1) return;
-  gbAutoTimer = setInterval(() => gbGo(gbIdx + 1), 4500);
+  gbAutoTimer = setInterval(() => {
+    if (Date.now() < gbPauseUntil) return;
+    const strip = document.getElementById('gbStrip');
+    if (!strip) return;
+    const card = strip.querySelector('.gb-card');
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(strip).columnGap) || 0;
+    const step = card.offsetWidth + gap;
+    if (strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 6) {
+      strip.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      strip.scrollBy({ left: step, behavior: 'smooth' });
+    }
+  }, 4000);
 }
 function resetGbAuto() { startGbAuto(); }
 
@@ -3930,41 +3829,18 @@ function setGuestbookMessages(arr) {
 }
 window.setGuestbookMessages = setGuestbookMessages;
 
-// 드래그 / 스와이프로 직접 넘기기
-(function initGbDrag() {
-  const car = document.getElementById('gbCarousel');
-  if (!car) return;
-  let startX = 0, dx = 0, dragging = false, w = 0;
-  const getTrack = () => document.getElementById('gbTrack');
+// 사용자가 직접 스와이프하면 자동 넘김 잠시 멈춤 + 데스크탑 마우스 드래그 스크롤
+(function initGbStrip() {
+  const strip = document.getElementById('gbStrip');
+  if (!strip) return;
+  const pause = () => { gbPauseUntil = Date.now() + 6000; };
+  strip.addEventListener('touchstart', pause, { passive: true });
+  strip.addEventListener('wheel', pause, { passive: true });
 
-  const down = (x) => {
-    if (gbMessages.length <= 1) return;
-    dragging = true; startX = x; dx = 0; w = car.clientWidth || 1;
-    const t = getTrack(); if (t) t.classList.remove('animate');
-    if (gbAutoTimer) clearInterval(gbAutoTimer);
-  };
-  const move = (x) => {
-    if (!dragging) return;
-    dx = x - startX;
-    const t = getTrack();
-    if (t) t.style.transform = 'translateX(calc(' + (-gbIdx * 100) + '% + ' + dx + 'px))';
-  };
-  const up = () => {
-    if (!dragging) return;
-    dragging = false;
-    const threshold = w * 0.18;
-    if (dx < -threshold) gbGo(gbIdx + 1);
-    else if (dx > threshold) gbGo(gbIdx - 1);
-    else gbGo(gbIdx);
-    resetGbAuto();
-  };
-
-  car.addEventListener('touchstart', e => down(e.touches[0].clientX), { passive: true });
-  car.addEventListener('touchmove', e => { if (dragging) move(e.touches[0].clientX); }, { passive: true });
-  car.addEventListener('touchend', up);
-  car.addEventListener('mousedown', e => { e.preventDefault(); down(e.clientX); });
-  window.addEventListener('mousemove', e => move(e.clientX));
-  window.addEventListener('mouseup', up);
+  let dragging = false, sx = 0, sl = 0;
+  strip.addEventListener('mousedown', (e) => { dragging = true; sx = e.clientX; sl = strip.scrollLeft; pause(); e.preventDefault(); });
+  window.addEventListener('mousemove', (e) => { if (dragging) strip.scrollLeft = sl - (e.clientX - sx); });
+  window.addEventListener('mouseup', () => { dragging = false; });
 })();
 
 document.addEventListener('DOMContentLoaded', renderGuestbook);
