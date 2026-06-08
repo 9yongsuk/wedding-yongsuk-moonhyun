@@ -296,25 +296,11 @@ html, body {
   opacity: 1;
 }
 .cover-focus-mask.run {
-  animation: focusOut 6.5s cubic-bezier(0.33, 0, 0.2, 1) forwards;
+  animation: focusOut 4.6s ease-out forwards;
 }
 @keyframes focusOut {
-  0% { 
-    --focus-r: 0%;
-    opacity: 1;
-  }
-  20% {
-    --focus-r: 5%;
-    opacity: 1;
-  }
-  60% {
-    --focus-r: 26%;
-    opacity: 1;
-  }
-  100% { 
-    --focus-r: 85%;
-    opacity: 0;
-  }
+  0%   { --focus-r: 0%;  opacity: 1; }
+  100% { --focus-r: 92%; opacity: 0; }
 }
 /* CSS @property로 --focus-r 트랜지션 가능하게 (지원 안 하면 graceful degrade) */
 @property --focus-r {
@@ -336,6 +322,17 @@ html, body {
   position: absolute; inset: 0; z-index: 2;
   pointer-events: none;
   box-shadow: inset 0 0 120px 40px rgba(0,0,0,0.45);
+}
+.cover-bottom-fade {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 24%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(10,9,7,0) 0%,
+    rgba(10,9,7,0.55) 55%,
+    #0a0907 100%);
 }
 
 .cover-frame { display: none; }
@@ -1994,6 +1991,106 @@ body.lightbox-open .bgm-toggle {
   letter-spacing: 1.5px;
   padding-bottom: 6px;
 }
+/* ===== 방명록 가로 슬라이드 (정사각형 필름 카드) ===== */
+.gb-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.gb-carousel:active { cursor: grabbing; }
+.gb-track {
+  display: flex;
+  will-change: transform;
+}
+.gb-track.animate {
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gb-slide {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.gb-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #2a2018;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 36px;
+  box-shadow: 0 4px 16px rgba(60,45,30,0.24);
+  overflow: hidden;
+}
+/* 좌우 세로 필름 구멍 */
+.gb-card::before, .gb-card::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 16px;
+  z-index: 0;
+  background-color: #1b140f;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='22' viewBox='0 0 16 22'><rect x='4' y='6' width='8' height='10' rx='1.6' ry='1.6' fill='%23efe7d8'/></svg>");
+  background-size: 16px 22px;
+  background-repeat: repeat-y;
+  background-position: center;
+}
+.gb-card::before { left: 0; }
+.gb-card::after { right: 0; }
+.gb-card-msg {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #f3ead8;
+  max-height: 58%;
+  overflow: hidden;
+}
+.gb-card-sign {
+  position: relative;
+  z-index: 1;
+  margin-top: 16px;
+  font-family: var(--font-kor);
+  font-size: 12px;
+  color: #d8c4a6;
+  letter-spacing: 0.5px;
+}
+.gb-card-date {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: rgba(243,234,216,0.5);
+}
+.gb-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-bottom: 24px;
+}
+.gb-dots .gb-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(138,109,79,0.35);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.gb-dots .gb-dot.active {
+  background: var(--accent);
+  width: 18px;
+  border-radius: 3px;
+}
 .write-btn {
   padding: 14px 34px;
   background: transparent;
@@ -2718,6 +2815,7 @@ body.lightbox-open .bgm-toggle {
     <div class="cover-overlay"></div>
     <div class="cover-focus-mask"></div>
     <div class="cover-vignette-extra"></div>
+    <div class="cover-bottom-fade"></div>
     <div class="cover-frame"></div>
 
     <div class="cover-inner">
@@ -2739,24 +2837,8 @@ body.lightbox-open .bgm-toggle {
     <div class="scroll-hint">SCROLL ↓</div>
   </section>
 
-  <section class="invitation">
-    <div class="invitation-inner">
-      <div class="section-label">INVITATION</div>
-      <h2 class="section-title">초대합니다</h2>
-      <div class="divider-dot"><span></span></div>
-      <p class="invitation-text">
-        서로가 마주보며 다져온 사랑을<br>
-        이제 함께 한 곳을 바라보며<br>
-        걸어갈 수 있는 큰 사랑으로<br>
-        키우고자 합니다.
-      </p>
-    </div>
-  </section>
-
   <!-- ===== 극장 입장: 사진 구간만 어둡게 ===== -->
   <div class="cinema-theater">
-    <!-- 검정 위에 크림 한지가 거칠게 찢어진 끝으로 진입 -->
-    <div class="tear-down tear-cream"></div>
 
     <div class="theater-marquee reveal">
       <div class="now">NOW PLAYING</div>
@@ -2852,11 +2934,9 @@ body.lightbox-open .bgm-toggle {
     </div>
 
     <div class="theater-quote reveal">
-      남은 인생을 함께하고 싶은<br>
-      사람을 만나게 되면,<br>
-      그 남은 인생이 한시라도 빨리<br>
-      시작되기를 바라게 됩니다.
-      <span class="source">— 영화 〈해리가 샐리를 만났을 때〉 —</span>
+      Thanks for the adventure —<br>
+      now go have a new one!
+      <span class="source">— 영화 〈UP〉 —</span>
     </div>
 
     <div class="theater-text reveal" style="padding-bottom:10px;">
@@ -3113,17 +3193,13 @@ body.lightbox-open .bgm-toggle {
       </svg>
     </div>
 
-    <div class="guestbook-list collapsed" id="guestbook-list">
-      <!-- 메시지는 Firebase에서 실시간 로드되거나, 로컬 모드일 경우 빈 상태로 시작 -->
+    <div class="gb-carousel" id="gbCarousel" style="display:none;">
+      <div class="gb-track" id="gbTrack"></div>
     </div>
+    <div class="gb-dots" id="gbDots" style="display:none;"></div>
     <div id="guestbook-empty" style="text-align:center; padding:30px 0; color:var(--ink-mute); font-size:13px;">
       첫 번째 축하 메시지를 남겨주세요 ♥
     </div>
-
-    <button class="guestbook-more-btn" id="guestbook-more-btn" onclick="toggleGuestbookMore()" style="display:none;">
-      <span class="more-text">VIEW ALL</span>
-      <span class="more-count" id="more-count"></span>
-    </button>
 
     <button class="write-btn" onclick="openGuestbook()">WRITE A MESSAGE</button>
   </section>
@@ -3645,73 +3721,129 @@ function submitGuestbook() {
 }
 
 function submitLocal(name, msg, ds) {
-  const list = document.getElementById('guestbook-list');
-  const emptyMsg = document.getElementById('guestbook-empty');
-  // 안내문 숨기기
-  if (emptyMsg) emptyMsg.style.display = 'none';
-  
-  const item = document.createElement('div');
-  item.className = 'guestbook-item';
-  item.innerHTML = '<div class="guestbook-msg">'+esc(msg)+'</div><div class="guestbook-meta"><span>'+esc(name)+'</span><span>'+ds+'</span></div>';
-  list.insertBefore(item, list.firstChild);
+  // 최신 메시지를 맨 앞에 추가
+  gbMessages.unshift({ msg: msg, name: name, date: ds });
+  gbIdx = 0;
+  renderGuestbook();
   document.getElementById('gb-name').value='';
   document.getElementById('gb-msg').value='';
   closeModal();
   showToast('축하 메시지가 등록되었습니다');
-  updateGuestbookMoreBtn();
 }
 
-// 방명록 더보기 토글
-function toggleGuestbookMore() {
-  const list = document.getElementById('guestbook-list');
-  const btn = document.getElementById('guestbook-more-btn');
-  const txt = btn.querySelector('.more-text');
-  const cnt = document.getElementById('more-count');
-  
-  if (list.classList.contains('collapsed')) {
-    // 펼치기
-    list.classList.remove('collapsed');
-    list.classList.add('expanded');
-    btn.classList.add('expanded');
-    txt.textContent = 'SHOW LESS';
-    cnt.textContent = '';
-  } else {
-    // 접기
-    list.classList.add('collapsed');
-    list.classList.remove('expanded');
-    btn.classList.remove('expanded');
-    updateGuestbookMoreBtn();
-    // 스크롤을 방명록 위로
-    document.querySelector('.guestbook').scrollIntoView({ behavior: 'smooth', block: 'start' });
+// ===== 방명록 가로 슬라이드 캐러셀 =====
+let gbMessages = [];
+let gbIdx = 0;
+let gbAutoTimer = null;
+
+function renderGuestbook() {
+  const track = document.getElementById('gbTrack');
+  const dots = document.getElementById('gbDots');
+  const empty = document.getElementById('guestbook-empty');
+  const carousel = document.getElementById('gbCarousel');
+  if (!track) return;
+
+  track.innerHTML = '';
+  dots.innerHTML = '';
+
+  if (!gbMessages.length) {
+    if (empty) empty.style.display = 'block';
+    carousel.style.display = 'none';
+    dots.style.display = 'none';
+    if (gbAutoTimer) clearInterval(gbAutoTimer);
+    return;
   }
+
+  if (empty) empty.style.display = 'none';
+  carousel.style.display = '';
+  dots.style.display = gbMessages.length > 1 ? 'flex' : 'none';
+
+  gbMessages.forEach((m, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'gb-slide';
+    slide.innerHTML =
+      '<div class="gb-card">' +
+        '<div class="gb-card-msg">' + esc(m.msg || '') + '</div>' +
+        '<div class="gb-card-sign">— ' + esc(m.name || '') + '</div>' +
+        '<div class="gb-card-date">' + esc(m.date || '') + '</div>' +
+      '</div>';
+    track.appendChild(slide);
+
+    const dot = document.createElement('span');
+    dot.className = 'gb-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => { gbGo(i); resetGbAuto(); });
+    dots.appendChild(dot);
+  });
+
+  if (gbIdx >= gbMessages.length) gbIdx = 0;
+  gbGo(gbIdx, false);
+  startGbAuto();
 }
 
-// 더보기 버튼 표시 여부 + 카운트 업데이트
-function updateGuestbookMoreBtn() {
-  const list = document.getElementById('guestbook-list');
-  const btn = document.getElementById('guestbook-more-btn');
-  const cnt = document.getElementById('more-count');
-  const txt = btn.querySelector('.more-text');
-  const items = list.querySelectorAll('.guestbook-item');
-  
-  if (items.length > 3) {
-    btn.style.display = 'inline-flex';
-    if (list.classList.contains('collapsed')) {
-      txt.textContent = 'VIEW ALL';
-      cnt.textContent = '(' + items.length + ')';
-    } else {
-      txt.textContent = 'SHOW LESS';
-      cnt.textContent = '';
-    }
-  } else {
-    btn.style.display = 'none';
-  }
+function gbGo(idx, animate) {
+  const track = document.getElementById('gbTrack');
+  if (!track || !gbMessages.length) return;
+  if (animate === undefined) animate = true;
+  gbIdx = (idx + gbMessages.length) % gbMessages.length;
+  track.classList.toggle('animate', animate);
+  track.style.transform = 'translateX(' + (-gbIdx * 100) + '%)';
+  document.querySelectorAll('#gbDots .gb-dot').forEach((d, i) => d.classList.toggle('active', i === gbIdx));
 }
 
-// 페이지 로드 시 초기 상태 적용
-document.addEventListener('DOMContentLoaded', updateGuestbookMoreBtn);
-// 이미 로드된 경우 대비
-updateGuestbookMoreBtn();
+function startGbAuto() {
+  if (gbAutoTimer) clearInterval(gbAutoTimer);
+  if (gbMessages.length <= 1) return;
+  gbAutoTimer = setInterval(() => gbGo(gbIdx + 1), 4500);
+}
+function resetGbAuto() { startGbAuto(); }
+
+// Firebase(모듈 스크립트)에서 호출하는 전역 세터
+function setGuestbookMessages(arr) {
+  gbMessages = (arr || []).map(m => ({ msg: m.msg || '', name: m.name || '', date: m.date || '' }));
+  gbIdx = 0;
+  renderGuestbook();
+}
+window.setGuestbookMessages = setGuestbookMessages;
+
+// 드래그 / 스와이프로 직접 넘기기
+(function initGbDrag() {
+  const car = document.getElementById('gbCarousel');
+  if (!car) return;
+  let startX = 0, dx = 0, dragging = false, w = 0;
+  const getTrack = () => document.getElementById('gbTrack');
+
+  const down = (x) => {
+    if (gbMessages.length <= 1) return;
+    dragging = true; startX = x; dx = 0; w = car.clientWidth || 1;
+    const t = getTrack(); if (t) t.classList.remove('animate');
+    if (gbAutoTimer) clearInterval(gbAutoTimer);
+  };
+  const move = (x) => {
+    if (!dragging) return;
+    dx = x - startX;
+    const t = getTrack();
+    if (t) t.style.transform = 'translateX(calc(' + (-gbIdx * 100) + '% + ' + dx + 'px))';
+  };
+  const up = () => {
+    if (!dragging) return;
+    dragging = false;
+    const threshold = w * 0.18;
+    if (dx < -threshold) gbGo(gbIdx + 1);
+    else if (dx > threshold) gbGo(gbIdx - 1);
+    else gbGo(gbIdx);
+    resetGbAuto();
+  };
+
+  car.addEventListener('touchstart', e => down(e.touches[0].clientX), { passive: true });
+  car.addEventListener('touchmove', e => { if (dragging) move(e.touches[0].clientX); }, { passive: true });
+  car.addEventListener('touchend', up);
+  car.addEventListener('mousedown', e => { e.preventDefault(); down(e.clientX); });
+  window.addEventListener('mousemove', e => move(e.clientX));
+  window.addEventListener('mouseup', up);
+})();
+
+document.addEventListener('DOMContentLoaded', renderGuestbook);
+renderGuestbook();
 function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function shareLink() {
   if (navigator.share) navigator.share({title:'구용석 ♥ 전문현 결혼합니다', url:location.href});
@@ -3862,39 +3994,17 @@ if (filmTrack) {
       // 실시간 메시지 받기 (최신 100개)
       const recentQuery = query(guestbookRef, orderByChild('timestamp'), limitToLast(100));
       onValue(recentQuery, (snapshot) => {
-        const list = document.getElementById('guestbook-list');
-        if (!list) return;
-        
-        // 기존 항목 모두 지움
-        list.innerHTML = '';
-        
         const messages = [];
         snapshot.forEach((child) => {
           messages.push({ key: child.key, ...child.val() });
         });
         // 최신순 정렬 (역순)
         messages.reverse();
-        
-        const emptyMsg = document.getElementById('guestbook-empty');
-        if (messages.length === 0) {
-          // 메시지 없으면 안내문 표시
-          if (emptyMsg) emptyMsg.style.display = 'block';
-        } else {
-          // 메시지 있으면 안내문 숨김
-          if (emptyMsg) emptyMsg.style.display = 'none';
-          messages.forEach((m) => {
-            const item = document.createElement('div');
-            item.className = 'guestbook-item';
-            const safeMsg = (m.msg || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-            const safeName = (m.name || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-            item.innerHTML = '<div class="guestbook-msg">' + safeMsg + '</div>' +
-                             '<div class="guestbook-meta"><span>' + safeName + '</span><span>' + (m.date || '') + '</span></div>';
-            list.appendChild(item);
-          });
+
+        // 가로 슬라이드 캐러셀로 렌더링
+        if (typeof window.setGuestbookMessages === 'function') {
+          window.setGuestbookMessages(messages);
         }
-        
-        // 더보기 버튼 갱신
-        if (typeof updateGuestbookMoreBtn === 'function') updateGuestbookMoreBtn();
       }, (error) => {
         console.warn('Firebase 읽기 실패:', error);
       });
