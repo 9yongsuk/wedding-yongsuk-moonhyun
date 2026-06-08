@@ -320,28 +320,28 @@ html, body {
 }
 
 .cover-names {
-  font-family: var(--font-serif);
-  font-size: 42px;
+  font-family: 'Allura', 'Great Vibes', cursive;
+  font-size: 60px;
   font-weight: 400;
   text-align: center;
   letter-spacing: 1px;
-  line-height: 1.5;
+  line-height: 1.15;
   color: #fff;
   opacity: 0;
   animation: fadeUp 1.2s 0.6s forwards;
   text-shadow: 
-    0 2px 4px rgba(0,0,0,0.9),
+    0 2px 6px rgba(0,0,0,0.95),
     0 4px 20px rgba(0,0,0,0.7),
     0 0 30px rgba(0,0,0,0.4);
 }
 
 .cover-names .amp {
   display: block;
-  font-family: var(--font-display);
-  font-size: 24px;
-  margin: 14px 0;
-  font-style: italic;
-  opacity: 0.9;
+  font-family: 'Allura', 'Great Vibes', cursive;
+  font-size: 52px;
+  margin: 4px 0;
+  font-style: normal;
+  opacity: 0.95;
 }
 
 .cover-kor {
@@ -398,6 +398,51 @@ html, body {
 .add-calendar-btn:hover {
   background: rgba(255,255,255,0.22);
   border-color: rgba(255,255,255,0.7);
+}
+
+/* 캘린더 선택 메뉴 (바텀시트 스타일) */
+.calendar-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  align-items: flex-end;
+  justify-content: center;
+  animation: rsvpFadeIn 0.25s ease-out;
+}
+.calendar-menu.active {
+  display: flex;
+}
+.calendar-menu > button {
+  background: var(--bg-card);
+  border: none;
+  border-top: 1px solid var(--line);
+  padding: 18px 24px;
+  font-family: var(--font-kor);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  cursor: pointer;
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  transition: background 0.15s;
+}
+.calendar-menu > button:hover {
+  background: var(--bg-soft);
+}
+.calendar-menu > button:first-of-type {
+  border-top: none;
+  border-radius: 0;
+  margin-top: auto;
+}
+.calendar-menu .cal-cancel {
+  color: var(--ink-mute);
+  font-weight: 300;
+  margin-bottom: 0;
 }
 
 .cover-date strong {
@@ -2314,7 +2359,13 @@ body.lightbox-open .bgm-toggle {
     <div class="cover-date">
       THE WEDDING DAY
       <strong>2026 . 08 . 16</strong>
-      <button class="add-calendar-btn" onclick="addToCalendar()">📅 캘린더에 추가</button>
+      <button class="add-calendar-btn" onclick="openCalendarMenu(event)">📅 캘린더에 추가</button>
+      <div class="calendar-menu" id="calendarMenu">
+        <button onclick="addCalendar('google')">📅 Google 캘린더</button>
+        <button onclick="addCalendar('ios')">🍎 iPhone (Apple 캘린더)</button>
+        <button onclick="addCalendar('ics')">🤖 Android / 기타</button>
+        <button class="cal-cancel" onclick="closeCalendarMenu()">취소</button>
+      </div>
     </div>
     <div class="scroll-hint">SCROLL ↓</div>
   </section>
