@@ -279,6 +279,43 @@ html, body {
 }
 
 /* 밝은 톤: 어두운 오버레이 대신 부드러운 화이트 베일 */
+
+/* 카메라 포커싱 효과: 검은 마스크 + 원형 구멍이 커짐 */
+.cover-focus-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: radial-gradient(
+    circle at 50% 45%,
+    transparent 0%,
+    transparent var(--focus-r, 18%),
+    rgba(0,0,0,0.92) calc(var(--focus-r, 18%) + 8%),
+    #000 100%
+  );
+  pointer-events: none;
+  animation: focusOut 3.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes focusOut {
+  0% { 
+    --focus-r: 12%;
+    opacity: 1;
+  }
+  50% {
+    --focus-r: 18%;
+    opacity: 1;
+  }
+  100% { 
+    --focus-r: 65%;
+    opacity: 0;
+  }
+}
+/* CSS @property로 --focus-r 트랜지션 가능하게 (지원 안 하면 graceful degrade) */
+@property --focus-r {
+  syntax: '<percentage>';
+  initial-value: 18%;
+  inherits: false;
+}
+
 .cover-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: 
@@ -366,18 +403,34 @@ html, body {
 
 .cover-date {
   position: absolute;
-  bottom: 90px;
-  font-family: var(--font-serif);
-  font-size: 13px;
-  letter-spacing: 5px;
-  color: #fff;
-  text-align: center;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 6;
-  opacity: 0;
-  animation: fadeUp 1.2s 1.2s forwards;
-  text-shadow: 
-    0 1px 3px rgba(0,0,0,0.95),
-    0 2px 12px rgba(0,0,0,0.6);
+  text-align: center;
+  color: #fff;
+  font-family: var(--font-kor);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.cover-date-line {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-kor);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  color: #fff;
+}
+.cover-date-line.cover-place {
+  font-family: var(--font-kor);
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.92);
+  margin-top: 4px;
 }
 
 .add-calendar-btn {
@@ -456,17 +509,15 @@ html, body {
 
 .scroll-hint {
   position: absolute;
-  bottom: 42px;
-  font-size: 10px;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 11px;
   letter-spacing: 4px;
-  color: #fff;
-  font-family: var(--font-display);
+  color: rgba(255,255,255,0.85);
   z-index: 6;
-  opacity: 0;
-  animation: fadeUp 1.2s 1.5s forwards, bounce 2.2s 2.8s infinite;
-  text-shadow: 
-    0 1px 3px rgba(0,0,0,0.9),
-    0 0 10px rgba(0,0,0,0.5);
 }
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
@@ -482,12 +533,13 @@ html, body {
 }
 
 .section-label {
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 7px;
-  color: var(--accent);
-  margin-bottom: 20px;
-  padding-left: 7px;
+  font-family: var(--font-kor);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #6b5037;
+  margin-bottom: 16px;
+  text-transform: uppercase;
 }
 
 .section-title {
@@ -601,13 +653,13 @@ html, body {
   padding: 0 42px;
 }
 .theater-marquee .now {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  letter-spacing: 5px;
-  color: #d8b87f;
+  font-family: var(--font-kor);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #d4b896;
+  position: relative;
+  padding-left: 16px;
 }
 .theater-marquee .now::before {
   content: '';
@@ -675,6 +727,7 @@ html, body {
   position: absolute;
   top: 52px; left: 18px;
   z-index: 4;
+  font-weight: 500;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 3px;
@@ -692,6 +745,7 @@ html, body {
   position: absolute;
   top: 52px; right: 18px;
   z-index: 4;
+  font-weight: 500;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 2px;
@@ -813,6 +867,7 @@ html, body {
   position: absolute;
   top: 44px; left: 22px;
   z-index: 4;
+  font-weight: 500;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 3px;
@@ -830,6 +885,7 @@ html, body {
   position: absolute;
   top: 44px; right: 22px;
   z-index: 4;
+  font-weight: 500;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 2px;
@@ -945,10 +1001,11 @@ html, body {
   padding: 34px 0;
 }
 .cast-role {
+  font-weight: 500;
   font-family: var(--font-display);
   font-size: 11px;
   letter-spacing: 6px;
-  color: var(--accent);
+  color: #8a6d3f;
   margin-bottom: 18px;
   display: inline-flex;
   align-items: center;
@@ -1014,41 +1071,119 @@ html, body {
 .ticket {
   position: relative;
   cursor: pointer;
-  transition: transform 1.4s cubic-bezier(0.4, 0.0, 0.2, 1);
-  transform-style: preserve-3d;
   width: 100%;
   min-height: 260px;
   filter: drop-shadow(0 10px 28px rgba(120, 100, 60, 0.22));
 }
-/* 클릭으로 뒤집은 상태 */
-.ticket.flipped { transform: rotateY(180deg); }
-/* 자동 회전 (한 바퀴 도는 효과) */
-.ticket.auto-spin { animation: ticketSpin 1.8s ease-in-out; }
-@keyframes ticketSpin {
-  0% { transform: rotateY(0deg); }
-  50% { transform: rotateY(180deg); }
-  100% { transform: rotateY(360deg); }
-}
+/* 3D 회전 대신 페이드로 깔끔하게 전환 */
+/* 자동회전 제거: 클릭으로만 뒤집기 (정상 동작 보장) */
 .ticket-face, .ticket-back {
   position: absolute;
   inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   display: flex;
+  transition: opacity 0.5s ease;
 }
 .ticket-face {
   background: linear-gradient(135deg, #faf6ee 0%, #f0e8d6 55%, #e6dac1 100%);
   color: var(--ink);
   border: 1px solid var(--line);
+  opacity: 1;
+  z-index: 2;
 }
 .ticket-back {
-  background: linear-gradient(135deg, #b08d57 0%, #c9a876 100%);
-  color: #fff;
-  transform: rotateY(180deg);
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #2a1f17 0%, #3d2d20 50%, #2a1f17 100%);
+  color: #f3ead8;
+  display: flex;
   flex-direction: column;
-  padding: 30px;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border: 1px solid rgba(216,184,127,0.3);
+  opacity: 0;
+  z-index: 1;
+}
+/* flipped 상태: 앞면 페이드아웃, 뒷면 페이드인 */
+.ticket.flipped .ticket-face {
+  opacity: 0;
+  z-index: 1;
+}
+.ticket.flipped .ticket-back {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* 영화 포스터 영역 */
+.back-poster {
+  flex: 0 0 auto;
+  margin-bottom: 14px;
+}
+.back-poster-frame {
+  border: 1px solid rgba(216,184,127,0.4);
+  padding: 14px 8px;
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+}
+.back-poster-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.back-poster-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #d8b87f;
+}
+.back-poster-amp {
+  font-family: 'Allura', 'Great Vibes', cursive;
+  font-size: 28px;
+  color: #d8b87f;
+  line-height: 0.7;
+  margin: 2px 0;
+}
+
+/* 메타 정보 */
+.back-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-display);
+  margin: 8px 0;
+}
+.back-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  border-bottom: 1px dotted rgba(216,184,127,0.2);
+  padding-bottom: 4px;
+}
+.back-label {
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: rgba(216,184,127,0.7);
+}
+.back-value {
+  font-family: var(--font-kor);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #f3ead8;
+}
+
+/* 태그라인 */
+.back-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 9.5px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: rgba(216,184,127,0.85);
+  text-align: center;
+  line-height: 1.7;
+  padding-top: 8px;
+  border-top: 1px solid rgba(216,184,127,0.2);
 }
 .ticket-face::before, .ticket-face::after,
 .ticket-back::before, .ticket-back::after {
@@ -1135,11 +1270,13 @@ html, body {
   font-family: var(--font-display);
 }
 .ticket-stub .stub-label {
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--ink-mute);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  font-family: var(--font-kor);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #8a6d3f;
+  text-align: center;
+  margin-bottom: 8px;
 }
 .ticket-stub .stub-num {
   font-size: 20px;
@@ -1199,43 +1336,55 @@ html, body {
   margin: 36px 0 0;
 }
 .calendar-month {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  margin-bottom: 30px;
-  color: var(--accent);
-  letter-spacing: 3px;
-  line-height: 1.4;
-  padding-left: 3px;
+  text-align: center;
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 4px;
+  color: var(--ink);
+  margin-bottom: 16px;
 }
 table.cal { width: 100%; border-collapse: collapse; }
 table.cal th {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-kor);
+  font-weight: 500;
   font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--ink-mute);
-  padding: 10px 0;
+  letter-spacing: 1.5px;
+  color: var(--ink-soft);
+  padding: 6px 0;
 }
 table.cal td {
-  padding: 13px 0;
+  padding: 7px 0;
   font-size: 14px;
   color: var(--ink);
-  font-family: var(--font-cor);
+  font-family: var(--font-kor);
+  font-weight: 400;
   position: relative;
+  text-align: center;
+  height: 36px;
 }
 table.cal td.sun { color: var(--rose); }
-table.cal td.wedding-day {
+table.cal td.wedding-day-cell {
+  position: relative;
+}
+.wedding-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
   background: var(--accent);
   color: #fff;
   border-radius: 50%;
   font-weight: 500;
-  width: 32px; height: 32px;
-  max-width: 32px;
+  font-size: 14px;
   animation: pulseDay 2.4s infinite;
+  position: relative;
+  z-index: 1;
 }
 @keyframes pulseDay {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(176,141,87,0.4); }
-  50% { box-shadow: 0 0 0 7px rgba(176,141,87,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(176,141,87,0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(176,141,87,0); }
 }
 .countdown-grid {
   display: grid;
@@ -1249,15 +1398,18 @@ table.cal td.wedding-day {
   padding: 15px 4px;
 }
 .cd-item .num {
-  font-family: var(--font-serif);
-  font-size: 23px;
-  color: var(--accent);
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
 }
 .cd-item .label {
-  font-family: var(--font-display);
-  font-size: 9px;
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 10px;
   letter-spacing: 2px;
-  color: var(--ink-mute);
+  color: #8a6d3f;
   margin-top: 6px;
 }
 .time-info {
@@ -1267,19 +1419,18 @@ table.cal td.wedding-day {
 }
 .time-info .day {
   font-family: var(--font-kor);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 14px;
-  color: var(--accent);
-  margin-bottom: 12px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
 }
 .time-info .time {
-  font-family: var(--font-serif);
-  font-size: 27px;
-  font-weight: 400;
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 4px;
   color: var(--ink);
-  letter-spacing: 2px;
-  line-height: 1.4;
+  margin: 8px 0;
 }
 
 /* ===== GALLERY ===== */
@@ -1572,10 +1723,11 @@ body.lightbox-open .bgm-toggle {
 }
 .acc-role-kor {
   display: block;
-  font-family: var(--font-display);
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  color: var(--accent);
+  font-family: var(--font-kor);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #6b5037;
   margin-bottom: 6px;
 }
 .acc-name-kor {
@@ -1629,11 +1781,11 @@ body.lightbox-open .bgm-toggle {
   color: #8a6d3f;
 }
 
-.account-role {
+.account-role { font-weight: 500;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 3px;
-  color: var(--accent);
+  color: #8a6d3f;
   margin-bottom: 6px;
 }
 .account-name {
@@ -1920,6 +2072,7 @@ body.lightbox-open .bgm-toggle {
   }
 }
 .credit-block .role {
+  font-weight: 500;
   font-family: var(--font-display);
   font-size: 10px;
   letter-spacing: 4px;
@@ -2242,6 +2395,92 @@ body.lightbox-open .bgm-toggle {
   border-color: var(--accent);
 }
 
+/* RSVP 3단계 폼 */
+.rsvp-step { display: none; }
+.rsvp-step.active { display: block; }
+.rsvp-form-content {
+  text-align: left;
+}
+.rsvp-textarea {
+  resize: none;
+  font-family: var(--font-kor);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.rsvp-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+.rsvp-cancel {
+  flex: 0 0 35%;
+  padding: 13px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-family: var(--font-kor);
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+.rsvp-submit-final {
+  flex: 1;
+  padding: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  font-family: var(--font-kor);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.rsvp-submit-final:hover { opacity: 0.85; }
+.rsvp-submit-final:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 완료 화면 */
+.rsvp-done {
+  text-align: center;
+  padding: 20px 0;
+}
+.rsvp-done-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  animation: doneScale 0.4s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+@keyframes doneScale {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+.rsvp-done-title {
+  font-family: var(--font-kor);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.rsvp-done-text {
+  font-family: var(--font-kor);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+
+
 .toast.show { opacity: 1; }
 
 .reveal {
@@ -2304,36 +2543,107 @@ body.lightbox-open .bgm-toggle {
   <div class="rsvp-card">
     <button class="rsvp-close" onclick="closeRsvp(false)" aria-label="닫기">×</button>
     
-    <div class="rsvp-header">
-      <div class="rsvp-mark">🎬 INVITATION</div>
-      <div class="rsvp-title">결혼식에 초대합니다</div>
-      <div class="rsvp-divider"></div>
+    <!-- 1단계: 안내 화면 -->
+    <div class="rsvp-step rsvp-step-1 active" id="rsvpStep1">
+      <div class="rsvp-header">
+        <div class="rsvp-mark">🎬 INVITATION</div>
+        <div class="rsvp-title">결혼식에 초대합니다</div>
+        <div class="rsvp-divider"></div>
+      </div>
+      
+      <p class="rsvp-text">
+        결혼식에 참석해주시는 모든 분들을<br>
+        더욱 정성껏 모시고자 하니<br>
+        <strong>참석 여부</strong>를 알려주시면 감사하겠습니다.
+      </p>
+      
+      <div class="rsvp-info">
+        <div class="rsvp-info-row">
+          <span class="rsvp-info-icon">📅</span>
+          <span>2026. 08. 16 (일) 오후 1:30</span>
+        </div>
+        <div class="rsvp-info-row">
+          <span class="rsvp-info-icon">📍</span>
+          <span>라도무스 아트센터 루미니스홀</span>
+        </div>
+      </div>
+      
+      <button class="rsvp-submit" onclick="goRsvpForm()">
+        참석 여부 전달하기
+      </button>
+      
+      <label class="rsvp-skip">
+        <input type="checkbox" id="rsvpDontShow"> 오늘 하루 보지 않기
+      </label>
     </div>
     
-    <p class="rsvp-text">
-      결혼식에 참석해주시는 모든 분들을<br>
-      더욱 정성껏 모시고자 하니<br>
-      <strong>참석 여부</strong>를 알려주시면 감사하겠습니다.
-    </p>
-    
-    <div class="rsvp-info">
-      <div class="rsvp-info-row">
-        <span class="rsvp-info-icon">📅</span>
-        <span>2026. 08. 16 (일) 오후 1:30</span>
+    <!-- 2단계: 입력 폼 -->
+    <div class="rsvp-step rsvp-step-2" id="rsvpStep2">
+      <div class="rsvp-header">
+        <div class="rsvp-mark">RSVP</div>
+        <div class="rsvp-title">참석 여부 전달</div>
+        <div class="rsvp-divider"></div>
       </div>
-      <div class="rsvp-info-row">
-        <span class="rsvp-info-icon">📍</span>
-        <span>라도무스 아트센터 루미니스홀</span>
-      </div>
+      
+      <form class="rsvp-form-content" onsubmit="submitRsvp(event)">
+        <div class="rsvp-form-row">
+          <label class="rsvp-form-label">참석 구분</label>
+          <div class="rsvp-options">
+            <button type="button" class="rsvp-option selected" data-side="신랑측" onclick="selectOption(this, 'side')">신랑측</button>
+            <button type="button" class="rsvp-option" data-side="신부측" onclick="selectOption(this, 'side')">신부측</button>
+          </div>
+        </div>
+        
+        <div class="rsvp-form-row">
+          <label class="rsvp-form-label">참석 여부 *</label>
+          <div class="rsvp-options">
+            <button type="button" class="rsvp-option selected" data-attend="참석" onclick="selectOption(this, 'attend')">참석</button>
+            <button type="button" class="rsvp-option" data-attend="불참" onclick="selectOption(this, 'attend')">불참</button>
+          </div>
+        </div>
+        
+        <div class="rsvp-form-row">
+          <label class="rsvp-form-label" for="rsvpName">성함 *</label>
+          <input type="text" class="rsvp-form-input" id="rsvpName" required maxlength="20" placeholder="홍길동">
+        </div>
+        
+        <div class="rsvp-form-row">
+          <label class="rsvp-form-label" for="rsvpCount">참석 인원</label>
+          <input type="number" class="rsvp-form-input" id="rsvpCount" min="1" max="10" value="1">
+        </div>
+        
+        <div class="rsvp-form-row">
+          <label class="rsvp-form-label">식사 여부</label>
+          <div class="rsvp-options">
+            <button type="button" class="rsvp-option selected" data-meal="식사함" onclick="selectOption(this, 'meal')">식사함</button>
+            <button type="button" class="rsvp-option" data-meal="식사안함" onclick="selectOption(this, 'meal')">식사안함</button>
+          </div>
+        </div>
+        
+        <div class="rsvp-form-row">
+          <label class="rsvp-form-label" for="rsvpMsg">전하실 말씀 (선택)</label>
+          <textarea class="rsvp-form-input rsvp-textarea" id="rsvpMsg" maxlength="200" rows="2" placeholder="축하 메시지 등"></textarea>
+        </div>
+        
+        <div class="rsvp-form-actions">
+          <button type="button" class="rsvp-cancel" onclick="backRsvp()">이전</button>
+          <button type="submit" class="rsvp-submit-final">전달하기</button>
+        </div>
+      </form>
     </div>
     
-    <button class="rsvp-submit" onclick="openRsvpForm()">
-      참석 여부 전달하기
-    </button>
-    
-    <label class="rsvp-skip">
-      <input type="checkbox" id="rsvpDontShow"> 오늘 하루 보지 않기
-    </label>
+    <!-- 3단계: 완료 -->
+    <div class="rsvp-step rsvp-step-3" id="rsvpStep3">
+      <div class="rsvp-done">
+        <div class="rsvp-done-icon">✓</div>
+        <div class="rsvp-done-title">전달되었습니다</div>
+        <p class="rsvp-done-text">
+          소중한 마음 전해주셔서<br>
+          진심으로 감사합니다.
+        </p>
+        <button class="rsvp-submit" onclick="closeRsvp(true)">닫기</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2343,6 +2653,7 @@ body.lightbox-open .bgm-toggle {
   <section class="cover">
     <div class="cover-photo"></div>
     <div class="cover-overlay"></div>
+    <div class="cover-focus-mask"></div>
     <div class="cover-vignette-extra"></div>
     <div class="cover-frame"></div>
 
@@ -2357,8 +2668,8 @@ body.lightbox-open .bgm-toggle {
     </div>
 
     <div class="cover-date">
-      THE WEDDING DAY
-      <strong>2026 . 08 . 16</strong>
+      <div class="cover-date-line">2026 . 08 . 16 SUN 1:30 PM</div>
+      <div class="cover-date-line cover-place">라도무스 아트센터 루미니스홀</div>
       <button class="add-calendar-btn" onclick="openCalendarMenu(event)">📅 캘린더에 추가</button>
       <div class="calendar-menu" id="calendarMenu">
         <button onclick="addCalendar('google')">📅 Google 캘린더</button>
@@ -2434,24 +2745,24 @@ body.lightbox-open .bgm-toggle {
     </div>
 
     <div class="theater-text reveal">
-      매일이 영화 같지는 않아도<br>
-      하루하루가 우리에게는 한 컷,<br>
-      그 모든 순간이 모여<br>
-      한 편의 이야기가 되었습니다.
+      여름의 끝자락에서<br>
+      가장 짙푸르게 빛나는 잎사귀들처럼<br>
+      서로를 향한 마음도<br>
+      그렇게 무르익었습니다.
     </div>
 
     <div class="theater-quote reveal">
-      인생은 모두가 함께하는 여행이다.<br>
-      매일매일 사는 동안 우리가 할 수 있는 건<br>
-      최선을 다해 이 멋진 여행을<br>
-      만끽하는 것이다.
-      <span class="source">— 영화 〈ABOUT TIME〉 중 —</span>
+      모험은 늘 거기에 있어.<br>
+      지금까지의 모험에 고마워.<br>
+      이제 새로운 모험을 시작해보자.
+      <span class="source">— 영화 〈UP〉 중 —</span>
     </div>
 
     <div class="theater-text reveal" style="padding-bottom:10px;">
-      새로운 여행의 출발선에 서있는<br>
-      저희를 축복해 주시면<br>
-      감사하겠습니다.
+      나란히 선 두 그루의 나무가<br>
+      한 자리에 뿌리를 내리듯<br>
+      저희도 그렇게 시작합니다.<br><br>
+      찾아주시는 발걸음에 깊이 감사드립니다.
     </div>
 
   </div>
@@ -2534,14 +2845,35 @@ body.lightbox-open .bgm-toggle {
           </div>
         </div>
         <div class="ticket-back">
-          <div class="ticket-back-text">Two souls,<br>one journey begins</div>
-          <div class="ticket-back-divider"></div>
-          <div class="ticket-back-name">용석 ♥ 문현</div>
+          <div class="back-poster">
+            <div class="back-poster-frame">
+              <div class="back-poster-content">
+                <div class="back-poster-title">YONGSUK</div>
+                <div class="back-poster-amp">&amp;</div>
+                <div class="back-poster-title">MOONHYUN</div>
+              </div>
+            </div>
+          </div>
+          <div class="back-meta">
+            <div class="back-meta-row">
+              <span class="back-label">SEAT</span>
+              <span class="back-value">FREE · 자유석</span>
+            </div>
+            <div class="back-meta-row">
+              <span class="back-label">SCREEN</span>
+              <span class="back-value">루미니스홀</span>
+            </div>
+            <div class="back-meta-row">
+              <span class="back-label">RATING</span>
+              <span class="back-value">★★★★★</span>
+            </div>
+          </div>
+          <div class="back-tagline">"A LOVE STORY THAT BLOOMS<br>IN THE SUMMER OF 2026"</div>
         </div>
       </div>
     </div>
 
-    <div class="ticket-hint">↻ TAP THE TICKET</div>
+    <div class="ticket-hint">↻ 티켓을 탭하면 뒷면이 보입니다</div>
   </section>
 
   <section class="section reveal">
@@ -2559,7 +2891,7 @@ body.lightbox-open .bgm-toggle {
           <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td></tr>
           <tr><td class="sun">2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
           <tr><td class="sun">9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
-          <tr><td class="sun wedding-day">16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td></tr>
+          <tr><td class="sun wedding-day-cell"><span class="wedding-day">16</span></td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td></tr>
           <tr><td class="sun">23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td></tr>
           <tr><td class="sun">30</td><td>31</td><td></td><td></td><td></td><td></td><td></td></tr>
         </tbody>
@@ -2919,44 +3251,7 @@ document.getElementById('lightbox').addEventListener('click', e => {
 
 function flipTicket() {
   const t = document.getElementById('ticket');
-  // 자동 회전 중이면 무시
-  if (t.classList.contains('auto-spin')) return;
   t.classList.toggle('flipped');
-}
-
-// 티켓을 한 바퀴 돌리는 함수
-function spinTicket() {
-  const t = document.getElementById('ticket');
-  if (!t) return;
-  // 현재 클릭으로 뒤집힌 상태면 회전 스킵
-  if (t.classList.contains('flipped')) return;
-  
-  // auto-spin 클래스 추가했다가 애니메이션 끝나면 제거
-  t.classList.add('auto-spin');
-  setTimeout(() => {
-    t.classList.remove('auto-spin');
-  }, 1800);
-}
-
-// 10초 주기로 자동 회전 (페이지 로드 시 한 번, 이후 10초마다)
-const ticketEl = document.getElementById('ticket');
-if (ticketEl) {
-  // IntersectionObserver로 화면에 처음 보일 때 시작
-  let spinStarted = false;
-  const ticketObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !spinStarted) {
-        spinStarted = true;
-        // 처음 보일 때 1초 후 첫 회전
-        setTimeout(() => {
-          spinTicket();
-          // 그 다음부터 10초 주기로 회전
-          setInterval(spinTicket, 10000);
-        }, 1000);
-      }
-    });
-  }, { threshold: 0.3 });
-  ticketObs.observe(ticketEl);
 }
 
 
@@ -2987,25 +3282,104 @@ function closeRsvp(submitted) {
   }
 }
 
-function openRsvpForm() {
-  // 카카오톡으로 메시지 보내기 또는 SMS
-  // 간단한 방법: window.location으로 SMS 앱 열기 (모바일)
-  // PC면 안내 메시지
+// ============= RSVP 폼 (3단계) =============
+function goStep(n) {
+  document.querySelectorAll('.rsvp-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('rsvpStep' + n).classList.add('active');
+}
+
+function goRsvpForm() {
+  goStep(2);
+}
+
+function backRsvp() {
+  goStep(1);
+}
+
+function selectOption(btn, group) {
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.rsvp-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function getSelected(group) {
+  const btn = document.querySelector('.rsvp-option.selected[data-' + group + ']');
+  return btn ? btn.dataset[group] : '';
+}
+
+async function submitRsvp(e) {
+  e.preventDefault();
   
-  const msg = '안녕하세요. 구용석♥전문현 결혼식 (2026.08.16) 참석 여부를 알려드리려고 합니다.';
+  const submitBtn = document.querySelector('.rsvp-submit-final');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = '전송 중...';
   
-  // 모바일이면 SMS 앱 열기
-  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-    // 신랑 번호 또는 신부 번호로 SMS
-    // 실제 전화번호 입력 필요 - 일단 placeholder
-    window.location.href = 'sms:?body=' + encodeURIComponent(msg);
-  } else {
-    // PC면 카톡 안내 토스트
-    showToast('카카오톡으로 신랑/신부에게 직접 알려주세요 💌');
+  const data = {
+    side: getSelected('side'),
+    attend: getSelected('attend'),
+    name: document.getElementById('rsvpName').value.trim(),
+    count: document.getElementById('rsvpCount').value,
+    meal: getSelected('meal'),
+    msg: document.getElementById('rsvpMsg').value.trim(),
+    timestamp: new Date().toISOString()
+  };
+  
+  if (!data.name) {
+    showToast('성함을 입력해주세요');
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+    return;
   }
   
-  closeRsvp(true);
+  // Google Form으로 전송
+  try {
+    await sendToGoogleForm(data);
+    goStep(3);
+  } catch (err) {
+    console.error('RSVP 전송 실패:', err);
+    showToast('전송 실패 - 잠시 후 다시 시도해주세요');
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
 }
+
+// Google Form 전송
+// ⚠️ 아래 URL과 entry ID는 사용자가 Google Form 만든 후 직접 채워야 함
+const GOOGLE_FORM_URL = window.GOOGLE_FORM_URL || '';  // firebase-config.js에서 설정 가능
+const GOOGLE_FORM_FIELDS = window.GOOGLE_FORM_FIELDS || {
+  side:   'entry.111111',  // 참석 구분
+  attend: 'entry.222222',  // 참석 여부
+  name:   'entry.333333',  // 성함
+  count:  'entry.444444',  // 인원
+  meal:   'entry.555555',  // 식사
+  msg:    'entry.666666'   // 메시지
+};
+
+async function sendToGoogleForm(data) {
+  if (!GOOGLE_FORM_URL) {
+    // Google Form 미설정 시 — 로컬 콘솔로만 출력 (테스트 모드)
+    console.log('📝 RSVP (Google Form 미연동):', data);
+    await new Promise(r => setTimeout(r, 500));
+    return;
+  }
+  
+  const formData = new FormData();
+  formData.append(GOOGLE_FORM_FIELDS.side, data.side);
+  formData.append(GOOGLE_FORM_FIELDS.attend, data.attend);
+  formData.append(GOOGLE_FORM_FIELDS.name, data.name);
+  formData.append(GOOGLE_FORM_FIELDS.count, data.count);
+  formData.append(GOOGLE_FORM_FIELDS.meal, data.meal);
+  formData.append(GOOGLE_FORM_FIELDS.msg, data.msg);
+  
+  // mode: no-cors로 fetch — 응답은 못 받지만 데이터는 전송됨
+  await fetch(GOOGLE_FORM_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  });
+}
+
 
 // 페이지 로드되면 RSVP 팝업 호출
 window.addEventListener('load', openRsvp);
