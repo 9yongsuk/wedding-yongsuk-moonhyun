@@ -14,7 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+KR:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+KR:wght@200;300;400&family=Allura&family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/[email protected]/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -294,13 +294,7 @@ html, body {
   box-shadow: inset 0 0 120px 40px rgba(0,0,0,0.45);
 }
 
-.cover-frame {
-  position: absolute;
-  top: 26px; left: 26px; right: 26px; bottom: 26px;
-  border: 1px solid rgba(255,255,255,0.55);
-  z-index: 4;
-  pointer-events: none;
-}
+.cover-frame { display: none; }
 
 .cover-inner {
   position: relative;
@@ -311,14 +305,16 @@ html, body {
 }
 
 .cover-mark {
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 7px;
-  color: #fff;
-  margin-bottom: 30px;
+  font-family: 'Allura', 'Great Vibes', cursive;
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #f5e6c8;
+  margin-bottom: 24px;
+  line-height: 1.1;
   text-shadow: 
-    0 1px 3px rgba(0,0,0,0.9),
-    0 0 12px rgba(0,0,0,0.5);
+    0 2px 6px rgba(0,0,0,0.95),
+    0 4px 20px rgba(0,0,0,0.7);
   opacity: 0;
   animation: fadeUp 1.2s 0.3s forwards;
 }
@@ -382,6 +378,26 @@ html, body {
   text-shadow: 
     0 1px 3px rgba(0,0,0,0.95),
     0 2px 12px rgba(0,0,0,0.6);
+}
+
+.add-calendar-btn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 18px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: #fff;
+  font-family: var(--font-kor);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s;
+  font-weight: 300;
+}
+.add-calendar-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.7);
 }
 
 .cover-date strong {
@@ -1487,6 +1503,87 @@ body.lightbox-open .bgm-toggle {
   text-align: left;
   background: var(--bg-card);
 }
+
+/* ============= 새 계좌 디자인 (한글, 미니멀) ============= */
+.account-clean {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 4px;
+  border-bottom: 1px solid rgba(176, 141, 87, 0.18);
+}
+.account-row:last-child {
+  border-bottom: none;
+}
+.account-row-label {
+  flex: 0 0 auto;
+  min-width: 78px;
+  text-align: left;
+}
+.acc-role-kor {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.acc-name-kor {
+  display: block;
+  font-family: var(--font-kor);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 1px;
+}
+.account-row-info {
+  flex: 1 1 auto;
+  text-align: center;
+  font-family: var(--font-kor);
+  font-size: 12px;
+  color: var(--ink-soft);
+  padding: 0 8px;
+  line-height: 1.5;
+}
+.acc-bank {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+.acc-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+}
+.copy-link {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--font-kor);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  padding: 6px 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(176, 141, 87, 0.4);
+  transition: color 0.2s;
+}
+.copy-link:hover {
+  color: #8a6d3f;
+}
+
 .account-role {
   font-family: var(--font-display);
   font-size: 10px;
@@ -1668,6 +1765,48 @@ body.lightbox-open .bgm-toggle {
   cursor: pointer;
   color: var(--ink-soft);
 }
+
+/* ============= INFORMATION 섹션 ============= */
+.information {
+  background: var(--bg-soft);
+  text-align: center;
+  position: relative;
+}
+.info-block {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 30px 26px;
+  background: var(--bg-card);
+  border-left: 2px solid var(--accent);
+  text-align: left;
+}
+.info-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.info-title {
+  font-family: var(--font-kor);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.info-text {
+  font-family: var(--font-kor);
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.info-text strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .footer {
   text-align: center;
@@ -1877,6 +2016,187 @@ body.lightbox-open .bgm-toggle {
   transition: opacity 0.3s;
   pointer-events: none;
 }
+
+/* ============= RSVP 팝업 ============= */
+.rsvp-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 9, 7, 0.78);
+  backdrop-filter: blur(8px);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: rsvpFadeIn 0.4s ease-out;
+}
+.rsvp-popup.active {
+  display: flex;
+}
+@keyframes rsvpFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.rsvp-card {
+  position: relative;
+  max-width: 380px;
+  width: 100%;
+  background: var(--bg-card);
+  padding: 38px 28px 26px;
+  text-align: center;
+  animation: rsvpSlideUp 0.5s cubic-bezier(0.16, 0.84, 0.44, 1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+@keyframes rsvpSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.rsvp-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 32px; height: 32px;
+  background: transparent;
+  border: none;
+  color: var(--ink-mute);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 300;
+}
+.rsvp-close:hover { color: var(--ink); }
+
+.rsvp-header { margin-bottom: 22px; }
+.rsvp-mark {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.rsvp-title {
+  font-family: var(--font-kor);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.rsvp-divider {
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+  margin: 0 auto;
+}
+.rsvp-text {
+  font-family: var(--font-kor);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+.rsvp-text strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+.rsvp-info {
+  background: rgba(176,141,87,0.06);
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.rsvp-info-row {
+  font-family: var(--font-kor);
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rsvp-info-icon {
+  flex-shrink: 0;
+}
+.rsvp-submit {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  font-family: var(--font-kor);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  cursor: pointer;
+  margin-bottom: 14px;
+  transition: opacity 0.2s;
+}
+.rsvp-submit:hover { opacity: 0.85; }
+.rsvp-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-kor);
+  font-size: 12px;
+  color: var(--ink-mute);
+  cursor: pointer;
+  user-select: none;
+}
+.rsvp-skip input { cursor: pointer; }
+
+/* RSVP 폼 (참석여부 전달) */
+.rsvp-form {
+  display: none;
+  margin-top: 18px;
+  text-align: left;
+}
+.rsvp-form.active { display: block; }
+.rsvp-form-row {
+  margin-bottom: 14px;
+}
+.rsvp-form-label {
+  display: block;
+  font-family: var(--font-kor);
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+.rsvp-form-input,
+.rsvp-form-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-family: var(--font-kor);
+  font-size: 14px;
+  color: var(--ink);
+  box-sizing: border-box;
+}
+.rsvp-options {
+  display: flex;
+  gap: 8px;
+}
+.rsvp-option {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-family: var(--font-kor);
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+.rsvp-option.selected {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
 .toast.show { opacity: 1; }
 
 .reveal {
@@ -1934,6 +2254,45 @@ body.lightbox-open .bgm-toggle {
   </div>
 </div>
 
+<!-- ============= RSVP 안내 팝업 (처음 한 번만) ============= -->
+<div class="rsvp-popup" id="rsvpPopup">
+  <div class="rsvp-card">
+    <button class="rsvp-close" onclick="closeRsvp(false)" aria-label="닫기">×</button>
+    
+    <div class="rsvp-header">
+      <div class="rsvp-mark">🎬 INVITATION</div>
+      <div class="rsvp-title">결혼식에 초대합니다</div>
+      <div class="rsvp-divider"></div>
+    </div>
+    
+    <p class="rsvp-text">
+      결혼식에 참석해주시는 모든 분들을<br>
+      더욱 정성껏 모시고자 하니<br>
+      <strong>참석 여부</strong>를 알려주시면 감사하겠습니다.
+    </p>
+    
+    <div class="rsvp-info">
+      <div class="rsvp-info-row">
+        <span class="rsvp-info-icon">📅</span>
+        <span>2026. 08. 16 (일) 오후 1:30</span>
+      </div>
+      <div class="rsvp-info-row">
+        <span class="rsvp-info-icon">📍</span>
+        <span>라도무스 아트센터 루미니스홀</span>
+      </div>
+    </div>
+    
+    <button class="rsvp-submit" onclick="openRsvpForm()">
+      참석 여부 전달하기
+    </button>
+    
+    <label class="rsvp-skip">
+      <input type="checkbox" id="rsvpDontShow"> 오늘 하루 보지 않기
+    </label>
+  </div>
+</div>
+
+
 <div class="wrap">
 
   <section class="cover">
@@ -1943,18 +2302,19 @@ body.lightbox-open .bgm-toggle {
     <div class="cover-frame"></div>
 
     <div class="cover-inner">
-      <div class="cover-mark">WE INVITE YOU</div>
+      <div class="cover-mark">Our wedding day</div>
       <div class="cover-names">
         Yongsuk
         <span class="amp">&amp;</span>
         Moonhyun
       </div>
-      <div class="cover-kor">구용석 · 전문현</div>
+      
     </div>
 
     <div class="cover-date">
       THE WEDDING DAY
       <strong>2026 . 08 . 16</strong>
+      <button class="add-calendar-btn" onclick="addToCalendar()">📅 캘린더에 추가</button>
     </div>
     <div class="scroll-hint">SCROLL ↓</div>
   </section>
@@ -2240,18 +2600,28 @@ body.lightbox-open .bgm-toggle {
       계좌번호를 안내드립니다.
     </p>
 
-    <div class="account-group">
-      <div class="account-card">
-        <div class="account-role">GROOM</div>
-        <div class="account-name">구용석</div>
-        <div class="account-bank">우리은행 1002-836-029145</div>
-        <button class="copy-btn" onclick="copyAccount('1002836029145')">COPY</button>
+    <div class="account-clean">
+      <div class="account-row">
+        <div class="account-row-label">
+          <span class="acc-role-kor">신랑</span>
+          <span class="acc-name-kor">구용석</span>
+        </div>
+        <div class="account-row-info">
+          <span class="acc-bank">우리은행</span>
+          <span class="acc-num">1002-836-029145</span>
+        </div>
+        <button class="copy-link" onclick="copyAccount('1002836029145')">복사하기</button>
       </div>
-      <div class="account-card">
-        <div class="account-role">BRIDE</div>
-        <div class="account-name">전문현</div>
-        <div class="account-bank">하나은행 66091128128107</div>
-        <button class="copy-btn" onclick="copyAccount('66091128128107')">COPY</button>
+      <div class="account-row">
+        <div class="account-row-label">
+          <span class="acc-role-kor">신부</span>
+          <span class="acc-name-kor">전문현</span>
+        </div>
+        <div class="account-row-info">
+          <span class="acc-bank">하나은행</span>
+          <span class="acc-num">66091128128107</span>
+        </div>
+        <button class="copy-link" onclick="copyAccount('66091128128107')">복사하기</button>
       </div>
     </div>
   </section>
@@ -2304,6 +2674,21 @@ body.lightbox-open .bgm-toggle {
     <div class="share-buttons">
       <button class="share-btn" onclick="shareLink()">LINK</button>
       <button class="share-btn" onclick="shareKakao()">KAKAO</button>
+    </div>
+  </section>
+  
+  <section class="information section">
+    <div class="section-label">INFORMATION</div>
+    <h2 class="section-title">안내 사항</h2>
+    <div class="divider-dot"><span></span></div>
+    
+    <div class="info-block">
+      <div class="info-icon">🍽</div>
+      <div class="info-title">식사 안내</div>
+      <p class="info-text">
+        식사는 <strong>오후 12시 30분</strong>부터 가능합니다.<br>
+        편하게 오셔서 식사하시고 가시면 좋겠습니다.
+      </p>
     </div>
   </section>
   <footer class="footer">
@@ -2521,6 +2906,87 @@ if (ticketEl) {
     });
   }, { threshold: 0.3 });
   ticketObs.observe(ticketEl);
+}
+
+
+// ============= 캘린더에 일정 추가 (ICS 파일 다운로드) =============
+
+// ============= RSVP 팝업 =============
+function openRsvp() {
+  // "오늘 하루 보지 않기" 체크 확인
+  const skipDate = localStorage.getItem('rsvpSkipDate');
+  const today = new Date().toDateString();
+  if (skipDate === today) return;
+  
+  // 1초 후 팝업 표시 (페이지 로딩 안정화 후)
+  setTimeout(() => {
+    document.getElementById('rsvpPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }, 1200);
+}
+
+function closeRsvp(submitted) {
+  document.getElementById('rsvpPopup').classList.remove('active');
+  document.body.style.overflow = '';
+  
+  // "오늘 하루 보지 않기" 체크되어 있으면 저장
+  const dontShow = document.getElementById('rsvpDontShow');
+  if (dontShow && dontShow.checked) {
+    localStorage.setItem('rsvpSkipDate', new Date().toDateString());
+  }
+}
+
+function openRsvpForm() {
+  // 카카오톡으로 메시지 보내기 또는 SMS
+  // 간단한 방법: window.location으로 SMS 앱 열기 (모바일)
+  // PC면 안내 메시지
+  
+  const msg = '안녕하세요. 구용석♥전문현 결혼식 (2026.08.16) 참석 여부를 알려드리려고 합니다.';
+  
+  // 모바일이면 SMS 앱 열기
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    // 신랑 번호 또는 신부 번호로 SMS
+    // 실제 전화번호 입력 필요 - 일단 placeholder
+    window.location.href = 'sms:?body=' + encodeURIComponent(msg);
+  } else {
+    // PC면 카톡 안내 토스트
+    showToast('카카오톡으로 신랑/신부에게 직접 알려주세요 💌');
+  }
+  
+  closeRsvp(true);
+}
+
+// 페이지 로드되면 RSVP 팝업 호출
+window.addEventListener('load', openRsvp);
+
+function addToCalendar() {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Yongsuk-Moonhyun Wedding//KR',
+    'BEGIN:VEVENT',
+    'UID:wedding-yongsuk-moonhyun-20260816@invitation',
+    'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
+    'DTSTART;TZID=Asia/Seoul:20260816T133000',
+    'DTEND;TZID=Asia/Seoul:20260816T153000',
+    'SUMMARY:구용석 ♥ 전문현 결혼식',
+    'LOCATION:라도무스 아트센터 루미니스홀 (대전 유성구 동서대로 639)',
+    'DESCRIPTION:구용석과 전문현의 결혼식에 초대합니다.',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'wedding-yongsuk-moonhyun.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  showToast('캘린더 파일이 다운로드됩니다');
 }
 
 function copyAccount(num) {
