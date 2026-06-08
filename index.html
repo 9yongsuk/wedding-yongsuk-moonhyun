@@ -1152,7 +1152,7 @@ html, body {
 .ticket-back {
   background: #141414;
   color: #f3ead8;
-  border: 1px solid rgba(216,184,127,0.3);
+  border: none;
   overflow: hidden;
   transform: rotateY(180deg);
 }
@@ -1560,11 +1560,9 @@ table.cal td.wedding-day-cell {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) contrast(1.03);
-  transition: transform 0.5s, filter 0.5s;
+  transition: transform 0.5s;
 }
 .film-frame:active img { transform: scale(0.96); }
-.film-frame:hover img { filter: grayscale(0%); }
 
 /* ===== LIGHTBOX ===== */
 .lightbox {
@@ -3323,10 +3321,10 @@ body.lightbox-open .bgm-toggle {
 <script>
 const photos = [
   'photo_00009.jpg','photo_00081.jpg','photo_00195.jpg','photo_00308.jpg',
-  'photo_00486.jpg','photo_00517.jpg','photo_00610.jpg','photo_00808.jpg',
-  'photo_00843.jpg','photo_00925.jpg','photo_00979.jpg','photo_01194.jpg',
-  'photo_01481.jpg','photo_01801.jpg','photo_02215.jpg','photo_02276.jpg',
-  'photo_02298.jpg','photo_02319.jpg'
+  'photo_00386.jpg','photo_00486.jpg','photo_00517.jpg','photo_00610.jpg',
+  'photo_00843.jpg','photo_00931.jpg','photo_00979.jpg','photo_01049.jpg',
+  'photo_01194.jpg','photo_01319.jpg','photo_01481.jpg','photo_01801.jpg',
+  'photo_02215.jpg','photo_02276.jpg','photo_02298.jpg','photo_02319.jpg'
 ];
 
 window.addEventListener('load', () => {
@@ -3372,7 +3370,8 @@ for (let i = 0; i < photos.length; i += perRow) {
   fgHtml += '<div class="film-strip">';
   for (let j = i; j < Math.min(i + perRow, photos.length); j++) {
     fgHtml += '<div class="film-frame" data-idx="' + j + '">' +
-              '<img src="./images/' + photos[j] + '" alt="Photo ' + (j + 1) + '" loading="lazy"></div>';
+              '<img src="./images/' + photos[j] + '" alt="" loading="lazy" ' +
+              'onerror="this.closest(\'.film-frame\').remove()"></div>';
   }
   fgHtml += '</div>';
 }
