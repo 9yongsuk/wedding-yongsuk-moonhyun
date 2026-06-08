@@ -286,33 +286,40 @@ html, body {
   inset: 0;
   z-index: 5;
   background: radial-gradient(
-    circle at 50% 45%,
+    circle at 50% 42%,
     transparent 0%,
-    transparent var(--focus-r, 18%),
-    rgba(0,0,0,0.92) calc(var(--focus-r, 18%) + 8%),
+    transparent var(--focus-r, 0%),
+    rgba(0,0,0,0.97) calc(var(--focus-r, 0%) + 6%),
     #000 100%
   );
   pointer-events: none;
-  animation: focusOut 3.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 1;
+}
+.cover-focus-mask.run {
+  animation: focusOut 6.5s cubic-bezier(0.33, 0, 0.2, 1) forwards;
 }
 @keyframes focusOut {
   0% { 
-    --focus-r: 12%;
+    --focus-r: 0%;
     opacity: 1;
   }
-  50% {
-    --focus-r: 18%;
+  20% {
+    --focus-r: 5%;
+    opacity: 1;
+  }
+  60% {
+    --focus-r: 26%;
     opacity: 1;
   }
   100% { 
-    --focus-r: 65%;
+    --focus-r: 85%;
     opacity: 0;
   }
 }
 /* CSS @property로 --focus-r 트랜지션 가능하게 (지원 안 하면 graceful degrade) */
 @property --focus-r {
   syntax: '<percentage>';
-  initial-value: 18%;
+  initial-value: 0%;
   inherits: false;
 }
 
@@ -334,7 +341,9 @@ html, body {
 .cover-frame { display: none; }
 
 .cover-inner {
-  position: relative;
+  position: absolute;
+  top: 11%;
+  left: 0; right: 0;
   z-index: 6;
   text-align: center;
   display: flex; flex-direction: column;
@@ -343,17 +352,18 @@ html, body {
 
 .cover-mark {
   font-family: 'Allura', 'Great Vibes', cursive;
-  font-size: 56px;
+  font-size: 72px;
   font-weight: 400;
   letter-spacing: 1px;
-  color: #f5e6c8;
-  margin-bottom: 24px;
-  line-height: 1.1;
+  color: #f6aac4;
+  margin-bottom: 6px;
+  line-height: 1.0;
+  max-width: 6em;
   text-shadow: 
-    0 2px 6px rgba(0,0,0,0.95),
-    0 4px 20px rgba(0,0,0,0.7);
+    0 2px 12px rgba(0,0,0,0.85),
+    0 6px 30px rgba(0,0,0,0.55);
   opacity: 0;
-  animation: fadeUp 1.2s 0.3s forwards;
+  animation: fadeUp 1.6s 1.4s forwards;
 }
 
 .cover-names {
@@ -415,14 +425,29 @@ html, body {
   letter-spacing: 2px;
   line-height: 1;
 }
+.cover-couple {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  color: #fff;
+  margin-bottom: 16px;
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeUp 1.4s 1.9s forwards;
+  text-shadow:
+    0 1px 4px rgba(0,0,0,0.9),
+    0 2px 12px rgba(0,0,0,0.6);
+}
 .cover-date-line {
   display: block;
   margin-bottom: 8px;
   font-family: var(--font-kor);
   font-size: 13px;
   font-weight: 400;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   color: #fff;
+  white-space: nowrap;
 }
 .cover-date-line.cover-place {
   font-family: var(--font-kor);
@@ -461,8 +486,9 @@ html, body {
   z-index: 9500;
   background: rgba(0,0,0,0.5);
   backdrop-filter: blur(4px);
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
   animation: rsvpFadeIn 0.25s ease-out;
 }
 .calendar-menu.active {
@@ -479,7 +505,6 @@ html, body {
   color: var(--ink);
   cursor: pointer;
   width: 100%;
-  max-width: 460px;
   text-align: center;
   letter-spacing: 0.5px;
   transition: background 0.15s;
@@ -978,6 +1003,18 @@ html, body {
   letter-spacing: 0.03em;
   color: #cfc4ad;
 }
+.theater-projector {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin: 18px auto 2px;
+}
+.theater-projector svg {
+  width: 96px;
+  height: auto;
+  opacity: 0.96;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.55));
+}
 .theater-quote {
   position: relative;
   z-index: 3;
@@ -1025,10 +1062,10 @@ html, body {
   padding: 34px 0;
 }
 .cast-role {
-  font-weight: 500;
-  font-family: var(--font-display);
-  font-size: 11px;
-  letter-spacing: 6px;
+  font-weight: 600;
+  font-family: var(--font-kor);
+  font-size: 12px;
+  letter-spacing: 5px;
   color: #8a6d3f;
   margin-bottom: 18px;
   display: inline-flex;
@@ -1062,12 +1099,13 @@ html, body {
   padding-left: 11px;
 }
 .cast-name-eng {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  letter-spacing: 4px;
+  font-family: var(--font-kor);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 3px;
   color: var(--accent);
   text-transform: uppercase;
-  padding-left: 4px;
+  padding-left: 3px;
 }
 .cast-amp {
   text-align: center;
@@ -1096,75 +1134,68 @@ html, body {
   position: relative;
   cursor: pointer;
   width: 100%;
-  min-height: 260px;
-  filter: drop-shadow(0 10px 28px rgba(120, 100, 60, 0.22));
+  min-height: 330px;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.4, 0.05, 0.2, 1);
 }
-/* 3D 회전 대신 페이드로 깔끔하게 전환 */
-/* 자동회전 제거: 클릭으로만 뒤집기 (정상 동작 보장) */
 .ticket-face, .ticket-back {
   position: absolute;
   inset: 0;
   display: flex;
-  transition: opacity 0.5s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 28px rgba(120, 100, 60, 0.22);
 }
 .ticket-face {
   background: linear-gradient(135deg, #faf6ee 0%, #f0e8d6 55%, #e6dac1 100%);
   color: var(--ink);
   border: 1px solid var(--line);
-  opacity: 1;
   z-index: 2;
 }
 .ticket-back {
-  background: linear-gradient(135deg, #2a1f17 0%, #3d2d20 50%, #2a1f17 100%);
+  background: #141414;
   color: #f3ead8;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 22px 24px;
   border: 1px solid rgba(216,184,127,0.3);
-  opacity: 0;
-  z-index: 1;
+  overflow: hidden;
+  transform: rotateY(180deg);
 }
-/* flipped 상태: 앞면 페이드아웃, 뒷면 페이드인 */
-.ticket.flipped .ticket-face {
-  opacity: 0;
-  z-index: 1;
-}
-.ticket.flipped .ticket-back {
-  opacity: 1;
-  z-index: 2;
+.ticket.flipped {
+  transform: rotateY(180deg);
 }
 
-/* 영화 포스터 영역 */
-.back-poster {
-  flex: 0 0 auto;
-  margin-bottom: 14px;
+/* 뒷면: 티켓 전체를 채우는 흑백 사진 */
+.back-full-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%) contrast(1.05) brightness(0.96);
+  z-index: 0;
 }
-.back-poster-frame {
-  border: 1px solid rgba(216,184,127,0.4);
-  padding: 14px 8px;
+/* 위쪽 살짝 어둡게 → 흰 글씨 가독성 */
+.ticket-back::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 90px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.back-invite-line {
+  position: absolute;
+  top: 14px;
+  left: 0; right: 0;
+  z-index: 2;
   text-align: center;
-  background: rgba(0,0,0,0.2);
-}
-.back-poster-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-.back-poster-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: 3px;
-  color: #d8b87f;
-}
-.back-poster-amp {
   font-family: 'Allura', 'Great Vibes', cursive;
-  font-size: 28px;
-  color: #d8b87f;
-  line-height: 0.7;
-  margin: 2px 0;
+  font-size: 26px;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7), 0 2px 14px rgba(0,0,0,0.5);
 }
 
 /* 메타 정보 */
@@ -1198,16 +1229,16 @@ html, body {
 
 /* 태그라인 */
 .back-tagline {
+  flex: 0 0 auto;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 1px;
-  color: rgba(216,184,127,0.85);
+  color: rgba(216,184,127,0.9);
   text-align: center;
   line-height: 1.7;
-  padding-top: 8px;
-  border-top: 1px solid rgba(216,184,127,0.2);
+  padding-top: 12px;
 }
 .ticket-face::before, .ticket-face::after,
 .ticket-back::before, .ticket-back::after {
@@ -1610,31 +1641,34 @@ body.lightbox-open .bgm-toggle {
   color: var(--ink);
 }
 .location-hall {
-  font-family: var(--font-display);
-  font-size: 12px;
-  color: var(--accent);
+  font-family: var(--font-kor);
+  font-size: 13px;
+  font-weight: 600;
+  color: #9a7b45;
   margin-bottom: 14px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 .location-addr {
   font-family: var(--font-kor);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 13px;
   color: var(--ink-soft);
   margin-bottom: 10px;
   letter-spacing: 0.04em;
 }
 .location-tel {
-  font-family: var(--font-display);
-  font-size: 12px;
-  color: var(--ink-mute);
+  font-family: var(--font-kor);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
   margin-bottom: 30px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 .location-tel a {
-  color: var(--accent);
+  color: #9a7b45;
+  font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px dotted var(--accent);
+  border-bottom: 1px dotted #9a7b45;
 }
 .map-wrap {
   width: 100%;
@@ -1661,11 +1695,12 @@ body.lightbox-open .bgm-toggle {
   padding: 15px;
   background: var(--bg);
   border: 1px solid var(--accent);
-  color: var(--accent);
+  color: #9a7b45;
   text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 3px;
+  font-family: var(--font-kor);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -1676,15 +1711,16 @@ body.lightbox-open .bgm-toggle {
   text-align: left;
 }
 .transport-title {
-  font-family: var(--font-display);
+  font-family: var(--font-kor);
   font-size: 13px;
-  letter-spacing: 4px;
-  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #9a7b45;
   margin-bottom: 12px;
 }
 .transport-desc {
   font-family: var(--font-kor);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 13px;
   color: var(--ink-soft);
   line-height: 2;
@@ -1773,15 +1809,17 @@ body.lightbox-open .bgm-toggle {
 }
 .acc-bank {
   display: block;
-  font-size: 11px;
-  color: var(--ink-mute);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
   letter-spacing: 0.5px;
   margin-bottom: 3px;
 }
 .acc-num {
   display: block;
-  font-family: var(--font-display);
-  font-size: 12.5px;
+  font-family: var(--font-kor);
+  font-weight: 600;
+  font-size: 14px;
   color: var(--ink);
   letter-spacing: 0.5px;
 }
@@ -1980,11 +2018,12 @@ body.lightbox-open .bgm-toggle {
   padding: 16px 0;
   background: transparent;
   border: 1px solid var(--line);
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 3px;
+  font-family: var(--font-kor);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
   cursor: pointer;
-  color: var(--ink-soft);
+  color: var(--ink);
 }
 
 /* ============= INFORMATION 섹션 ============= */
@@ -2031,11 +2070,11 @@ body.lightbox-open .bgm-toggle {
 .share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .footer {
   text-align: center;
-  padding: 100px 30px 100px;
+  padding: 90px 30px 110px;
   background: #0a0907;
   position: relative;
   overflow: hidden;
-  min-height: 1400px;
+  min-height: 1080px;
 }
 /* footer 위 그라데이션 제거: 한지 가장자리에서 깔끔하게 검정 시작 */
 .footer-fin {
@@ -2682,16 +2721,11 @@ body.lightbox-open .bgm-toggle {
     <div class="cover-frame"></div>
 
     <div class="cover-inner">
-      <div class="cover-mark">Our wedding day</div>
-      <div class="cover-names">
-        Yongsuk
-        <span class="amp">&amp;</span>
-        Moonhyun
-      </div>
-      
+      <div class="cover-mark">Our Wedding Day</div>
     </div>
 
     <div class="cover-date">
+      <div class="cover-couple">Yongsuk &amp; Moonhyun</div>
       <div class="cover-date-line">2026 . 08 . 16 SUN 1:30 PM</div>
       <div class="cover-date-line cover-place">라도무스 아트센터 루미니스홀</div>
       <button class="add-calendar-btn" onclick="openCalendarMenu(event)">📅 캘린더에 추가</button>
@@ -2775,11 +2809,54 @@ body.lightbox-open .bgm-toggle {
       그렇게 무르익었습니다.
     </div>
 
+    <div class="theater-projector reveal" aria-hidden="true">
+      <svg viewBox="0 0 140 96" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="projMetal" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f1ece2"/>
+            <stop offset="0.5" stop-color="#cfc8ba"/>
+            <stop offset="1" stop-color="#a59d8d"/>
+          </linearGradient>
+          <linearGradient id="projBeam" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff6e2" stop-opacity="0.6"/>
+            <stop offset="1" stop-color="#fff6e2" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- 빛 -->
+        <path d="M98 57 L139 30 L139 86 Z" fill="url(#projBeam)"/>
+        <!-- 받침 -->
+        <path d="M52 78 L72 78 L77 85 L47 85 Z" fill="url(#projMetal)" stroke="#8c8472" stroke-width="1"/>
+        <rect x="38" y="85" width="48" height="5" rx="2.5" fill="url(#projMetal)" stroke="#8c8472" stroke-width="1"/>
+        <!-- 본체 -->
+        <rect x="24" y="40" width="62" height="36" rx="6" fill="url(#projMetal)" stroke="#8c8472" stroke-width="1.2"/>
+        <!-- 렌즈 -->
+        <rect x="84" y="50" width="13" height="15" rx="2" fill="url(#projMetal)" stroke="#8c8472" stroke-width="1.2"/>
+        <circle cx="97" cy="57.5" r="5.5" fill="#2f2b23" stroke="#e6e0d4" stroke-width="1.6"/>
+        <!-- 릴 -->
+        <g stroke="#8c8472" stroke-width="1.2">
+          <circle cx="40" cy="25" r="15" fill="url(#projMetal)"/>
+          <circle cx="40" cy="25" r="4" fill="#2f2b23"/>
+          <circle cx="71" cy="30" r="11" fill="url(#projMetal)"/>
+          <circle cx="71" cy="30" r="3" fill="#2f2b23"/>
+        </g>
+        <g stroke="#8c8472" stroke-width="1" opacity="0.55">
+          <line x1="40" y1="12" x2="40" y2="19"/>
+          <line x1="40" y1="31" x2="40" y2="38"/>
+          <line x1="27" y1="25" x2="34" y2="25"/>
+          <line x1="46" y1="25" x2="53" y2="25"/>
+        </g>
+        <!-- 손잡이 -->
+        <circle cx="24" cy="58" r="3.2" fill="none" stroke="#e6e0d4" stroke-width="1.6"/>
+        <line x1="24" y1="58" x2="18" y2="62" stroke="#e6e0d4" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <div class="theater-quote reveal">
-      모험은 늘 거기에 있어.<br>
-      지금까지의 모험에 고마워.<br>
-      이제 새로운 모험을 시작해보자.
-      <span class="source">— 영화 〈UP〉 중 —</span>
+      남은 인생을 함께하고 싶은<br>
+      사람을 만나게 되면,<br>
+      그 남은 인생이 한시라도 빨리<br>
+      시작되기를 바라게 됩니다.
+      <span class="source">— 영화 〈해리가 샐리를 만났을 때〉 —</span>
     </div>
 
     <div class="theater-text reveal" style="padding-bottom:10px;">
@@ -2869,35 +2946,14 @@ body.lightbox-open .bgm-toggle {
           </div>
         </div>
         <div class="ticket-back">
-          <div class="back-poster">
-            <div class="back-poster-frame">
-              <div class="back-poster-content">
-                <div class="back-poster-title">YONGSUK</div>
-                <div class="back-poster-amp">&amp;</div>
-                <div class="back-poster-title">MOONHYUN</div>
-              </div>
-            </div>
-          </div>
-          <div class="back-meta">
-            <div class="back-meta-row">
-              <span class="back-label">SEAT</span>
-              <span class="back-value">FREE · 자유석</span>
-            </div>
-            <div class="back-meta-row">
-              <span class="back-label">SCREEN</span>
-              <span class="back-value">루미니스홀</span>
-            </div>
-            <div class="back-meta-row">
-              <span class="back-label">RATING</span>
-              <span class="back-value">★★★★★</span>
-            </div>
-          </div>
-          <div class="back-tagline">"A LOVE STORY THAT BLOOMS<br>IN THE SUMMER OF 2026"</div>
+          <!-- 뒷면 사진: 아래 photo_02319.jpg 부분만 원하는 사진 파일명으로 바꾸면 교체됩니다 (흑백으로 표시됨) -->
+          <img class="back-full-photo" src="./images/photo_02319.jpg" alt="" loading="lazy">
+          <div class="back-invite-line">An invitation for you</div>
         </div>
       </div>
     </div>
 
-    <div class="ticket-hint">↻ 티켓을 탭하면 뒷면이 보입니다</div>
+    <div class="ticket-hint">티켓을 클릭해 보세요!</div>
   </section>
 
   <section class="section reveal">
@@ -2937,7 +2993,6 @@ body.lightbox-open .bgm-toggle {
     <div class="section-label">GALLERY</div>
     <h2 class="section-title">Behind the Scenes</h2>
     <div class="divider-dot"><span></span></div>
-    <p class="gallery-note" style="margin:0 0 4px;">CONTACT SHEET · 36 EXP</p>
 
     <div class="gallery-grid reveal" id="galleryGrid"></div>
     <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
@@ -3275,18 +3330,67 @@ document.getElementById('lightbox').addEventListener('click', e => {
 
 function flipTicket() {
   const t = document.getElementById('ticket');
-  t.classList.toggle('flipped');
+  if (t) t.classList.toggle('flipped');
 }
+
+// ===== 티켓 등장 연출: 스크롤로 처음 보일 때 '뒷면 → 앞면' 한 번 돌려서 보여줌 =====
+(function () {
+  const t = document.getElementById('ticket');
+  if (!t) return;
+  let done = false;
+
+  const reveal = () => {
+    if (done) return;
+    done = true;
+    // 1) 애니메이션 없이 즉시 뒷면 상태로
+    t.style.transition = 'none';
+    t.classList.add('flipped');
+    void t.offsetWidth; // 강제 리플로우
+    // 2) 잠깐 뒷면을 보여준 뒤 앞면으로 천천히 회전
+    setTimeout(() => {
+      t.style.transition = '';
+      t.classList.remove('flipped');
+    }, 650);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { reveal(); io.disconnect(); }
+    });
+  }, { threshold: 0.45 });
+  io.observe(t);
+})();
 
 
 // ============= 캘린더에 일정 추가 (ICS 파일 다운로드) =============
+
+// ============= 커버 fade-out (팝업이 닫힌 뒤에 천천히 시작) =============
+let coverFadeStarted = false;
+function startCoverFade() {
+  if (coverFadeStarted) return;
+  coverFadeStarted = true;
+  const mask = document.querySelector('.cover-focus-mask');
+  if (mask) mask.classList.add('run');
+}
+// 안전장치: 팝업이 열려 있지 않은데도 오래 시작되지 않으면 자동으로 시작
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const popup = document.getElementById('rsvpPopup');
+    const popupOpen = popup && popup.classList.contains('active');
+    if (!popupOpen) startCoverFade();
+  }, 9000);
+});
 
 // ============= RSVP 팝업 =============
 function openRsvp() {
   // "오늘 하루 보지 않기" 체크 확인
   const skipDate = localStorage.getItem('rsvpSkipDate');
   const today = new Date().toDateString();
-  if (skipDate === today) return;
+  if (skipDate === today) {
+    // 팝업을 건너뛰는 경우엔 로딩이 끝난 뒤 바로 fade 시작
+    setTimeout(startCoverFade, 2000);
+    return;
+  }
   
   // 1초 후 팝업 표시 (페이지 로딩 안정화 후)
   setTimeout(() => {
@@ -3298,6 +3402,9 @@ function openRsvp() {
 function closeRsvp(submitted) {
   document.getElementById('rsvpPopup').classList.remove('active');
   document.body.style.overflow = '';
+  
+  // 팝업이 닫히면 커버 fade-out 시작
+  startCoverFade();
   
   // "오늘 하루 보지 않기" 체크되어 있으면 저장
   const dontShow = document.getElementById('rsvpDontShow');
@@ -3403,23 +3510,65 @@ async function sendToGoogleForm(data) {
 // 페이지 로드되면 RSVP 팝업 호출
 window.addEventListener('load', openRsvp);
 
-function addToCalendar() {
+// ============= 캘린더에 일정 추가 =============
+// 결혼식 정보
+const WEDDING_CAL = {
+  title: '구용석 ♥ 전문현 결혼식',
+  start: '20260816T133000',
+  end:   '20260816T153000',
+  location: '라도무스 아트센터 루미니스홀 (대전 유성구 동서대로 639)',
+  details: '구용석과 전문현의 결혼식에 초대합니다.'
+};
+
+// 바텀시트 메뉴 열기/닫기
+function openCalendarMenu(e) {
+  if (e) e.preventDefault();
+  document.getElementById('calendarMenu').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeCalendarMenu() {
+  document.getElementById('calendarMenu').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// 종류별 캘린더 추가 처리
+function addCalendar(type) {
+  if (type === 'google') {
+    // Google 캘린더 일정 추가 페이지 열기 → 사용자가 '저장'만 누르면 됨
+    const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent(WEDDING_CAL.title)
+      + '&dates=' + WEDDING_CAL.start + '/' + WEDDING_CAL.end
+      + '&ctz=Asia/Seoul'
+      + '&location=' + encodeURIComponent(WEDDING_CAL.location)
+      + '&details=' + encodeURIComponent(WEDDING_CAL.details);
+    window.open(url, '_blank', 'noopener');
+  } else {
+    // iOS(Apple 캘린더) / Android·기타 → .ics 파일 다운로드
+    // iPhone Safari: 파일 열기 시 Apple 캘린더로 일정 추가 화면이 뜸
+    // Android: 다운로드한 .ics를 열면 Google 캘린더 등으로 가져오기 됨
+    downloadICS();
+  }
+  closeCalendarMenu();
+}
+
+function downloadICS() {
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Yongsuk-Moonhyun Wedding//KR',
+    'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
     'UID:wedding-yongsuk-moonhyun-20260816@invitation',
     'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
-    'DTSTART;TZID=Asia/Seoul:20260816T133000',
-    'DTEND;TZID=Asia/Seoul:20260816T153000',
-    'SUMMARY:구용석 ♥ 전문현 결혼식',
-    'LOCATION:라도무스 아트센터 루미니스홀 (대전 유성구 동서대로 639)',
-    'DESCRIPTION:구용석과 전문현의 결혼식에 초대합니다.',
+    'DTSTART;TZID=Asia/Seoul:' + WEDDING_CAL.start,
+    'DTEND;TZID=Asia/Seoul:' + WEDDING_CAL.end,
+    'SUMMARY:' + WEDDING_CAL.title,
+    'LOCATION:' + WEDDING_CAL.location,
+    'DESCRIPTION:' + WEDDING_CAL.details,
     'END:VEVENT',
     'END:VCALENDAR'
   ].join('\r\n');
-  
+
   const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -3429,9 +3578,19 @@ function addToCalendar() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  
-  showToast('캘린더 파일이 다운로드됩니다');
+
+  showToast('캘린더 파일이 저장됩니다');
 }
+
+// 메뉴 배경(딤 영역) 탭하면 닫기
+document.addEventListener('DOMContentLoaded', () => {
+  const calMenu = document.getElementById('calendarMenu');
+  if (calMenu) {
+    calMenu.addEventListener('click', e => {
+      if (e.target === calMenu) closeCalendarMenu();
+    });
+  }
+});
 
 function copyAccount(num) {
   const t = document.createElement('textarea');
@@ -3584,31 +3743,34 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal, .slide-left, .slide-right').forEach(el => observer.observe(el));
 
-// 엔드 크레딧: 페이지 맨 아래에 도달했을 때 시작 (스크롤 이벤트 직접 감지)
+// 엔드 크레딧: 검은 footer 영역이 화면에 들어오기 시작하면 바로 재생
 const footerEl = document.querySelector('.footer');
 if (footerEl) {
   let triggered = false;
-  
-  function checkBottomReached() {
+
+  const startCredits = () => {
     if (triggered) return;
-    
-    // 페이지 전체 높이 - (스크롤 위치 + 화면 높이) = 남은 스크롤 거리
-    const scrolled = window.innerHeight + window.scrollY;
-    const total = document.documentElement.scrollHeight;
-    const remaining = total - scrolled;
-    
-    // 페이지 끝까지 100px 이내로 다가오면 트리거
-    if (remaining < 100) {
-      triggered = true;
-      footerEl.classList.add('rolling');
-      window.removeEventListener('scroll', checkBottomReached);
-    }
-  }
-  
-  window.addEventListener('scroll', checkBottomReached, { passive: true });
-  
-  // 이미 페이지 끝에 있을 때 대비
-  setTimeout(checkBottomReached, 500);
+    triggered = true;
+    footerEl.classList.add('rolling');
+  };
+
+  // footer 상단이 화면 하단에서 약간 위로 올라오면(화면 안에 들어오면) 트리거
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        startCredits();
+        footerObserver.disconnect();
+      }
+    });
+  }, { root: null, threshold: 0, rootMargin: '0px 0px -12% 0px' });
+
+  footerObserver.observe(footerEl);
+
+  // 폴백: 페이지가 이미 footer까지 와 있는 경우 대비
+  setTimeout(() => {
+    const rect = footerEl.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.88) startCredits();
+  }, 600);
 }
 
 document.getElementById('guestbookModal').addEventListener('click', e => {
