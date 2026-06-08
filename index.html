@@ -1521,6 +1521,67 @@ table.cal td.wedding-day-cell {
   letter-spacing: 0.08em;
 }
 
+/* ===== 갤러리 가로 스와이프 ===== */
+.photo-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 34px auto 0;
+  overflow: hidden;
+  background: var(--bg-soft);
+  box-shadow: 0 6px 22px rgba(60,45,30,0.14);
+  touch-action: pan-y;
+  cursor: grab;
+}
+.photo-carousel:active { cursor: grabbing; }
+.photo-track { display: flex; will-change: transform; }
+.photo-track.animate { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.photo-slide {
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-soft);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.photo-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.photo-counter {
+  position: absolute;
+  bottom: 12px; right: 12px;
+  background: rgba(20,15,10,0.55);
+  color: #f3ead8;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 4px 11px;
+  backdrop-filter: blur(4px);
+}
+.photo-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(20,15,10,0.32);
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+  z-index: 2;
+}
+.photo-nav:hover { background: rgba(20,15,10,0.6); }
+.photo-nav.prev { left: 8px; }
+.photo-nav.next { right: 8px; }
+
 /* ===== LIGHTBOX ===== */
 .lightbox {
   display: none;
@@ -3026,8 +3087,8 @@ body.lightbox-open .bgm-toggle {
           </div>
         </div>
         <div class="ticket-back">
-          <!-- 뒷면 사진: 아래 photo_02319.jpg 부분만 원하는 사진 파일명으로 바꾸면 교체됩니다 (흑백으로 표시됨) -->
-          <img class="back-full-photo" src="./images/photo_02319.jpg" alt="" loading="lazy">
+          <!-- 뒷면 사진: 아래 photo_01319.jpg 부분만 원하는 사진 파일명으로 바꾸면 교체됩니다 (흑백으로 표시됨) -->
+          <img class="back-full-photo" src="./images/photo_01319.jpg" alt="" loading="lazy">
           <div class="back-invite-line">An invitation for you</div>
         </div>
       </div>
@@ -3074,8 +3135,13 @@ body.lightbox-open .bgm-toggle {
     <h2 class="section-title">Behind the Scenes</h2>
     <div class="divider-dot"><span></span></div>
 
-    <div class="gallery-grid reveal" id="galleryGrid"></div>
-    <p class="gallery-note">사진을 누르면 크게 볼 수 있어요</p>
+    <div class="photo-carousel reveal" id="photoCarousel">
+      <div class="photo-track" id="photoTrack"></div>
+      <div class="photo-counter" id="photoCounter">01 / 01</div>
+      <button class="photo-nav prev" onclick="photoNav(-1)" aria-label="이전">‹</button>
+      <button class="photo-nav next" onclick="photoNav(1)" aria-label="다음">›</button>
+    </div>
+    <p class="gallery-note">사진을 넘기거나 누르면 크게 볼 수 있어요</p>
   </section>
   <!-- 위 섹션(크림)이 베이지 위로 거칠게 찢어진 끝 -->
   <section class="location section reveal">
@@ -3341,15 +3407,74 @@ function tryAutoplay() {
 document.addEventListener('touchstart', tryAutoplay, { once: true });
 document.addEventListener('click', tryAutoplay, { once: true });
 
-// Gallery
-const grid = document.getElementById('galleryGrid');
-let gridHtml = '';
+// Gallery — 가로 스와이프 캐러셀
+const photoTrack = document.getElementById('photoTrack');
+let pHtml = '';
 photos.forEach((p, idx) => {
-  const cls = idx === 0 ? 'gallery-item featured' : 'gallery-item';
-  gridHtml += '<div class="'+cls+'" onclick="openImage('+idx+')">' +
-              '<img src="./images/thumbs/'+p+'" alt="Photo '+(idx+1)+'" loading="lazy"></div>';
+  pHtml += '<div class="photo-slide" data-idx="'+idx+'"><img src="./images/'+p+'" alt="Photo '+(idx+1)+'" loading="lazy"></div>';
 });
-grid.innerHTML = gridHtml;
+photoTrack.innerHTML = pHtml;
+
+let photoIdx = 0;
+const photoTotal = photos.length;
+function photoGo(idx, animate) {
+  if (animate === undefined) animate = true;
+  photoIdx = (idx + photoTotal) % photoTotal;
+  photoTrack.classList.toggle('animate', animate);
+  photoTrack.style.transform = 'translateX(' + (-photoIdx * 100) + '%)';
+  document.getElementById('photoCounter').textContent =
+    String(photoIdx + 1).padStart(2, '0') + ' / ' + String(photoTotal).padStart(2, '0');
+}
+function photoNav(dir) { photoGo(photoIdx + dir); resetPhotoAuto(); }
+
+let photoAutoTimer = null;
+function startPhotoAuto() {
+  if (photoAutoTimer) clearInterval(photoAutoTimer);
+  if (photoTotal <= 1) return;
+  photoAutoTimer = setInterval(() => photoGo(photoIdx + 1), 4000);
+}
+function resetPhotoAuto() { startPhotoAuto(); }
+photoGo(0, false);
+startPhotoAuto();
+
+// 드래그/스와이프 + 탭하면 라이트박스로 확대
+(function initPhotoDrag() {
+  const car = document.getElementById('photoCarousel');
+  if (!car) return;
+  let sx = 0, dx = 0, drag = false, w = 0, moved = false;
+  const down = (x) => {
+    drag = true; sx = x; dx = 0; moved = false; w = car.clientWidth || 1;
+    photoTrack.classList.remove('animate');
+    if (photoAutoTimer) clearInterval(photoAutoTimer);
+  };
+  const move = (x) => {
+    if (!drag) return;
+    dx = x - sx;
+    if (Math.abs(dx) > 6) moved = true;
+    photoTrack.style.transform = 'translateX(calc(' + (-photoIdx * 100) + '% + ' + dx + 'px))';
+  };
+  const up = () => {
+    if (!drag) return;
+    drag = false;
+    const th = w * 0.18;
+    if (dx < -th) photoGo(photoIdx + 1);
+    else if (dx > th) photoGo(photoIdx - 1);
+    else photoGo(photoIdx);
+    resetPhotoAuto();
+  };
+  car.addEventListener('touchstart', e => down(e.touches[0].clientX), { passive: true });
+  car.addEventListener('touchmove', e => { if (drag) move(e.touches[0].clientX); }, { passive: true });
+  car.addEventListener('touchend', up);
+  car.addEventListener('mousedown', e => { e.preventDefault(); down(e.clientX); });
+  window.addEventListener('mousemove', e => move(e.clientX));
+  window.addEventListener('mouseup', up);
+  // 드래그가 아니라 탭이면 라이트박스 열기
+  photoTrack.addEventListener('click', e => {
+    if (moved) return;
+    const slide = e.target.closest('.photo-slide');
+    if (slide) openImage(parseInt(slide.dataset.idx));
+  });
+})();
 
 let currentIdx = 0;
 function openImage(idx) {
