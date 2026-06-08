@@ -3368,40 +3368,35 @@ async function submitRsvp(e) {
   }
 }
 
-// Google Form 전송
-// ⚠️ 아래 URL과 entry ID는 사용자가 Google Form 만든 후 직접 채워야 함
-const GOOGLE_FORM_URL = window.GOOGLE_FORM_URL || '';  // firebase-config.js에서 설정 가능
-const GOOGLE_FORM_FIELDS = window.GOOGLE_FORM_FIELDS || {
-  side:   'entry.111111',  // 참석 구분
-  attend: 'entry.222222',  // 참석 여부
-  name:   'entry.333333',  // 성함
-  count:  'entry.444444',  // 인원
-  meal:   'entry.555555',  // 식사
-  msg:    'entry.666666'   // 메시지
-};
-
+// Google Form 전송 — 함수 안에서 window를 매번 새로 읽음
 async function sendToGoogleForm(data) {
-  if (!GOOGLE_FORM_URL) {
-    // Google Form 미설정 시 — 로컬 콘솔로만 출력 (테스트 모드)
-    console.log('📝 RSVP (Google Form 미연동):', data);
+  const formUrl = window.GOOGLE_FORM_URL || '';
+  const fields = window.GOOGLE_FORM_FIELDS || null;
+  
+  console.log('📤 RSVP 전송 시도:', { formUrl: formUrl, hasFields: !!fields, data: data });
+  
+  if (!formUrl || !fields) {
+    console.log('⚠️ RSVP (Google Form 미연동 - URL 또는 FIELDS 없음):', data);
     await new Promise(r => setTimeout(r, 500));
     return;
   }
   
   const formData = new FormData();
-  formData.append(GOOGLE_FORM_FIELDS.side, data.side);
-  formData.append(GOOGLE_FORM_FIELDS.attend, data.attend);
-  formData.append(GOOGLE_FORM_FIELDS.name, data.name);
-  formData.append(GOOGLE_FORM_FIELDS.count, data.count);
-  formData.append(GOOGLE_FORM_FIELDS.meal, data.meal);
-  formData.append(GOOGLE_FORM_FIELDS.msg, data.msg);
+  formData.append(fields.side, data.side);
+  formData.append(fields.attend, data.attend);
+  formData.append(fields.name, data.name);
+  formData.append(fields.count, data.count);
+  formData.append(fields.meal, data.meal);
+  formData.append(fields.msg, data.msg);
   
   // mode: no-cors로 fetch — 응답은 못 받지만 데이터는 전송됨
-  await fetch(GOOGLE_FORM_URL, {
+  console.log('📡 Google Form으로 전송 중...');
+  await fetch(formUrl, {
     method: 'POST',
     mode: 'no-cors',
     body: formData
   });
+  console.log('✅ Google Form 전송 완료');
 }
 
 
