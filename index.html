@@ -659,7 +659,31 @@ html, body {
   letter-spacing: 4px;
   color: #d4b896;
   position: relative;
-  padding-left: 16px;
+  padding-left: 20px;
+  display: inline-block;
+}
+.theater-marquee .now::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4b896;
+  box-shadow: 0 0 8px rgba(212, 184, 150, 0.7);
+  animation: nowBlink 1.6s ease-in-out infinite;
+}
+@keyframes nowBlink {
+  0%, 100% { 
+    opacity: 1; 
+    box-shadow: 0 0 10px rgba(212, 184, 150, 0.9), 0 0 0 0 rgba(212, 184, 150, 0.5);
+  }
+  50% { 
+    opacity: 0.5; 
+    box-shadow: 0 0 6px rgba(212, 184, 150, 0.4), 0 0 0 6px rgba(212, 184, 150, 0);
+  }
 }
 .theater-marquee .now::before {
   content: '';
