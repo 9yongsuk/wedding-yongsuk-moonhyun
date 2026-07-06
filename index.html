@@ -2256,11 +2256,11 @@ body.lightbox-open .bgm-toggle {
   }
 }
 .credit-block .role {
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 4px;
-  color: rgba(216,184,127,0.65);
+  color: rgba(232,200,146,0.95);
   margin-bottom: 10px;
 }
 .credit-block .name {
@@ -2292,7 +2292,7 @@ body.lightbox-open .bgm-toggle {
   font-family: var(--font-display);
   font-size: 11px;
   letter-spacing: 6px;
-  color: rgba(207,196,173,0.5);
+  color: rgba(222,212,190,0.88);
 }
 .footer.rolling .footer-end { opacity: 1; }
 
@@ -2307,7 +2307,7 @@ body.lightbox-open .bgm-toggle {
   font-weight: 300;
   font-size: 10px;
   line-height: 1.7;
-  color: rgba(207,196,173,0.4);
+  color: rgba(214,204,184,0.72);
   letter-spacing: 0.5px;
 }
 .music-credit-line {
@@ -2318,9 +2318,9 @@ body.lightbox-open .bgm-toggle {
   letter-spacing: 1px;
 }
 .music-credit-song a {
-  color: rgba(216,184,127,0.55);
+  color: rgba(230,198,142,0.92);
   text-decoration: none;
-  border-bottom: 1px dotted rgba(216,184,127,0.3);
+  border-bottom: 1px dotted rgba(230,198,142,0.5);
 }
 
 
@@ -3167,27 +3167,86 @@ body.lightbox-open .bgm-toggle {
     </p>
 
     <div class="account-clean">
-      <div class="account-row">
-        <div class="account-row-label">
-          <span class="acc-role-kor">신랑</span>
-          <span class="acc-name-kor">구용석</span>
+      <div class="account-group">
+        <div class="account-group-title">
+          <span class="line"></span>
+          <span class="text">신랑측</span>
+          <span class="line"></span>
         </div>
-        <div class="account-row-info">
-          <span class="acc-bank">우리은행</span>
-          <span class="acc-num">1002-836-029145</span>
+        <div class="account-row">
+          <div class="account-row-label">
+            <span class="acc-role-kor">신랑</span>
+            <span class="acc-name-kor">구용석</span>
+          </div>
+          <div class="account-row-info">
+            <span class="acc-bank">우리은행</span>
+            <span class="acc-num">1002-836-029145</span>
+          </div>
+          <button class="copy-link" onclick="copyAccount('1002836029145')">복사하기</button>
         </div>
-        <button class="copy-link" onclick="copyAccount('1002836029145')">복사하기</button>
+        <div class="account-row">
+          <div class="account-row-label">
+            <span class="acc-role-kor">아버지</span>
+            <span class="acc-name-kor">구동완</span>
+          </div>
+          <div class="account-row-info">
+            <span class="acc-bank">우리은행</span>
+            <span class="acc-num">333-013747-02-101</span>
+          </div>
+          <button class="copy-link" onclick="copyAccount('33301374702101')">복사하기</button>
+        </div>
+        <div class="account-row">
+          <div class="account-row-label">
+            <span class="acc-role-kor">어머니</span>
+            <span class="acc-name-kor">이선자</span>
+          </div>
+          <div class="account-row-info">
+            <span class="acc-bank">우리은행</span>
+            <span class="acc-num">216-041321-12-003</span>
+          </div>
+          <button class="copy-link" onclick="copyAccount('21604132112003')">복사하기</button>
+        </div>
       </div>
-      <div class="account-row">
-        <div class="account-row-label">
-          <span class="acc-role-kor">신부</span>
-          <span class="acc-name-kor">전문현</span>
+
+      <div class="account-group" style="margin-top: 14px;">
+        <div class="account-group-title">
+          <span class="line"></span>
+          <span class="text">신부측</span>
+          <span class="line"></span>
         </div>
-        <div class="account-row-info">
-          <span class="acc-bank">하나은행</span>
-          <span class="acc-num">660-911281-28107</span>
+        <div class="account-row">
+          <div class="account-row-label">
+            <span class="acc-role-kor">신부</span>
+            <span class="acc-name-kor">전문현</span>
+          </div>
+          <div class="account-row-info">
+            <span class="acc-bank">하나은행</span>
+            <span class="acc-num">660-911281-28107</span>
+          </div>
+          <button class="copy-link" onclick="copyAccount('66091128128107')">복사하기</button>
         </div>
-        <button class="copy-link" onclick="copyAccount('66091128128107')">복사하기</button>
+        <div class="account-row">
+          <div class="account-row-label">
+            <span class="acc-role-kor">아버지</span>
+            <span class="acc-name-kor">전경재</span>
+          </div>
+          <div class="account-row-info">
+            <span class="acc-bank">기업은행</span>
+            <span class="acc-num">516-028087-01-023</span>
+          </div>
+          <button class="copy-link" onclick="copyAccount('51602808701023')">복사하기</button>
+        </div>
+        <div class="account-row">
+          <div class="account-row-label">
+            <span class="acc-role-kor">어머니</span>
+            <span class="acc-name-kor">육근미</span>
+          </div>
+          <div class="account-row-info">
+            <span class="acc-bank">농협</span>
+            <span class="acc-num">312-8524-5256-11</span>
+          </div>
+          <button class="copy-link" onclick="copyAccount('3128524525611')">복사하기</button>
+        </div>
       </div>
     </div>
   </section>
