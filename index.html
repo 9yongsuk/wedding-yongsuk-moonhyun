@@ -486,7 +486,7 @@ html, body {
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-end;
-  animation: rsvpFadeIn 0.25s ease-out;
+  animation: popFadeIn 0.25s ease-out;
 }
 .calendar-menu.active {
   display: flex;
@@ -2235,66 +2235,6 @@ body.lightbox-open .bgm-toggle {
   background: repeating-linear-gradient(to right, var(--line) 0 4px, transparent 4px 8px);
 }
 
-/* ============= INFORMATION 섹션 ============= */
-.information {
-  background: var(--bg-soft);
-  text-align: center;
-  position: relative;
-}
-.info-block {
-  max-width: 360px;
-  margin: 0 auto;
-  padding: 30px 26px;
-  background: var(--bg-card);
-  border-left: 2px solid var(--accent);
-  text-align: left;
-}
-.info-icon {
-  font-size: 28px;
-  margin-bottom: 12px;
-  text-align: center;
-}
-.info-title {
-  font-family: var(--font-kor);
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: 1.5px;
-  margin-bottom: 14px;
-  text-align: center;
-}
-.info-text {
-  font-family: var(--font-kor);
-  font-size: 13.5px;
-  font-weight: 300;
-  line-height: 1.9;
-  color: var(--ink-soft);
-  text-align: center;
-}
-.info-text strong {
-  color: var(--accent);
-  font-weight: 500;
-}
-.info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 380px;
-  margin: 0 auto;
-}
-.info-list .info-block {
-  max-width: none;
-  width: 100%;
-  padding: 24px 22px;
-}
-.info-list .info-icon { font-size: 24px; margin-bottom: 10px; }
-.info-list .info-title { font-size: 14.5px; letter-spacing: 0.8px; margin-bottom: 12px; }
-.info-list .info-text { font-size: 13px; line-height: 1.85; }
-.info-block.info-feature {
-  border-left-width: 3px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.035), rgba(0,0,0,0.01));
-}
-
 .share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .footer {
   text-align: center;
@@ -2506,271 +2446,166 @@ body.lightbox-open .bgm-toggle {
   pointer-events: none;
 }
 
-/* ============= RSVP 팝업 ============= */
-.rsvp-popup {
+/* ============= 안내사항 팝업 ============= */
+.info-popup {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(10, 9, 7, 0.78);
+  background: rgba(10, 9, 7, 0.80);
   backdrop-filter: blur(8px);
   z-index: 9000;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  animation: rsvpFadeIn 0.4s ease-out;
+  padding: 18px;
+  animation: popFadeIn 0.4s ease-out;
 }
-.rsvp-popup.active {
-  display: flex;
-}
-@keyframes rsvpFadeIn {
+.info-popup.active { display: flex; }
+@keyframes popFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-.rsvp-card {
-  position: relative;
-  max-width: 380px;
-  width: 100%;
-  background: var(--bg-card);
-  padding: 38px 28px 26px;
-  text-align: center;
-  animation: rsvpSlideUp 0.5s cubic-bezier(0.16, 0.84, 0.44, 1);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-@keyframes rsvpSlideUp {
+@keyframes popSlideUp {
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-.rsvp-close {
+.info-card {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  animation: popSlideUp 0.5s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+.info-pop-close {
   position: absolute;
-  top: 12px; right: 12px;
+  top: 10px; right: 12px;
   width: 32px; height: 32px;
   background: transparent;
   border: none;
   color: var(--ink-mute);
   font-size: 22px;
   line-height: 1;
+  font-weight: 300;
   cursor: pointer;
   padding: 0;
-  font-weight: 300;
+  z-index: 2;
 }
-.rsvp-close:hover { color: var(--ink); }
-
-.rsvp-header { margin-bottom: 22px; }
-.rsvp-mark {
+.info-pop-head {
+  flex: 0 0 auto;
+  padding: 30px 26px 16px;
+  text-align: center;
+}
+.info-pop-mark {
   font-family: var(--font-display);
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
-.rsvp-title {
-  font-family: var(--font-kor);
-  font-size: 19px;
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-}
-.rsvp-divider {
-  width: 30px;
-  height: 1px;
-  background: var(--accent);
-  margin: 0 auto;
-}
-.rsvp-text {
-  font-family: var(--font-kor);
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 2;
-  color: var(--ink-soft);
-  margin-bottom: 24px;
-}
-.rsvp-text strong {
-  color: var(--accent);
-  font-weight: 500;
-}
-.rsvp-info {
-  background: rgba(176,141,87,0.06);
-  padding: 16px;
-  margin-bottom: 24px;
-  text-align: left;
-}
-.rsvp-info-row {
-  font-family: var(--font-kor);
-  font-size: 13px;
-  color: var(--ink);
-  line-height: 1.8;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.rsvp-info-icon {
-  flex-shrink: 0;
-}
-.rsvp-submit {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  background: var(--ink);
-  color: var(--bg);
-  border: none;
-  font-family: var(--font-kor);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 3px;
-  cursor: pointer;
-  margin-bottom: 14px;
-  transition: opacity 0.2s;
-}
-.rsvp-submit:hover { opacity: 0.85; }
-.rsvp-skip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-kor);
-  font-size: 12px;
-  color: var(--ink-mute);
-  cursor: pointer;
-  user-select: none;
-}
-.rsvp-skip input { cursor: pointer; }
-
-/* RSVP 폼 (참석여부 전달) */
-.rsvp-form {
-  display: none;
-  margin-top: 18px;
-  text-align: left;
-}
-.rsvp-form.active { display: block; }
-.rsvp-form-row {
-  margin-bottom: 14px;
-}
-.rsvp-form-label {
-  display: block;
-  font-family: var(--font-kor);
-  font-size: 12px;
-  color: var(--ink-soft);
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
-.rsvp-form-input,
-.rsvp-form-select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  font-family: var(--font-kor);
-  font-size: 14px;
-  color: var(--ink);
-  box-sizing: border-box;
-}
-.rsvp-options {
-  display: flex;
-  gap: 8px;
-}
-.rsvp-option {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  font-family: var(--font-kor);
-  font-size: 13px;
-  color: var(--ink-soft);
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s;
-}
-.rsvp-option.selected {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-
-/* RSVP 3단계 폼 */
-.rsvp-step { display: none; }
-.rsvp-step.active { display: block; }
-.rsvp-form-content {
-  text-align: left;
-}
-.rsvp-textarea {
-  resize: none;
-  font-family: var(--font-kor);
-  font-size: 13.5px;
-  line-height: 1.6;
-}
-.rsvp-form-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 22px;
-}
-.rsvp-cancel {
-  flex: 0 0 35%;
-  padding: 13px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  font-family: var(--font-kor);
-  font-size: 13px;
-  color: var(--ink-soft);
-  cursor: pointer;
-  letter-spacing: 1px;
-}
-.rsvp-submit-final {
-  flex: 1;
-  padding: 13px;
-  background: var(--ink);
-  color: var(--bg);
-  border: none;
-  font-family: var(--font-kor);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 3px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-.rsvp-submit-final:hover { opacity: 0.85; }
-.rsvp-submit-final:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* 완료 화면 */
-.rsvp-done {
-  text-align: center;
-  padding: 20px 0;
-}
-.rsvp-done-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  font-size: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  animation: doneScale 0.4s cubic-bezier(0.16, 0.84, 0.44, 1);
-}
-@keyframes doneScale {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
-}
-.rsvp-done-title {
+.info-pop-title {
   font-family: var(--font-kor);
   font-size: 18px;
   font-weight: 500;
   color: var(--ink);
-  margin-bottom: 14px;
+  letter-spacing: 1px;
 }
-.rsvp-done-text {
+.info-pop-divider {
+  width: 34px;
+  height: 1px;
+  background: var(--accent);
+  margin: 14px auto 0;
+  opacity: 0.6;
+}
+.info-pop-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 26px 6px;
+}
+.info-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.info-item:last-child { border-bottom: none; }
+.info-item .ii-icon {
+  flex: 0 0 auto;
+  width: 26px;
+  font-size: 17px;
+  line-height: 1.4;
+  text-align: center;
+}
+.info-item .ii-body { flex: 1 1 auto; min-width: 0; }
+.info-item .ii-title {
+  font-family: var(--font-kor);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.info-item .ii-text {
+  font-family: var(--font-kor);
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+.info-item .ii-text strong { color: var(--accent); font-weight: 500; }
+.info-item.is-key { background: rgba(176,141,87,0.06); margin: 0 -12px; padding: 14px 12px; }
+.info-pop-foot {
+  flex: 0 0 auto;
+  padding: 14px 26px 22px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.info-pop-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
   font-family: var(--font-kor);
   font-size: 14px;
-  font-weight: 300;
-  line-height: 1.9;
-  color: var(--ink-soft);
-  margin-bottom: 24px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
+.info-pop-btn:hover { opacity: 0.88; }
+.info-pop-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: var(--font-kor);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink-mute);
+  cursor: pointer;
+}
+.info-pop-skip input { cursor: pointer; }
 
+/* 안내사항 다시 보기 버튼 */
+.info-reopen {
+  display: block;
+  margin: 22px auto 0;
+  padding: 12px 26px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-kor);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.info-reopen:hover { background: var(--accent); color: #fff; }
 
 .toast.show { opacity: 1; }
 
@@ -2829,7 +2664,70 @@ body.lightbox-open .bgm-toggle {
   </div>
 </div>
 
-<!-- RSVP 팝업 제거됨 (참석여부 전달 기능 삭제) -->
+<!-- ============= 안내사항 팝업 ============= -->
+<div class="info-popup" id="infoPopup">
+  <div class="info-card">
+    <button class="info-pop-close" onclick="closeInfoPopup()" aria-label="닫기">×</button>
+
+    <div class="info-pop-head">
+      <div class="info-pop-mark">GUIDE</div>
+      <div class="info-pop-title">안내 사항</div>
+      <div class="info-pop-divider"></div>
+    </div>
+
+    <div class="info-pop-body">
+      <div class="info-item is-key">
+        <div class="ii-icon">🎬</div>
+        <div class="ii-body">
+          <div class="ii-title">레고 방명록 & 포토부스</div>
+          <div class="ii-text">식장 입구에 <strong>레고 방명록</strong>과 <strong>포토부스</strong>를 준비했습니다.<br>조금 일찍 오셔서 자유롭게 즐겨주세요.</div>
+        </div>
+      </div>
+      <div class="info-item is-key">
+        <div class="ii-icon">💐</div>
+        <div class="ii-body">
+          <div class="ii-title">화환은 정중히 사양합니다</div>
+          <div class="ii-text">꽃은 <strong>신부 한 사람</strong>으로 충분합니다.<br>따뜻한 마음만 감사히 받겠습니다.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">🏢</div>
+        <div class="ii-body">
+          <div class="ii-title">예식 8층 · 연회장 7층</div>
+          <div class="ii-text">예식은 <strong>별관(신관) 8층</strong> 루미니스홀,<br>연회장은 <strong>7층</strong>입니다. 에스컬레이터로 이동하십니다.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">🍽</div>
+        <div class="ii-body">
+          <div class="ii-title">식사 안내</div>
+          <div class="ii-text">7층 연회장에서 <strong>오후 1시</strong>부터 가능합니다.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">🅿️</div>
+        <div class="ii-body">
+          <div class="ii-title">주차 안내</div>
+          <div class="ii-text">건물 <strong>주차타워 무료 주차</strong>입니다.<br>주차 후 같은 건물 엘리베이터로 8층까지 바로 오시면 됩니다.<br>당일 다른 예식이 없어 여유로울 예정입니다.</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">🏧</div>
+        <div class="ii-body">
+          <div class="ii-title">ATM 위치</div>
+          <div class="ii-text"><strong>1층</strong> 정문 입구 · IBK기업은행<br><strong>7층</strong> 연회장 · 하나은행</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-pop-foot">
+      <button class="info-pop-btn" onclick="closeInfoPopup()">확인했습니다</button>
+      <label class="info-pop-skip">
+        <input type="checkbox" id="infoDontShow"> 오늘 하루 보지 않기
+      </label>
+    </div>
+  </div>
+</div>
 
 <div class="wrap">
 
@@ -3184,6 +3082,8 @@ body.lightbox-open .bgm-toggle {
         </div>
       </div>
     </div>
+
+    <button class="info-reopen" onclick="openInfoPopup(true)">안내 사항 다시 보기</button>
   </section>
   <!-- 위 섹션(베이지)이 크림 위로 거칠게 찢어진 끝 -->
   <section class="section reveal">
@@ -3326,52 +3226,6 @@ body.lightbox-open .bgm-toggle {
     </div>
   </section>
   
-  <section class="information section">
-    <div class="section-label">INFORMATION</div>
-    <h2 class="section-title">안내 사항</h2>
-    <div class="divider-dot"><span></span></div>
-    
-    <div class="info-list">
-
-      <div class="info-block info-feature">
-        <div class="info-icon">🎬</div>
-        <div class="info-title">EVENT · 레고 방명록 &amp; 포토부스</div>
-        <p class="info-text">
-          <strong>레고 방명록</strong>과 <strong>포토부스</strong>를 준비했습니다.<br>
-          조금 일찍 오셔서 자유롭게 즐겨주세요.
-        </p>
-      </div>
-
-      <div class="info-block">
-        <div class="info-icon">💐</div>
-        <div class="info-title">화환은 정중히 사양합니다</div>
-        <p class="info-text">
-          꽃은 <strong>신부 한 사람</strong>으로 충분합니다.<br>
-          축하 화환은 정중히 사양하며,<br>
-          따뜻한 마음만 감사히 받겠습니다.
-        </p>
-      </div>
-
-      <div class="info-block">
-        <div class="info-icon">🍽</div>
-        <div class="info-title">식사 안내</div>
-        <p class="info-text">
-          <strong>7층 연회장</strong>에서 <strong>오후 1시</strong>부터 가능합니다.<br>
-          8층 예식장에서 에스컬레이터로 내려오시면 됩니다.
-        </p>
-      </div>
-
-      <div class="info-block">
-        <div class="info-icon">🏧</div>
-        <div class="info-title">ATM 위치</div>
-        <p class="info-text">
-          <strong>1층</strong> 정문 입구 · IBK기업은행<br>
-          <strong>7층</strong> 연회장 · 하나은행
-        </p>
-      </div>
-
-    </div>
-  </section>
   <footer class="footer">
     <div class="credits-scroll">
     <div class="footer-fin">Fin.</div>
@@ -3600,9 +3454,44 @@ function startCoverFade() {
   const mask = document.querySelector('.cover-focus-mask');
   if (mask) mask.classList.add('run');
 }
-window.addEventListener('load', () => { setTimeout(startCoverFade, 2000); });
 // 안전장치: 어떤 이유로든 시작되지 않았으면 강제 시작
 window.addEventListener('load', () => { setTimeout(startCoverFade, 9000); });
+
+// ============= 안내사항 팝업 =============
+function openInfoPopup(manual) {
+  document.getElementById('infoPopup').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  if (manual) {
+    const body = document.querySelector('.info-pop-body');
+    if (body) body.scrollTop = 0;
+  }
+}
+
+function closeInfoPopup() {
+  document.getElementById('infoPopup').classList.remove('active');
+  document.body.style.overflow = '';
+  startCoverFade();
+  const dontShow = document.getElementById('infoDontShow');
+  if (dontShow && dontShow.checked) {
+    localStorage.setItem('infoSkipDate', new Date().toDateString());
+  }
+}
+
+// 배경(어두운 영역) 탭해도 닫힘
+document.addEventListener('click', (e) => {
+  const p = document.getElementById('infoPopup');
+  if (p && e.target === p) closeInfoPopup();
+});
+
+// 최초 1회 자동 노출
+window.addEventListener('load', () => {
+  const skipDate = localStorage.getItem('infoSkipDate');
+  if (skipDate === new Date().toDateString()) {
+    setTimeout(startCoverFade, 2000);
+    return;
+  }
+  setTimeout(() => openInfoPopup(false), 2200);
+});
 
 // ============= 캘린더에 일정 추가 =============
 // 결혼식 정보
