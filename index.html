@@ -1766,6 +1766,7 @@ body.lightbox-open .bgm-toggle {
   line-height: 2;
   letter-spacing: 0.02em;
 }
+.transport-desc strong { color: var(--accent); font-weight: 500; }
 
 /* ===== ACCOUNT ===== */
 .account-group {
@@ -2147,6 +2148,93 @@ body.lightbox-open .bgm-toggle {
   color: var(--ink);
 }
 
+/* ============= 층 안내 (FLOOR GUIDE) ============= */
+.floor-guide {
+  max-width: 420px;
+  margin: 34px auto 0;
+  padding: 20px 18px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  text-align: left;
+}
+.floor-guide-head {
+  font-family: var(--font-serif);
+  font-size: 10.5px;
+  letter-spacing: 2.6px;
+  color: var(--ink-mute);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.floor-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 12px;
+  background: rgba(0,0,0,0.02);
+  border-left: 2px solid var(--line);
+}
+.floor-row.is-main {
+  border-left-color: var(--accent);
+  background: rgba(0,0,0,0.045);
+}
+.floor-num {
+  flex: 0 0 auto;
+  min-width: 40px;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink-mute);
+  letter-spacing: 0.5px;
+}
+.floor-row.is-main .floor-num { color: var(--accent); }
+.floor-num span { font-size: 12px; margin-left: 1px; }
+.floor-body { flex: 1 1 auto; min-width: 0; }
+.floor-name {
+  font-family: var(--font-kor);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.floor-name em {
+  font-style: normal;
+  font-size: 11.5px;
+  font-weight: 300;
+  color: var(--ink-mute);
+  margin-left: 4px;
+}
+.floor-sub {
+  font-family: var(--font-kor);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+.floor-sub b { color: var(--ink-mute); font-weight: 300; margin: 0 2px; }
+.floor-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 0;
+}
+.floor-link span {
+  font-family: var(--font-kor);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  color: var(--ink-mute);
+}
+.floor-link::before,
+.floor-link::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: repeating-linear-gradient(to right, var(--line) 0 4px, transparent 4px 8px);
+}
+
 /* ============= INFORMATION 섹션 ============= */
 .information {
   background: var(--bg-soft);
@@ -2186,6 +2274,25 @@ body.lightbox-open .bgm-toggle {
 .info-text strong {
   color: var(--accent);
   font-weight: 500;
+}
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.info-list .info-block {
+  max-width: none;
+  width: 100%;
+  padding: 24px 22px;
+}
+.info-list .info-icon { font-size: 24px; margin-bottom: 10px; }
+.info-list .info-title { font-size: 14.5px; letter-spacing: 0.8px; margin-bottom: 12px; }
+.info-list .info-text { font-size: 13px; line-height: 1.85; }
+.info-block.info-feature {
+  border-left-width: 3px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.035), rgba(0,0,0,0.01));
 }
 
 .share-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -2722,115 +2829,7 @@ body.lightbox-open .bgm-toggle {
   </div>
 </div>
 
-<!-- ============= RSVP 안내 팝업 (처음 한 번만) ============= -->
-<div class="rsvp-popup" id="rsvpPopup">
-  <div class="rsvp-card">
-    <button class="rsvp-close" onclick="closeRsvp(false)" aria-label="닫기">×</button>
-    
-    <!-- 1단계: 안내 화면 -->
-    <div class="rsvp-step rsvp-step-1 active" id="rsvpStep1">
-      <div class="rsvp-header">
-        <div class="rsvp-mark">🎬 INVITATION</div>
-        <div class="rsvp-title">결혼식에 초대합니다</div>
-        <div class="rsvp-divider"></div>
-      </div>
-      
-      <p class="rsvp-text">
-        결혼식에 참석해주시는 모든 분들을<br>
-        더욱 정성껏 모시고자 하니<br>
-        <strong>참석 여부</strong>를 알려주시면 감사하겠습니다.
-      </p>
-      
-      <div class="rsvp-info">
-        <div class="rsvp-info-row">
-          <span class="rsvp-info-icon">📅</span>
-          <span>2026. 08. 16 (일) 오후 1:30</span>
-        </div>
-        <div class="rsvp-info-row">
-          <span class="rsvp-info-icon">📍</span>
-          <span>라도무스 아트센터 루미니스홀</span>
-        </div>
-      </div>
-      
-      <button class="rsvp-submit" onclick="goRsvpForm()">
-        참석 여부 전달하기
-      </button>
-      
-      <label class="rsvp-skip">
-        <input type="checkbox" id="rsvpDontShow"> 오늘 하루 보지 않기
-      </label>
-    </div>
-    
-    <!-- 2단계: 입력 폼 -->
-    <div class="rsvp-step rsvp-step-2" id="rsvpStep2">
-      <div class="rsvp-header">
-        <div class="rsvp-mark">RSVP</div>
-        <div class="rsvp-title">참석 여부 전달</div>
-        <div class="rsvp-divider"></div>
-      </div>
-      
-      <form class="rsvp-form-content" onsubmit="submitRsvp(event)">
-        <div class="rsvp-form-row">
-          <label class="rsvp-form-label">참석 구분</label>
-          <div class="rsvp-options">
-            <button type="button" class="rsvp-option selected" data-side="신랑측" onclick="selectOption(this, 'side')">신랑측</button>
-            <button type="button" class="rsvp-option" data-side="신부측" onclick="selectOption(this, 'side')">신부측</button>
-          </div>
-        </div>
-        
-        <div class="rsvp-form-row">
-          <label class="rsvp-form-label">참석 여부 *</label>
-          <div class="rsvp-options">
-            <button type="button" class="rsvp-option selected" data-attend="참석" onclick="selectOption(this, 'attend')">참석</button>
-            <button type="button" class="rsvp-option" data-attend="불참" onclick="selectOption(this, 'attend')">불참</button>
-          </div>
-        </div>
-        
-        <div class="rsvp-form-row">
-          <label class="rsvp-form-label" for="rsvpName">성함 *</label>
-          <input type="text" class="rsvp-form-input" id="rsvpName" required maxlength="20" placeholder="홍길동">
-        </div>
-        
-        <div class="rsvp-form-row">
-          <label class="rsvp-form-label" for="rsvpCount">참석 인원</label>
-          <input type="number" class="rsvp-form-input" id="rsvpCount" min="1" max="10" value="1">
-        </div>
-        
-        <div class="rsvp-form-row">
-          <label class="rsvp-form-label">식사 여부</label>
-          <div class="rsvp-options">
-            <button type="button" class="rsvp-option selected" data-meal="식사함" onclick="selectOption(this, 'meal')">식사함</button>
-            <button type="button" class="rsvp-option" data-meal="식사안함" onclick="selectOption(this, 'meal')">식사안함</button>
-          </div>
-        </div>
-        
-        <div class="rsvp-form-row">
-          <label class="rsvp-form-label" for="rsvpMsg">전하실 말씀 (선택)</label>
-          <textarea class="rsvp-form-input rsvp-textarea" id="rsvpMsg" maxlength="200" rows="2" placeholder="축하 메시지 등"></textarea>
-        </div>
-        
-        <div class="rsvp-form-actions">
-          <button type="button" class="rsvp-cancel" onclick="backRsvp()">이전</button>
-          <button type="submit" class="rsvp-submit-final">전달하기</button>
-        </div>
-      </form>
-    </div>
-    
-    <!-- 3단계: 완료 -->
-    <div class="rsvp-step rsvp-step-3" id="rsvpStep3">
-      <div class="rsvp-done">
-        <div class="rsvp-done-icon">✓</div>
-        <div class="rsvp-done-title">전달되었습니다</div>
-        <p class="rsvp-done-text">
-          소중한 마음 전해주셔서<br>
-          진심으로 감사합니다.
-        </p>
-        <button class="rsvp-submit" onclick="closeRsvp(true)">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
-
+<!-- RSVP 팝업 제거됨 (참석여부 전달 기능 삭제) -->
 
 <div class="wrap">
 
@@ -3150,7 +3149,39 @@ body.lightbox-open .bgm-toggle {
     <div class="transport-item">
       <div class="transport-title">PARKING</div>
       <div class="transport-desc">
-        단독건물 전용 주차장 이용<br>넉넉한 주차 공간 보유
+        건물 <strong>주차타워 무료 주차</strong><br>
+        주차 후 같은 건물 엘리베이터로 <strong>8층</strong>까지 바로 올라오시면 됩니다.<br>
+        당일 다른 예식이 없어 주차는 여유로울 예정입니다.
+      </div>
+    </div>
+
+    <div class="floor-guide">
+      <div class="floor-guide-head">FLOOR GUIDE · 층 안내</div>
+
+      <div class="floor-row is-main">
+        <div class="floor-num">8<span>F</span></div>
+        <div class="floor-body">
+          <div class="floor-name">예식 · 루미니스홀 <em>별관(신관)</em></div>
+          <div class="floor-sub">주차타워에서 엘리베이터로 바로 오시면 됩니다</div>
+        </div>
+      </div>
+
+      <div class="floor-link"><span>에스컬레이터로 이동</span></div>
+
+      <div class="floor-row">
+        <div class="floor-num">7<span>F</span></div>
+        <div class="floor-body">
+          <div class="floor-name">연회장 · 식사</div>
+          <div class="floor-sub">오후 1시부터 이용 가능 <b>·</b> 하나은행 ATM</div>
+        </div>
+      </div>
+
+      <div class="floor-row">
+        <div class="floor-num">1<span>F</span></div>
+        <div class="floor-body">
+          <div class="floor-name">정문 입구</div>
+          <div class="floor-sub">IBK기업은행 ATM</div>
+        </div>
       </div>
     </div>
   </section>
@@ -3300,13 +3331,45 @@ body.lightbox-open .bgm-toggle {
     <h2 class="section-title">안내 사항</h2>
     <div class="divider-dot"><span></span></div>
     
-    <div class="info-block">
-      <div class="info-icon">🍽</div>
-      <div class="info-title">식사 안내</div>
-      <p class="info-text">
-        식사는 <strong>오후 1시</strong>부터 가능합니다.<br>
-        편하게 오셔서 식사하시고 가시면 좋겠습니다.
-      </p>
+    <div class="info-list">
+
+      <div class="info-block info-feature">
+        <div class="info-icon">🎬</div>
+        <div class="info-title">EVENT · 레고 방명록 &amp; 포토부스</div>
+        <p class="info-text">
+          <strong>레고 방명록</strong>과 <strong>포토부스</strong>를 준비했습니다.<br>
+          조금 일찍 오셔서 자유롭게 즐겨주세요.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-icon">💐</div>
+        <div class="info-title">화환은 정중히 사양합니다</div>
+        <p class="info-text">
+          꽃은 <strong>신부 한 사람</strong>으로 충분합니다.<br>
+          축하 화환은 정중히 사양하며,<br>
+          따뜻한 마음만 감사히 받겠습니다.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-icon">🍽</div>
+        <div class="info-title">식사 안내</div>
+        <p class="info-text">
+          <strong>7층 연회장</strong>에서 <strong>오후 1시</strong>부터 가능합니다.<br>
+          8층 예식장에서 에스컬레이터로 내려오시면 됩니다.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-icon">🏧</div>
+        <div class="info-title">ATM 위치</div>
+        <p class="info-text">
+          <strong>1층</strong> 정문 입구 · IBK기업은행<br>
+          <strong>7층</strong> 연회장 · 하나은행
+        </p>
+      </div>
+
     </div>
   </section>
   <footer class="footer">
@@ -3529,7 +3592,7 @@ function flipTicket() {
 
 // ============= 캘린더에 일정 추가 (ICS 파일 다운로드) =============
 
-// ============= 커버 fade-out (팝업이 닫힌 뒤에 천천히 시작) =============
+// ============= 커버 fade-out (로딩 종료 후 자동 시작) =============
 let coverFadeStarted = false;
 function startCoverFade() {
   if (coverFadeStarted) return;
@@ -3537,143 +3600,9 @@ function startCoverFade() {
   const mask = document.querySelector('.cover-focus-mask');
   if (mask) mask.classList.add('run');
 }
-// 안전장치: 팝업이 열려 있지 않은데도 오래 시작되지 않으면 자동으로 시작
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const popup = document.getElementById('rsvpPopup');
-    const popupOpen = popup && popup.classList.contains('active');
-    if (!popupOpen) startCoverFade();
-  }, 9000);
-});
-
-// ============= RSVP 팝업 =============
-function openRsvp() {
-  // "오늘 하루 보지 않기" 체크 확인
-  const skipDate = localStorage.getItem('rsvpSkipDate');
-  const today = new Date().toDateString();
-  if (skipDate === today) {
-    // 팝업을 건너뛰는 경우엔 로딩이 끝난 뒤 바로 fade 시작
-    setTimeout(startCoverFade, 2000);
-    return;
-  }
-  
-  // 1초 후 팝업 표시 (페이지 로딩 안정화 후)
-  setTimeout(() => {
-    document.getElementById('rsvpPopup').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }, 1200);
-}
-
-function closeRsvp(submitted) {
-  document.getElementById('rsvpPopup').classList.remove('active');
-  document.body.style.overflow = '';
-  
-  // 팝업이 닫히면 커버 fade-out 시작
-  startCoverFade();
-  
-  // "오늘 하루 보지 않기" 체크되어 있으면 저장
-  const dontShow = document.getElementById('rsvpDontShow');
-  if (dontShow && dontShow.checked) {
-    localStorage.setItem('rsvpSkipDate', new Date().toDateString());
-  }
-}
-
-// ============= RSVP 폼 (3단계) =============
-function goStep(n) {
-  document.querySelectorAll('.rsvp-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('rsvpStep' + n).classList.add('active');
-}
-
-function goRsvpForm() {
-  goStep(2);
-}
-
-function backRsvp() {
-  goStep(1);
-}
-
-function selectOption(btn, group) {
-  const parent = btn.parentElement;
-  parent.querySelectorAll('.rsvp-option').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-function getSelected(group) {
-  const btn = document.querySelector('.rsvp-option.selected[data-' + group + ']');
-  return btn ? btn.dataset[group] : '';
-}
-
-async function submitRsvp(e) {
-  e.preventDefault();
-  
-  const submitBtn = document.querySelector('.rsvp-submit-final');
-  const originalText = submitBtn.textContent;
-  submitBtn.disabled = true;
-  submitBtn.textContent = '전송 중...';
-  
-  const data = {
-    side: getSelected('side'),
-    attend: getSelected('attend'),
-    name: document.getElementById('rsvpName').value.trim(),
-    count: document.getElementById('rsvpCount').value,
-    meal: getSelected('meal'),
-    msg: document.getElementById('rsvpMsg').value.trim(),
-    timestamp: new Date().toISOString()
-  };
-  
-  if (!data.name) {
-    showToast('성함을 입력해주세요');
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-    return;
-  }
-  
-  // Google Form으로 전송
-  try {
-    await sendToGoogleForm(data);
-    goStep(3);
-  } catch (err) {
-    console.error('RSVP 전송 실패:', err);
-    showToast('전송 실패 - 잠시 후 다시 시도해주세요');
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-  }
-}
-
-// Google Form 전송 — 함수 안에서 window를 매번 새로 읽음
-async function sendToGoogleForm(data) {
-  const formUrl = window.GOOGLE_FORM_URL || '';
-  const fields = window.GOOGLE_FORM_FIELDS || null;
-  
-  console.log('📤 RSVP 전송 시도:', { formUrl: formUrl, hasFields: !!fields, data: data });
-  
-  if (!formUrl || !fields) {
-    console.log('⚠️ RSVP (Google Form 미연동 - URL 또는 FIELDS 없음):', data);
-    await new Promise(r => setTimeout(r, 500));
-    return;
-  }
-  
-  const formData = new FormData();
-  formData.append(fields.side, data.side);
-  formData.append(fields.attend, data.attend);
-  formData.append(fields.name, data.name);
-  formData.append(fields.count, data.count);
-  formData.append(fields.meal, data.meal);
-  formData.append(fields.msg, data.msg);
-  
-  // mode: no-cors로 fetch — 응답은 못 받지만 데이터는 전송됨
-  console.log('📡 Google Form으로 전송 중...');
-  await fetch(formUrl, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
-  });
-  console.log('✅ Google Form 전송 완료');
-}
-
-
-// 페이지 로드되면 RSVP 팝업 호출
-window.addEventListener('load', openRsvp);
+window.addEventListener('load', () => { setTimeout(startCoverFade, 2000); });
+// 안전장치: 어떤 이유로든 시작되지 않았으면 강제 시작
+window.addEventListener('load', () => { setTimeout(startCoverFade, 9000); });
 
 // ============= 캘린더에 일정 추가 =============
 // 결혼식 정보
